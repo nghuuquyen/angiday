@@ -1,0 +1,25 @@
+{{!< html-struct}}
+
+{{#contentFor 'pageMeta'}}
+{{> 'default-meta.server.view'}}
+{{/contentFor}}
+
+{{#contentFor 'pageStyles'}}
+{{> 'default-styles.server.view'}}
+{{/contentFor}}
+
+{{#contentFor 'pageScripts'}}
+{{> 'default-scripts.server.view'}}
+{{/contentFor}}
+
+<header>
+  {{> 'default-header.server.view' showToggleButton = false}}
+</header>
+
+<main ui-view="root">
+  {{{body}}}
+</main>
+
+<footer>
+  {{> 'default-footer.server.view'}}
+</footer>

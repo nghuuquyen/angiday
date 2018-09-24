@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "web",
+      "script": "server.js",
+      "env_uat": {
+        "NODE_ENV": "uat",
+        "PORT": "2441",
+        "MAX_AGE" : "2592000",
+        "EXPIRES" : "2592000",
+        "CACHE_HTML" : false,
+        "PRERENDER_SERVICE_URL" : "http://localhost:1234"
+      },
+      "env_production" :{
+        "NODE_ENV": "production",
+        "PORT": "2325",
+        "MAX_AGE" : "2592000",
+        "EXPIRES" : "2592000",
+        "CACHE_HTML" : false,
+        "PRERENDER_SERVICE_URL" : "http://localhost:1234"
+      }
+    }
+  ]
+}

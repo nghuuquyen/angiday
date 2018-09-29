@@ -2,19 +2,32 @@ version: '3.1'
 
 services:
   web:
-    build: .
+    build: ./web-app
     restart: always
     command: npm start
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/app
+      - ./web-app:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/public
-    links:
+    depends_on:
       - mongodb
       - redis
 
+  api:
+    build: ./api-server
+    restart: always
+    command: sails lift
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./api-server:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongodb
+      - redis    
+  
   mongodb:
     build: ./docker/mongodb
     restart: always

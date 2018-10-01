@@ -20,18 +20,18 @@
  *   https://sailsjs.com/anatomy/app.js
  */
 
-
 // Ensure we're in the project directory, so cwd-relative paths work as expected
 // no matter where we actually lift from.
 // > Note: This is not required in order to lift, but it is a convenient default.
 process.chdir(__dirname);
 
-
-
 // Attempt to import `sails` dependency, as well as `rc` (for loading `.sailsrc` files).
 var sails;
 var rc;
 try {
+  // loads environment variables from a .env file into process.env
+  require('dotenv').config();
+
   sails = require('sails');
   rc = require('sails/accessible/rc');
 } catch (err) {

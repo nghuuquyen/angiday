@@ -14,8 +14,6 @@
     activate();
 
     function activate() {
-      alert(`Hello Wellcome ${Authentication.user.username} To Dashboard !!`);
-
       Socket.connect('/chatroom');
 
       Socket.on('connect', function () {

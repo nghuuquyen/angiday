@@ -9,7 +9,7 @@ angular.module(ApplicationConfiguration.applicationModuleName)
   .config(['$locationProvider', '$httpProvider', '$logProvider',
     function ($locationProvider, $httpProvider, $logProvider) {
       $httpProvider.defaults.withCredentials = true;
-
+      
       $locationProvider.html5Mode({
         enabled: true,
         requireBase: false

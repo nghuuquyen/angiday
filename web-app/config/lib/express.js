@@ -76,7 +76,7 @@ function initLocalVariables(app) {
   // Client JS and CSS files for browser client load.
   app.locals.jsFiles = config.files.client.js;
   app.locals.cssFiles = config.files.client.css;
-
+  
   // Deploy time will used for make sure client update all assets file cached,
   // when we deploy new version.
   app.locals.deployTime = (new Date()).getTime();

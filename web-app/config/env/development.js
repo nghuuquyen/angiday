@@ -1,6 +1,9 @@
 "use strict";
 
 module.exports = {
+  hosts: {
+    api: 'http://localhost:1337'
+  },
   db: {
     // mongodb://[username:password@]host1[:port1]
     uri: process.env.MONGO_URI,
@@ -10,8 +13,8 @@ module.exports = {
     // Enable mongoose debug mode
     debug: process.env.MONGODB_DEBUG || false
   },
-  secure : {
-    ssl : false
+  secure: {
+    ssl: false
   },
   facebook: {
     clientID: process.env.FACEBOOK_CLIENT_ID,
@@ -19,7 +22,7 @@ module.exports = {
     callbackURL: "/auth/facebook/callback",
     profileFields: ['id', 'displayName', 'photos']
   },
-  twitter:{
+  twitter: {
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
     callbackURL: "/auth/twitter/callback",

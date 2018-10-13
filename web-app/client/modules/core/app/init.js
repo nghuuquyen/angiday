@@ -8,7 +8,7 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
 angular.module(ApplicationConfiguration.applicationModuleName)
   .config(['$locationProvider', '$httpProvider', '$logProvider',
     function ($locationProvider, $httpProvider, $logProvider) {
-      $httpProvider.defaults.withCredentials = true;
+      // $httpProvider.defaults.withCredentials = true;
       
       $locationProvider.html5Mode({
         enabled: true,
@@ -19,6 +19,9 @@ angular.module(ApplicationConfiguration.applicationModuleName)
 
 angular.module(ApplicationConfiguration.applicationModuleName)
   .run(function ($rootScope, $state, Authentication, $transitions, $exceptionHandler) {
+
+    // Config API Host Endpoint
+    $rootScope.hosts = window.hosts;
 
     $transitions.onStart({}, function ($transition) {
       var toState = $transition.to();

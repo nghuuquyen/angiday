@@ -12,8 +12,11 @@
     .module('content-management')
     .controller('FoodManagementController', Controller);
 
-  Controller.$inject = ['FoodService'];
+  Controller.$inject = [
+    'FoodService'
+  ];
+
   function Controller(FoodService) {
-    var vm = this;
+    let vm = this;
   }
 })();

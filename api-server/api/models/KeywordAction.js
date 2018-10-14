@@ -2,19 +2,16 @@
  * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
  * @module models
  * @description
- * Application shop model.
+ * Define action for keyword search.
  */
 module.exports = {
   attributes: {
     name: {
-      type: 'string'
+      type: 'string',
+      unique: true
     },
     description: {
       type: 'string'
-    },
-    keywords: {
-      collection: 'keyword',
-      via: 'shops'
     }
   }
 };

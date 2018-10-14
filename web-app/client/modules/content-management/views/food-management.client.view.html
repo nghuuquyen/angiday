@@ -1,3 +1,42 @@
 <section ng-controller="FoodManagementController as vm">
-  <h1>Food Management Page</h1>
+  <div class="container">
+    <br />
+    <h3>Food Management Page</h3>
+    <hr />
+  </div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-8">
+        <!-- foods -->
+        <div id="accordion">
+          <div class="card" ng-repeat="food in vm.foods track by $index">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" href="#food_{{$index}}">
+                {{food.name}}
+              </a>
+            </div>
+            <div id="food_{{$index}}" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <!-- food keywords -->
+                <div class="media" ng-repeat="keyword in food.keywords track by $index">
+                  <img src="https://via.placeholder.com/35x35" alt="{{keyword.name}}" class="mr-3 mt-3 rounded-circle"
+                    style="width:45px;">
+                  <div class="media-body">
+                    <h4>{{keyword.name}}</h4>
+                    <p>{{keyword.description}}</p>
+                  </div>
+                </div>
+                <!-- ./ food keywords -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ./ foods -->
+      </div>
+      <div class="col-sm-4">
+        <food-setting-card-component id="123"></food-setting-card-component>
+      </div>
+    </div>
+  </div>
 </section>

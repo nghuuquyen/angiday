@@ -1,7 +1,7 @@
 /**
 * @module services 
 * @name ShopService
-* @description API serice for CRUD on Food object.
+* @description API serice for CRUD on Keyword object.
 * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>> at 28/7/2018
 */
 (function () {
@@ -9,13 +9,13 @@
 
   angular
     .module('content-management')
-    .factory('FoodService', Service);
+    .factory('KeywordService', Service);
 
   Service.$inject = ['$resource', '$rootScope'];
 
   /* @ngInject */
   function Service($resource, $rootScope) {
-    return $resource($rootScope.hosts.api + '/food/:id', { id: '@id' }, {
+    return $resource($rootScope.hosts.api + '/keyword/:id', { id: '@id' }, {
       update: {
         method: 'PUT'
       }

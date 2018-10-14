@@ -11,6 +11,10 @@ module.exports = {
     },
     description: {
       type: 'string'
+    },
+    keywords: {
+      collection: 'keyword',
+      via: 'foods'
     }
   }
 };

@@ -13,45 +13,59 @@
     .controller('FoodManagementController', Controller);
 
   Controller.$inject = [
-    'FoodService'
+    'FoodService', '$timeout'
   ];
 
-  function Controller(FoodService) {
+  function Controller(FoodService, $timeout) {
     let vm = this;
 
-    vm.foods = getDummyFoods() || [];
+    /**
+     * @var Array
+     * List of foods
+     */
+    vm.foods = [];
 
+    /**
+     * @var Number 
+     * Limit food items display for each page.
+     */
+    vm.pageLimit = 30;
 
-    function getDummyFoods() {
-      return [
-        {
-          name: 'Food 1',
-          description: 'Food 1 description.',
-          keywords: [
-            { name: 'Keyword 1', description: 'Keyword 1 Description', type: 'search' },
-            { name: 'Keyword 2', description: 'Keyword 2 Description', type: 'search' },
-            { name: 'Keyword 3', description: 'Keyword 3 Description', type: 'search' }
-          ]
-        },
-        {
-          name: 'Food 2',
-          description: 'Food 2 description.',
-          keywords: [
-            { name: 'Keyword 4', description: 'Keyword 4 Description', type: 'search' },
-            { name: 'Keyword 5', description: 'Keyword 5 Description', type: 'search' },
-            { name: 'Keyword 6', description: 'Keyword 6 Description', type: 'search' }
-          ]
-        },
-        {
-          name: 'Food 3',
-          description: 'Food 3 description.',
-          keywords: [
-            { name: 'Keyword 7', description: 'Keyword 7 Description', type: 'search' },
-            { name: 'Keyword 8', description: 'Keyword 8 Description', type: 'search' },
-            { name: 'Keyword 9', description: 'Keyword 9 Description', type: 'search' }
-          ]
-        }
-      ];
+    // Initial controller.
+    activeController();
+
+    /* ============= PUBLIC FUNCTIONS ============= **/
+    vm.viewDetailFood = viewDetailFood;
+
+    /* ============= PRIVATE FUNCTION ============= **/
+
+    /**
+     * @name activeController
+     * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
+     * @description
+     * Active controller method, it will load needed data for view page.
+     */
+    function activeController() {
+      FoodService.search({ limit: vm.pageLimit, skip: 0 }).$promise
+        .then(foods => {
+          vm.foods = foods;
+        });
+    }
+
+    /**
+     * @name viewDetailFood
+     * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
+     * @description
+     * Show detail food card.
+     * @param {Object} food 
+     */
+    function viewDetailFood(food) {
+      // Set to null and compose with timeout for re-render card.
+      vm.selectedFood = null;
+
+      $timeout(() => {
+        vm.selectedFood = angular.copy(food);
+      }, 0);
     }
   }
 })();

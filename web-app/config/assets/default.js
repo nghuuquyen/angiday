@@ -11,7 +11,8 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
-        'public/lib/ng-tags-input/ng-tags-input.min.css'
+        'public/lib/ng-tags-input/ng-tags-input.min.css',
+        'public/lib/angular-toastr/dist/angular-toastr.min.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -20,7 +21,9 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
         'public/lib/angular-resource/angular-resource.min.js',
         'public/lib/ng-tags-input/ng-tags-input.min.js',
-        'public/lib/angular-modal-service/dst/angular-modal-service.min.js'
+        'public/lib/angular-modal-service/dst/angular-modal-service.min.js',
+        'public/lib/lodash/dist/lodash.min.js',
+        'public/lib/angular-toastr/dist/angular-toastr.tpls.min.js'
       ],
       tests: []
     },

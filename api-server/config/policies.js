@@ -9,5 +9,6 @@
  */
 
 module.exports.policies = {
+  // For security problem, all routes default is deny.
   '*': true
 };

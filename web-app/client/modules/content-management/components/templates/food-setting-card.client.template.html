@@ -1,16 +1,21 @@
 <div class="card">
-  <div class="card-header">Food Settings Card</div>
+  <div class="card-header">{{vm.formTitle || 'Food Settings Card'}}</div>
   <div class="card-body">
+    <div class="alert alert-danger" role="alert" ng-if="vm.message">
+      {{vm.message}}
+    </div>
     <form>
       <div class="form-group">
         <label for="name">Food Name:</label>
-        <input type="text" class="form-control" id="name">
+        <input type="text" class="form-control" id="name" ng-model="vm.food.name">
       </div>
       <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" id="description"></textarea>
+        <textarea class="form-control" rows="5" id="description" ng-model="vm.food.description"></textarea>
       </div>
-      <button type="button" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-primary" ng-click="vm.submitFoodForm()">
+        {{vm.submitBtnTitle || 'Save'}}
+      </button>
     </form>
   </div>
 </div>

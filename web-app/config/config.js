@@ -80,7 +80,6 @@ function initGlobalConfigFiles(config, assets) {
 
   // Setting Globbed js files
   config.files.client.js = helpers.getClientJSFilePaths(config, assets) || [];
-
   // Setting Globbed css files
   config.files.client.css = helpers.getClientCSSFilePaths(config, assets) || [];
 

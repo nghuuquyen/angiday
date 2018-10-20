@@ -25,14 +25,6 @@ module.exports = {
      */
     action: {
       model: 'keywordaction'
-    },
-    foods: {
-      collection: 'food',
-      via: 'keywords'
-    },
-    shops: {
-      collection: 'shop',
-      via: 'keywords'
     }
   }
 };

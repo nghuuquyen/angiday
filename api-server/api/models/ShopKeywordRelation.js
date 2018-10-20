@@ -2,18 +2,18 @@
  * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
  * @module models
  * @description
- * Application shop model.
+ * Application food keyword relation model.
  */
 module.exports = {
   attributes: {
-    name: {
-      type: 'string'
+    keyword: {
+      model: 'keyword'
     },
-    description: {
-      type: 'string'
+    shop: {
+      model: 'shop'
     },
-    address: {
-      type: 'string'
+    scores: {
+      type: 'number'
     }
   }
 };

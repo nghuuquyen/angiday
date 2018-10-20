@@ -16,7 +16,7 @@
         id : '='
       },
     });
-
+    
   Controller.$inject = ['ShopService'];
   
   function Controller(ShopService) {

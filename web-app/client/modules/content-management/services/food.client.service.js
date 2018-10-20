@@ -18,6 +18,16 @@
     return $resource($rootScope.hosts.api + '/food/:id', { id: '@id' }, {
       update: {
         method: 'PUT'
+      },
+      /**
+       * @name search
+       * @description
+       * Search food by name and limit offset.
+       */
+      search: {
+        method: 'GET',
+        isArray: true,
+        url: $rootScope.hosts.api + '/food/search'
       }
     });
   }

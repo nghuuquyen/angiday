@@ -44,6 +44,20 @@
       removeKeyword: {
         method: 'DELETE',
         url: base + '/food/remove-keyword'
+      },
+      /**
+       * @name removeShop
+       * @description
+       * Remove one shop in food shop collection.
+       * 
+       * @path DELETE /food/remove-shop
+       *
+       * @query {String} shop_id     - Keyword id
+       * @query {String} food_id     - food id
+       */
+      removeShop: {
+        method: 'DELETE',
+        url: base + '/food/remove-shop'
       }
     });
   }

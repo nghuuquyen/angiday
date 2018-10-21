@@ -19,7 +19,7 @@
                 {{$index + 1 }}. {{food.name}}
               </a>
             </div>
-            <div id="food_{{$index}}" class="collapse" data-parent="#accordion">
+            <div id="food_{{$index}}" class="collapse" data-parent="#accordion" ng-class="{'show': $index === 0}">
               <div class="card-body">
                 <p>{{food.description}}</p>
                 
@@ -41,10 +41,37 @@
                 <keyword-selection-card-component ng-if="vm.showKeywordSelectionCard" on-submit="vm.addKeywordsToFood(keywords);"></keyword-selection-card-component>
                 <br />
 
-                <button type="button" ng-if="!vm.showKeywordSelectionCard" class="btn btn-primary" ng-click="vm.showKeywordSelectionCard = true;">
+                <button type="button" ng-if="!vm.showKeywordSelectionCard" class="btn btn-block sc-dashed-btn" ng-click="vm.showKeywordSelectionCard = true;">
                   <i class="fas fa-plus-square"></i> Add Keyword
                 </button>
                 <button type="button" ng-if="vm.showKeywordSelectionCard" class="btn btn-danger" ng-click="vm.showKeywordSelectionCard = false;">
+                  <i class="fas fa-ban"></i> Cancel
+                </button>
+                <!-- ./ keyword select or create  -->
+
+                <br />
+                <br />
+                <h5>Food Shops</h5>
+                <!-- food shops -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex" ng-repeat="shop in food.shops track by $index">
+                    {{ shop.name }}
+                    <a class="ml-auto">
+                      <i class="fas fa-trash" ng-click="vm.removeFoodShop(food, shop)"></i>
+                    </a>
+                  </li>
+                </ul>
+                <!-- ./ food shops -->
+          
+                <!-- keyword select or create  -->
+                <br />
+                <shop-selection-card-component ng-if="vm.showShopSelectionCard" on-submit="vm.addShopsToFood(shops);"></shop-selection-card-component>
+                <br />
+
+                <button type="button" ng-if="!vm.showShopSelectionCard" class="btn btn-block sc-dashed-btn" ng-click="vm.showShopSelectionCard = true;">
+                  <i class="fas fa-plus-square"></i> Add Shop
+                </button>
+                <button type="button" ng-if="vm.showShopSelectionCard" class="btn btn-danger" ng-click="vm.showShopSelectionCard = false;">
                   <i class="fas fa-ban"></i> Cancel
                 </button>
                 <!-- ./ keyword select or create  -->

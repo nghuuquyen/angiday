@@ -17,13 +17,13 @@ module.exports.policies = {
   /**
    * Food APIs Group
    */
-  'food/search': true,
+  'food/find': true,
   'food/findOne': true,
   'food/create': true,
   'food/update': true,
   'food/destroy': true,
-  'foodkeywordrelation/destroy' : true,
   'food/remove-keyword': true,
+  'food/remove-shop': true,
 
   /**
    * Keyword APIs Group
@@ -32,5 +32,14 @@ module.exports.policies = {
   'keyword/findOne': true,
   'keyword/create': true,
   'keyword/update': true,
-  'keyword/destroy': true
+  'keyword/destroy': true,
+
+  /**
+   * Shop APIs Group
+   */
+  'shop/search': true,
+  'shop/findOne': true,
+  'shop/create': true,
+  'shop/update': true,
+  'shop/destroy': true
 };

@@ -15,9 +15,21 @@
 
   /* @ngInject */
   function Service($resource, $rootScope) {
-    return $resource($rootScope.hosts.api + '/shop/:id', { id: '@id' }, {
+    const base = $rootScope.hosts.api;
+
+    return $resource(base + '/shop/:id', { id: '@id' }, {
       update: {
         method: 'PUT'
+      },
+      /**
+       * @name search
+       * @description
+       * Search shop by name and limit offset.
+       */
+      search: {
+        method: 'GET',
+        url: base + '/shop/search',
+        isArray: true
       }
     });
   }

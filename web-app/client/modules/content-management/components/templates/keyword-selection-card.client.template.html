@@ -22,12 +22,12 @@
 
     <br />
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-pills">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#seach">Search Keywords</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#create-new">Create New</a>
+        <a class="nav-link" data-toggle="tab" href="#create-new-keyword">Create New</a>
       </li>
     </ul>
     <br />
@@ -35,13 +35,13 @@
     <div class="tab-content">
       <div class="tab-pane active container" id="seach">
         <!-- word search and select form -->
-        <tags-input ng-model="vm.selectedKeywords" min-length="1" style="height: 60px;" ng-model="tags" placeholder="Enter your condition"
+        <tags-input ng-model="vm.selectedKeywords" min-length="1" style="height: 60px;" placeholder="Enter your condition"
           add-from-autocomplete-only="true">
           <auto-complete source="vm.searchKeywords($query)" load-on-focus="true" load-on-empty="true" min-length="1"></auto-complete>
         </tags-input>
         <!-- word search and select form -->
       </div>
-      <div class="tab-pane container" id="create-new">
+      <div class="tab-pane container" id="create-new-keyword">
         <!-- word create form -->
         <form name="wordForm">
           <div class="form-group">

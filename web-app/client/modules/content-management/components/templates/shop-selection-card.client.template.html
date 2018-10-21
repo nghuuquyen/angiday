@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="card-header">Shop Selection</div>
+    <div class="card-body">
+      <!-- list selected keywords -->
+      <div ng-show="vm.selectedShops.length > 0">
+        <h6><i class="fas fa-list"></i> Selected Shops</h6>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex" ng-repeat="keyword in vm.selectedShops track by $index">
+            {{ keyword.name }}
+            <a class="ml-auto" ng-click="vm.selectedShops.splice($index, 1);">
+              <i class="fas fa-trash"></i>
+            </a>
+          </li>
+        </ul>
+  
+        <br />
+        <button type="button" class="btn btn-success btn-block" ng-click="vm.saveAndSelect()">
+          <i class="fas fa-save"></i> Save & Select
+        </button>
+      </div>
+      <!-- ./ list selected keywords -->
+  
+      <br />
+      <!-- Nav tabs -->
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#seach">Search Shops</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#create-new-shop">Create New</a>
+        </li>
+      </ul>
+      <br />
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active container" id="seach">
+          <!-- shop search and select form -->
+          <tags-input ng-model="vm.selectedShops" min-length="1" style="height: 60px;" placeholder="Enter shop name"
+            add-from-autocomplete-only="true">
+            <auto-complete source="vm.searchShops($query)" load-on-focus="true" load-on-empty="true" min-length="1"></auto-complete>
+          </tags-input>
+          <!-- shop search and select form -->
+        </div>
+        <div class="tab-pane container" id="create-new-shop">
+          <!-- shop create form -->
+          <form name="shopForm">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" name="name" ng-model="vm.shop.name" ng-minlength="3" required>
+              <div ng-messages="shopForm.name.$error" ng-if="shopForm.name.$touched">
+                <p class="text-danger" ng-message="required">Shop name is required.</p>
+                <p class="text-danger" ng-message="minlength">Shop name is too short (min is 3 characters).</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea class="form-control" rows="5" id="description" ng-model="vm.shop.description"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" ng-click="vm.createShop(shopForm.$valid)">
+              Create Shop
+            </button>
+          </form>
+          <!-- ./ shop create form -->
+        </div>
+      </div>
+    </div>
+  </div>

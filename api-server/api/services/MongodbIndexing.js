@@ -18,6 +18,7 @@ function createMongodbIndexing() {
   const db = Keyword.getDatastore().manager;
   const keywordCollection = db.collection(Keyword.tableName);
   const foodCollection = db.collection(Food.tableName);
+  const shopCollection = db.collection(Shop.tableName);
 
   sails.log('Do create indexing for mongodb database.');
   // Create indexing on keyword.
@@ -28,6 +29,12 @@ function createMongodbIndexing() {
 
   // Create indexing on food.
   foodCollection.createIndex({
+    "name": "text",
+    "description": "text"
+  });
+
+  // Create indexing on shop.
+  shopCollection.createIndex({
     "name": "text",
     "description": "text"
   });

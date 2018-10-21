@@ -13,11 +13,15 @@ module.exports.routes = {
   /**
    * Food Module Routes
    */
-  'GET /food/search': { action: 'food/search' },
   'DELETE /food/remove-keyword': { action: 'food/remove-keyword' },
-
+  'DELETE /food/remove-shop': { action: 'food/remove-shop' },
   /**
    * Keyword Module Routes
    */
-  'GET /keyword/search': { action: 'keyword/search' }
+  'GET /keyword/search': { action: 'keyword/search' },
+
+  /**
+   * Shop Module Routes
+   */
+  'GET /shop/search': { action: 'shop/search' }
 };

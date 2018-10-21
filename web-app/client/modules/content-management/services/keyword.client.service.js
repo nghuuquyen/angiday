@@ -15,9 +15,21 @@
 
   /* @ngInject */
   function Service($resource, $rootScope) {
-    return $resource($rootScope.hosts.api + '/keyword/:id', { id: '@id' }, {
+    const base = $rootScope.hosts.api;
+
+    return $resource(base + '/keyword/:id', { id: '@id' }, {
       update: {
-        method: 'PUT'
+        method: 'PATCH'
+      },
+      /**
+       * @name search
+       * @description
+       * Search keyword by word name and limit offset.
+       */
+      search: {
+        method: 'GET',
+        url: base + '/keyword/search',
+        isArray: true
       }
     });
   }

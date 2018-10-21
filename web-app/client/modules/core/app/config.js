@@ -5,7 +5,7 @@ var ApplicationConfiguration = (function () {
   // Init module configuration options
   var applicationModuleName = 'AnGiDay';
   var applicationModuleVendorDependencies = [
-    'ngResource', 'ui.router', 'ngTagsInput', 'toastr'
+    'ngResource', 'ui.router', 'ngTagsInput', 'toastr', 'ngMessages'
   ];
 
   // Add a new vertical module

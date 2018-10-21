@@ -12,7 +12,8 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
         'public/lib/ng-tags-input/ng-tags-input.min.css',
-        'public/lib/angular-toastr/dist/angular-toastr.min.css'
+        'public/lib/angular-toastr/dist/angular-toastr.min.css',
+        'public/lib/components-font-awesome/css/fontawesome-all.min.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -23,7 +24,8 @@ module.exports = {
         'public/lib/ng-tags-input/ng-tags-input.min.js',
         'public/lib/angular-modal-service/dst/angular-modal-service.min.js',
         'public/lib/lodash/dist/lodash.min.js',
-        'public/lib/angular-toastr/dist/angular-toastr.tpls.min.js'
+        'public/lib/angular-toastr/dist/angular-toastr.tpls.min.js',
+        'public/lib/angular-messages/angular-messages.min.js'
       ],
       tests: []
     },

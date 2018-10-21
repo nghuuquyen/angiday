@@ -5,6 +5,8 @@
  * Define action for keyword search.
  */
 module.exports = {
+  tableName: 'keyword_action',
+  schema: true,
   attributes: {
     name: {
       type: 'string',

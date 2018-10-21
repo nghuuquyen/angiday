@@ -14,6 +14,11 @@ module.exports = {
     },
     address: {
       type: 'string'
+    },
+    foods: {
+      collection: 'food',
+      via: 'shop',
+      through: 'foodshoprelation'
     }
   }
 };

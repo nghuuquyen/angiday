@@ -15,9 +15,11 @@
 
   /* @ngInject */
   function Service($resource, $rootScope) {
-    return $resource($rootScope.hosts.api + '/food/:id', { id: '@id' }, {
+    const base = $rootScope.hosts.api;
+
+    return $resource(base + '/food/:id', { id: '@id' }, {
       update: {
-        method: 'PUT'
+        method: 'PATCH'
       },
       /**
        * @name search
@@ -27,7 +29,21 @@
       search: {
         method: 'GET',
         isArray: true,
-        url: $rootScope.hosts.api + '/food/search'
+        url: base + '/food/search'
+      },
+      /**
+       * @name removeKeyword
+       * @description
+       * Remove one keyword in food keyword collection.
+       * 
+       * @path DELETE /food/remove-keyword
+       *
+       * @query {String} keyword_id  - Keyword id
+       * @query {String} food_id     - food id
+       */
+      removeKeyword: {
+        method: 'DELETE',
+        url: base + '/food/remove-keyword'
       }
     });
   }

@@ -2,14 +2,14 @@
  * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
  * @module models
  * @description
- * Application food keyword relation model.
+ * Application food and shop relation model.
  */
 module.exports = {
-  tableName: 'food_keyword_relation',
+  tableName: 'food_shop_relation',
   schema: true,
   attributes: {
-    keyword: {
-      model: 'keyword'
+    shop: {
+      model: 'shop'
     },
     food: {
       model: 'food'

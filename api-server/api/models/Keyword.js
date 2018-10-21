@@ -7,7 +7,8 @@
 module.exports = {
   attributes: {
     name: {
-      type: 'string'
+      type: 'string',
+      unique: true
     },
     description: {
       type: 'string'
@@ -25,6 +26,11 @@ module.exports = {
      */
     action: {
       model: 'keywordaction'
+    },
+    foods: {
+      collection: 'food',
+      via: 'keyword',
+      through: 'foodkeywordrelation'
     }
   }
 };

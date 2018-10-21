@@ -23,10 +23,12 @@
     "jquery": "^3.3.1",
     "ng-tags-input": "^3.2.0",
     "lodash": "^4.17.4",
-    "angular-toastr": "^2.1.1"
+    "angular-toastr": "^2.1.1",
+    "components-font-awesome": "^5.0.6",
+    "angular-messages": "^1.7.5"
   },
   "resolutions": {
-    "angular": "~1.6",
+    "angular": "~1.7",
     "angular-ui-router": "^1.0.0",
     "moment": "^2.0.0"
   }

@@ -1,6 +1,9 @@
 "use strict";
 
 module.exports = {
+  hosts: {
+    api: 'http://localhost:1337'
+  },
   db: {
     // mongodb://[username:password@]host1[:port1]
     uri: process.env.MONGO_URI,

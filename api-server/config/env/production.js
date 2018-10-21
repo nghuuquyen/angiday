@@ -119,6 +119,7 @@ module.exports = {
   ***************************************************************************/
   blueprints: {
     shortcuts: false,
+    rest: true
   },
 
 
@@ -148,11 +149,12 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cors: {
-      // allowOrigins: [
-      //   'https://example.com',
-      // ]
-    },
-
+      allRoutes: true,
+      allowOrigins: [
+        'http://localhost:3000', 'http://127.0.0.1:3000'
+      ],
+      allowCredentials: false
+    }
   },
 
 

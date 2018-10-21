@@ -62,7 +62,15 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
     // ||  (or use system env var: `sails_sockets__url`)
     //--------------------------------------------------------------------------
   }),
-
+  security: {
+    cors: {
+      allRoutes: true,
+      allowOrigins: [
+        'http://localhost:3000', 'http://127.0.0.1:3000'
+      ],
+      allowCredentials: false
+    }
+  },
   session: Object.assign({}, PRODUCTION_CONFIG.session, {
     // url: 'redis://shared:some_password_everyone_knows@bigsquid.redistogo.com:9562/staging-sessions',
     //--------------------------------------------------------------------------

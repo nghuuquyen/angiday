@@ -80,7 +80,6 @@ function initGlobalConfigFiles(config, assets) {
 
   // Setting Globbed js files
   config.files.client.js = helpers.getClientJSFilePaths(config, assets) || [];
-
   // Setting Globbed css files
   config.files.client.css = helpers.getClientCSSFilePaths(config, assets) || [];
 
@@ -107,13 +106,16 @@ function initGlobalConfig() {
   // Get the environment configs base on NODE_ENV
   const environmentConfig = require('./env');
 
-  // Merge assets files
-  let assets = _.merge(defaultAssets, environmentAssets);
+  // Application assets.
+  let assets;
 
   if(process.env.NODE_ENV === 'production') {
     // On production don't need merge defaut assets.
     // Becase default assets already compile to minify versions.
     assets = environmentAssets;
+  } else {
+    // Merge assets files
+    assets = _.merge(defaultAssets, environmentAssets);
   }
 
   // Merge config files
@@ -121,7 +123,7 @@ function initGlobalConfig() {
 
   initGlobalConfigFiles(config, assets);
   initGlobalConfigFolders(config, assets);
-
+  
   return config;
 }
 

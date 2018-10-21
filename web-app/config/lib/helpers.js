@@ -5,11 +5,11 @@ const glob = require('glob');
 const path = require('path');
 
 module.exports = {
-  getGlobbedPaths : getGlobbedPaths,
-  getClientTestFilePaths : getClientTestFilePaths,
-  getClientCSSFilePaths : getClientCSSFilePaths,
-  getClientJSFilePaths : getClientJSFilePaths,
-  getClientFolders : getClientFolders
+  getGlobbedPaths: getGlobbedPaths,
+  getClientTestFilePaths: getClientTestFilePaths,
+  getClientCSSFilePaths: getClientCSSFilePaths,
+  getClientJSFilePaths: getClientJSFilePaths,
+  getClientFolders: getClientFolders
 };
 
 /**
@@ -71,7 +71,7 @@ function getGlobbedPaths(globPatterns, excludes) {
 */
 function getClientJSFilePaths(config, assets) {
   return getGlobbedPaths(assets.client.lib.js, ['public/'])
-  .concat(getGlobbedPaths(assets.client.js, ['public/']));
+    .concat(getGlobbedPaths(assets.client.js, ['public/']));
 }
 
 /**
@@ -86,7 +86,7 @@ function getClientJSFilePaths(config, assets) {
 */
 function getClientCSSFilePaths(config, assets) {
   return getGlobbedPaths(assets.client.lib.css, ['public/'])
-  .concat(getGlobbedPaths(assets.client.css, ['public/']));
+    .concat(getGlobbedPaths(assets.client.css, ['public/']));
 }
 
 /**

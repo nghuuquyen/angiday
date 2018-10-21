@@ -9,13 +9,28 @@
  */
 
 module.exports.policies = {
+  /**
+   * For security problem, default all routes default is deny. You need
+   * manual open it.
+   */
+  '*': false,
+  /**
+   * Food APIs Group
+   */
+  'food/search': true,
+  'food/findOne': true,
+  'food/create': true,
+  'food/update': true,
+  'food/destroy': true,
+  'foodkeywordrelation/destroy' : true,
+  'food/remove-keyword': true,
 
-  '*': 'is-logged-in',
-
-  // Bypass the `is-logged-in` policy for:
-  'entrance/*': true,
-  'account/logout': true,
-  'view-homepage-or-redirect': true,
-  'deliver-contact-form-message': true,
-
+  /**
+   * Keyword APIs Group
+   */
+  'keyword/search': true,
+  'keyword/findOne': true,
+  'keyword/create': true,
+  'keyword/update': true,
+  'keyword/destroy': true
 };

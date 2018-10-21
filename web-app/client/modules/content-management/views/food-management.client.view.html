@@ -1,0 +1,66 @@
+<section ng-controller="FoodManagementController as vm">
+  <div class="container">
+    <br />
+    <h3>Food Management Page</h3>
+    <hr />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <!-- error message panel -->
+        <p class="text-danger">{{vm.message}}</p>
+        <!-- ./ error message panel -->
+
+        <!-- foods -->
+        <div id="accordion">
+          <div class="card" ng-repeat="food in vm.foods track by $index">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" href="#food_{{$index}}" ng-click="vm.viewDetailFood(food)">
+                {{$index + 1 }}. {{food.name}}
+              </a>
+            </div>
+            <div id="food_{{$index}}" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p>{{food.description}}</p>
+                
+                <br />
+                <h5>Food Keywords</h5>
+                <!-- food keywords -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex" ng-repeat="keyword in food.keywords track by $index">
+                    {{ keyword.name }}
+                    <a class="ml-auto">
+                      <i class="fas fa-trash" ng-click="vm.removeFoodKeyword(food, keyword)"></i>
+                    </a>
+                  </li>
+                </ul>
+                <!-- ./ food keywords -->
+          
+                <!-- keyword select or create  -->
+                <br />
+                <keyword-selection-card-component ng-if="vm.showKeywordSelectionCard" on-submit="vm.addKeywordsToFood(keywords);"></keyword-selection-card-component>
+                <br />
+
+                <button type="button" ng-if="!vm.showKeywordSelectionCard" class="btn btn-primary" ng-click="vm.showKeywordSelectionCard = true;">
+                  <i class="fas fa-plus-square"></i> Add Keyword
+                </button>
+                <button type="button" ng-if="vm.showKeywordSelectionCard" class="btn btn-danger" ng-click="vm.showKeywordSelectionCard = false;">
+                  <i class="fas fa-ban"></i> Cancel
+                </button>
+                <!-- ./ keyword select or create  -->
+              </div>
+            </div>
+          </div>
+          <hr />
+          <food-setting-card-component id="false"></food-setting-card-component>
+        </div>
+        <!-- ./ foods -->
+      </div>
+      <div class="col-sm-4">
+        <div ng-if="vm.selectedFood">
+          <food-setting-card-component id="vm.selectedFood.id"></food-setting-card-component>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

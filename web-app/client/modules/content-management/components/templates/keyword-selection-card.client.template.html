@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-header">Keyword Selection</div>
+  <div class="card-body">
+    <!-- list selected keywords -->
+    <div ng-show="vm.selectedKeywords.length > 0">
+      <h6><i class="fas fa-list"></i> Selected Keywords</h6>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex" ng-repeat="keyword in vm.selectedKeywords track by $index">
+          {{ keyword.name }}
+          <a class="ml-auto" ng-click="vm.selectedKeywords.splice($index, 1);">
+            <i class="fas fa-trash"></i>
+          </a>
+        </li>
+      </ul>
+
+      <br />
+      <button type="button" class="btn btn-success btn-block" ng-click="vm.saveAndSelect()">
+        <i class="fas fa-save"></i> Save & Select
+      </button>
+    </div>
+    <!-- ./ list selected keywords -->
+
+    <br />
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#seach">Search Keywords</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#create-new">Create New</a>
+      </li>
+    </ul>
+    <br />
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active container" id="seach">
+        <!-- word search and select form -->
+        <tags-input ng-model="vm.selectedKeywords" min-length="1" style="height: 60px;" ng-model="tags" placeholder="Enter your condition"
+          add-from-autocomplete-only="true">
+          <auto-complete source="vm.searchKeywords($query)" load-on-focus="true" load-on-empty="true" min-length="1"></auto-complete>
+        </tags-input>
+        <!-- word search and select form -->
+      </div>
+      <div class="tab-pane container" id="create-new">
+        <!-- word create form -->
+        <form name="wordForm">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="name" ng-model="vm.keyword.name" ng-minlength="3" required>
+            <div ng-messages="wordForm.name.$error" ng-if="wordForm.name.$touched">
+              <p class="text-danger" ng-message="required">Keyword name is required.</p>
+              <p class="text-danger" ng-message="minlength">Keyword name is too short (min is 3 characters).</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" rows="5" id="description" ng-model="vm.keyword.description"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" ng-click="vm.createKeyword(wordForm.$valid)">
+            Create Keyword
+          </button>
+        </form>
+        <!-- ./ word create form -->
+      </div>
+    </div>
+  </div>
+</div>

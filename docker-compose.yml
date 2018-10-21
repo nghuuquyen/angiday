@@ -18,7 +18,7 @@ services:
   api:
     build: ./api-server
     restart: always
-    command: node app
+    command: sails lift
     ports:
       - "1337:1337"
     volumes:

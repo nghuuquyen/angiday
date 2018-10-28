@@ -3,3 +3,5 @@
 /docker/mongodb/data
 /docker/mongodb/db
 /docker/redis/data
+/docker/neo4j/data
+/docker/neo4j/logs

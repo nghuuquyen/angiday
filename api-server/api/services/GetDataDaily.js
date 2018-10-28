@@ -13,22 +13,23 @@ module.exports = {
     getData: getDataDaily
 };
 
-function getDataDaily() {
+async function getDataDaily() {
   
-  getAndInsetFood(0);
-  getAndInsetKeyword(0);
-  getAndInsetShop(0);
-  getAndInsetFoodKeywordRelation(0);
-  getAndInsetFoodShopRelation(0);
-  
-  let getDataSchedule = schedule.scheduleJob('*/5 * * * *', function(){
+  await getAndInsetFood(0);
+  await getAndInsetKeyword(0);
+  await getAndInsetShop(0);
+  await getAndInsetFoodKeywordRelation(0);
+  await getAndInsetFoodShopRelation(0);
+
+  let getDataSchedule = schedule.scheduleJob('*/5 * * * *', async function(){
 
     let currentTime = new Date().getTime();
-    getAndInsetFood(currentTime);
-    getAndInsetKeyword(currentTime);
-    getAndInsetShop(currentTime);
-    getAndInsetFoodKeywordRelation(currentTime);
-    getAndInsetFoodShopRelation(currentTime);
+    await getAndInsetFood(currentTime);
+    await getAndInsetKeyword(currentTime);
+    await getAndInsetShop(currentTime);
+    await getAndInsetFoodKeywordRelation(currentTime);
+    await getAndInsetFoodShopRelation(currentTime);
+
   });
 }
 
@@ -40,9 +41,14 @@ async function getAndInsetFood(timesamp) {
                 '>=': timesamp - 5*60*1000,
                 '<' : timesamp - 1*1000,
                 }
-              } : {}
+              } : {};
+  let foods = [];
+  try {
+    foods = await Food.find(check);
+  } catch (error) {
+    console.log(error);
+  }
 
-  let foods = await Food.find(check);
 
   const session = driver.session();
   if(session == null) {
@@ -56,18 +62,30 @@ async function getAndInsetFood(timesamp) {
   let success = false;
   for(let i = 0 ; i < foods.length; i++) {
     let food = foods[i];
-    let foodItem = await tx.run("MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name", 
+    let foodItem = null;
+    try {
+      foodItem = await tx.run("MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name", 
                                 {id: food.id, name: food.name, description: food.description, createdAt: food.createdAt, updatedAt: food.updatedAt});
-    if(foodItem) {
-      success = true;
+      if(foodItem) {
+        success = true;
+      }
+    } catch (error) {
+      console.log(error);
     }
+    
   }
   if(success){
-    let foodCommit = await tx.commit();
-    if(foodCommit) {
-      console.log("Insert food success")
-      session.close();
+    let foodCommit = null;
+    try {
+      foodCommit = await tx.commit();
+      if(foodCommit) {
+        console.log("Insert food success")
+        session.close();
+      }
+    } catch (error) {
+      console.log(error);
     }
+
   } else {
     console.log('rolled back');
     tx.rollback();
@@ -83,7 +101,13 @@ async function getAndInsetKeyword(timesamp) {
     '<' : timesamp - 1*1000,
     }
   } : {};
-  let keywords = await Keyword.find(check);
+  let keywords = [];
+  try {
+    keywords = await Keyword.find(check);
+  } catch (error) {
+    console.log(error);
+  }
+
 
   const session = driver.session();
   if(session == null) {
@@ -97,18 +121,30 @@ async function getAndInsetKeyword(timesamp) {
   let success = false;
   for(let i = 0 ; i < keywords.length; i++) {
     let keyword = keywords[i];
-    let keywordItem = await tx.run("MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name", 
+    let keywordItem = null;
+    try {
+      keywordItem = await tx.run("MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name", 
                                 {id: keyword.id, name: keyword.name, description: keyword.description, createdAt: keyword.createdAt, updatedAt: keyword.updatedAt, type: keyword.type, action: keyword.action ? keyword.action : ''});
-    if(keywordItem) {
-      success = true;
+      if(keywordItem) {
+        success = true;
+      }
+    } catch (error) {
+      console.log(error);
     }
+    
   }
   if(success){
-    let keywordCommit = await tx.commit();
-    if(keywordCommit) {
-      console.log("Insert keyword success")
-      session.close();
+    let keywordCommit = null;
+    try {
+      keywordCommit = await tx.commit();
+      if(keywordCommit) {
+        console.log("Insert keyword success")
+        session.close();
+      }
+    } catch (error) {
+      console.log(error);
     }
+    
   } else {
     console.log('rolled back');
     tx.rollback();
@@ -124,7 +160,13 @@ async function getAndInsetShop(timesamp) {
     '<' : timesamp - 1*1000,
     }
   } : {};
-  let shops = await Shop.find(check);
+  let shops = [];
+  try {
+    shops = await Shop.find(check);
+  } catch (error) {
+    console.log(error);
+  }
+
 
   const session = driver.session();
   if(session == null) {
@@ -138,18 +180,30 @@ async function getAndInsetShop(timesamp) {
   let success = false;
   for(let i = 0 ; i < shops.length; i++) {
     let shop = shops[i];
-    let shopItem = await tx.run("MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name", 
-                                {id: shop.id, name: shop.name, description: shop.description, createdAt: shop.createdAt, updatedAt: shop.updatedAt, address: shop.address});
-    if(shopItem) {
-      success = true;
+    let shopItem = null;
+    try {
+      shopItem = await tx.run("MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name", 
+            {id: shop.id, name: shop.name, description: shop.description, createdAt: shop.createdAt, updatedAt: shop.updatedAt, address: shop.address});
+      if(shopItem) {
+        success = true;
+      }
+    } catch (error) {
+      console.log(error);
     }
+
   }
   if(success){
-    let shopCommit = await tx.commit();
-    if(shopCommit) {
-      console.log("Insert shop success")
-      session.close();
+    let shopCommit = null;
+    try {
+      shopCommit = await tx.commit();
+      if(shopCommit) {
+        console.log("Insert shop success")
+        session.close();
+      }
+    } catch (error) {
+      console.log(error);
     }
+    
   } else {
     console.log('rolled back');
     tx.rollback();
@@ -164,8 +218,13 @@ async function getAndInsetFoodKeywordRelation(timesamp) {
     '<' : timesamp - 1*1000,
     }
   } : {};
-  let foodKeywordRelations  = await FoodKeywordRelation.find(check);
 
+  let foodKeywordRelations = [];
+  try {
+    foodKeywordRelations  = await FoodKeywordRelation.find(check);
+  } catch (error) {
+    console.log(error);
+  }
   const session = driver.session();
   if(session == null) {
     console.log("Connect neo4j that bai");
@@ -178,14 +237,25 @@ async function getAndInsetFoodKeywordRelation(timesamp) {
   let success = false;
   for(let i = 0 ; i < foodKeywordRelations.length; i++) {
     let foodKeywordRelation = foodKeywordRelations[i];
-    let foodKeywordRelationItem = await tx.run("MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph", 
-                                {id: foodKeywordRelation.id, foodID: foodKeywordRelation.food, keywordID: foodKeywordRelation.keyword, createdAt: foodKeywordRelation.createdAt, updatedAt: foodKeywordRelation.updatedAt, scores: foodKeywordRelation.scores});
-    if(foodKeywordRelationItem) {
-      success = true;
+    try {
+      let foodKeywordRelationItem = await tx.run("MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph", 
+        {id: foodKeywordRelation.id, foodID: foodKeywordRelation.food, keywordID: foodKeywordRelation.keyword, createdAt: foodKeywordRelation.createdAt, updatedAt: foodKeywordRelation.updatedAt, scores: foodKeywordRelation.scores});
+      if(foodKeywordRelationItem) {
+        success = true;
+      }
+    } catch (error) {
+      console.log(error);
     }
+
   }
   if(success){
-    let foodKeywordRelationCommit = await tx.commit();
+    let foodKeywordRelationCommit
+    try {
+      foodKeywordRelationCommit = await tx.commit();
+    } catch (error) {
+      console.log(error);
+    }
+
     if(foodKeywordRelationCommit) {
       console.log("Insert food keyword relation success")
       session.close();
@@ -205,8 +275,13 @@ async function getAndInsetFoodShopRelation(timesamp) {
     '<' : timesamp - 1*1000,
     }
   } : {};
-  let foodShopRelations  = await FoodShopRelation.find(check);
-
+  let foodShopRelations = [];
+  try {
+    foodShopRelations  = await FoodShopRelation.find(check);
+  } catch (error) {
+    console.log(error);
+  }
+  
   const session = driver.session();
   if(session == null) {
     console.log("Connect neo4j that bai");
@@ -219,18 +294,31 @@ async function getAndInsetFoodShopRelation(timesamp) {
   let success = false;
   for(let i = 0 ; i < foodShopRelations.length; i++) {
     let foodShopRelation = foodShopRelations[i];
-    let foodShopRelationItem = await tx.run("MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv", 
+    let foodShopRelationItem = null;
+    try {
+      foodShopRelationItem = await tx.run("MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}}]->(f) SET pv+={scores: {scores}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN pv", 
                                 {id: foodShopRelation.id, foodID: foodShopRelation.food, shopID: foodShopRelation.shop, createdAt: foodShopRelation.createdAt, updatedAt: foodShopRelation.updatedAt, scores: foodShopRelation.scores});
-    if(foodShopRelationItem) {
-      success = true;
+      if(foodShopRelationItem) {
+        success = true;
+      }
+    } catch (error) {
+      console.log(error);
     }
+    
   }
   if(success){
-    let foodShopRelationCommit = await tx.commit();
-    if(foodShopRelationCommit) {
-      console.log("Insert food shop relation success")
-      session.close();
+    let foodShopRelationCommit = null;
+    try {
+      foodShopRelationCommit = await tx.commit();
+      if(foodShopRelationCommit) {
+        console.log("Insert food shop relation success")
+        session.close();
+      }
+    } catch (error) {
+      console.log(error);
     }
+
+
   } else {
     console.log('rolled back');
     tx.rollback();

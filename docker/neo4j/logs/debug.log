@@ -7764,3 +7764,1274 @@ MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
 2018-10-28 08:23:42.843+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 91 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
 2018-10-28 08:23:42.852+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 91 checkpoint completed in 66ms
 2018-10-28 08:23:42.854+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 08:33:42.828+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 817 seconds: MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 08:33:42.831+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 817 seconds: EXPLAIN MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 08:33:43.723+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 744 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 08:33:43.726+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 744 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 08:33:44.830+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1419 seconds: MATCH p=()-[r:PHUC_VU]->() RETURN p LIMIT 25
+2018-10-28 08:33:44.833+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1419 seconds: EXPLAIN MATCH p=()-[r:PHUC_VU]->() RETURN p LIMIT 25
+2018-10-28 08:33:45.158+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1395 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 08:33:45.160+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1395 seconds: EXPLAIN MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 08:34:18.479+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 783 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 08:34:18.482+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 783 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 08:34:18.488+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 783 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 08:34:18.495+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 783 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 08:34:18.586+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 783 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 08:34:18.592+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 783 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 08:34:18.610+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 783 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 08:34:18.613+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 783 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 08:34:18.617+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 783 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 08:34:18.618+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 783 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 08:34:31.242+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 47 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 08:34:31.250+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 47 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 08:38:52.274+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 98 checkpoint started...
+2018-10-28 08:38:52.310+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 98 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 08:38:52.326+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 98 checkpoint completed in 49ms
+2018-10-28 08:38:52.330+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 08:40:00.376+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 341 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 08:40:00.380+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 341 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 08:40:00.425+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 341 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 08:40:00.432+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 341 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 08:54:01.749+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 100 checkpoint started...
+2018-10-28 08:54:01.802+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 100 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
+2018-10-28 08:54:01.809+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 100 checkpoint completed in 58ms
+2018-10-28 08:54:01.812+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 09:10:35.438+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2163 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:10:35.452+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2163 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:10:36.341+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 101 checkpoint started...
+2018-10-28 09:10:36.372+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 101 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 09:10:36.380+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 101 checkpoint completed in 37ms
+2018-10-28 09:10:36.383+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 09:10:58.098+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1857 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:10:58.107+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1857 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:10:58.129+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1857 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:10:58.147+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1857 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:10:59.715+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 23 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:10:59.729+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 23 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:19:48.442+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2763 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:19:48.457+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2763 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:19:48.701+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 4944 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 09:19:48.720+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 4944 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 09:20:10.979+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2752 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:20:10.994+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2752 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:20:11.002+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 552 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:20:11.009+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 552 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:20:11.073+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2752 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:20:11.082+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 552 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:20:11.086+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2752 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:20:11.093+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 552 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:20:11.125+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2752 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:20:11.134+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2752 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:20:20.522+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 560 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:20:20.526+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 560 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:20:23.075+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 34 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 09:20:23.081+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 34 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 09:20:25.844+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2800 seconds: MATCH p=()-[r:PHUC_VU]->() RETURN p LIMIT 25
+2018-10-28 09:20:25.847+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2800 seconds: MATCH p=()-[r:PHUC_VU]->() RETURN p LIMIT 25
+2018-10-28 09:24:34.476+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 286 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:24:34.479+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 286 seconds: EXPLAIN MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:24:39.572+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 5240 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 09:24:39.577+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 5240 seconds: EXPLAIN MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 09:24:48.396+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 13 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:24:48.399+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 13 seconds: EXPLAIN MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:24:49.793+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 268 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:24:49.798+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 268 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:25:00.496+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 289 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:25:00.499+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 289 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:25:00.505+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 289 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:25:00.520+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 289 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:25:45.424+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 115 checkpoint started...
+2018-10-28 09:25:45.458+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 115 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
+2018-10-28 09:25:45.470+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 115 checkpoint completed in 41ms
+2018-10-28 09:25:45.473+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 09:26:54.597+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 403 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:26:54.609+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 403 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:26:54.611+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 403 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:26:54.617+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 403 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:26:54.806+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 403 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:26:54.811+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 403 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:27:00.801+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 130 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:27:00.804+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 130 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:28:07.541+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 186 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:28:07.544+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 186 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 09:28:07.599+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 72 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:28:07.606+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 72 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:28:07.616+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 72 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:28:07.627+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 72 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:28:07.652+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 187 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:28:07.655+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 187 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:28:07.726+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 72 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:28:07.728+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 72 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:28:26.043+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 217 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:28:26.045+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 217 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 09:33:45.579+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 337 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:33:45.581+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 337 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 09:33:45.687+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 338 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:33:45.689+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 338 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 09:33:45.775+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 338 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:33:45.777+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 338 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 09:33:46.065+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 338 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:33:46.067+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 338 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 09:33:49.523+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 408 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:33:49.526+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 408 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 09:40:54.466+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 132 checkpoint started...
+2018-10-28 09:40:54.530+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 132 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 09:40:54.545+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 132 checkpoint completed in 75ms
+2018-10-28 09:40:54.548+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 10:26:35.417+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3169 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:26:35.420+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3169 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:26:35.556+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3169 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 10:26:35.558+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3169 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 10:26:35.684+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3169 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 10:26:35.687+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3169 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 10:26:35.966+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3508 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:26:35.969+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3508 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:26:36.352+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3169 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 10:26:36.355+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3169 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 10:26:41.220+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 135 checkpoint started...
+2018-10-28 10:26:41.305+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 135 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
+2018-10-28 10:26:41.315+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 135 checkpoint completed in 91ms
+2018-10-28 10:26:41.317+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 10:27:57.549+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 4054 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 10:27:57.551+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 4054 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 10:28:16.195+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 100 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:28:16.198+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 100 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:40:38.721+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 742 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:40:38.723+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 742 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:41:50.345+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 143 checkpoint started...
+2018-10-28 10:41:50.415+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 143 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 10:41:50.426+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 143 checkpoint completed in 78ms
+2018-10-28 10:41:50.428+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 10:43:17.606+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 919 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 10:43:17.615+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 919 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 10:43:30.882+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 7788 seconds: MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 10:43:30.884+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 7788 seconds: EXPLAIN MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 10:43:31.101+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 4181 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:43:31.103+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 4181 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:43:51.309+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 19 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:43:51.311+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 19 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:45:28.944+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1133 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:45:28.947+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1133 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:45:29.043+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1133 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 10:45:29.046+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1133 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 10:45:29.149+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1133 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 10:45:29.153+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1133 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 10:45:29.257+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 290 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:45:29.260+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 290 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:45:29.573+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1133 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 10:45:29.579+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1133 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 10:45:31.169+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 99 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:45:31.172+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 99 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:53:09.620+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 578 seconds: MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 10:53:09.626+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 578 seconds: EXPLAIN MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 10:55:00.045+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 571 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:55:00.047+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 571 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:55:00.186+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 570 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:55:00.196+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 570 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:56:59.461+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 161 checkpoint started...
+2018-10-28 10:56:59.513+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 161 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
+2018-10-28 10:56:59.536+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 161 checkpoint completed in 72ms
+2018-10-28 10:56:59.538+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 10:57:13.557+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 5553 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 10:57:13.562+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 5553 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 10:59:10.634+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 819 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:59:10.643+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 819 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:59:31.216+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 20 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:59:31.219+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 20 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:59:40.167+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 280 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:59:40.170+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 280 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 10:59:40.459+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 280 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:59:40.465+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 280 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 10:59:51.081+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 19 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 10:59:51.084+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 19 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:00:44.901+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 64 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 11:00:44.907+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 64 seconds: EXPLAIN MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(k) SET ph.scores = {scores} RETURN ph
+2018-10-28 11:05:00.099+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 319 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:05:00.102+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 319 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:12:08.575+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 171 checkpoint started...
+2018-10-28 11:12:08.638+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 171 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 11:12:08.653+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 171 checkpoint completed in 68ms
+2018-10-28 11:12:08.657+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 11:26:28.464+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1754 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 11:26:28.469+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1754 seconds: EXPLAIN MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 11:26:33.308+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1602 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:26:33.317+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1602 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:26:48.545+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1308 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:26:48.550+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1308 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:26:48.862+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 274 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:26:48.865+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 274 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:26:57.919+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 24 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:26:57.922+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 24 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:27:17.650+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 187 checkpoint started...
+2018-10-28 11:27:17.769+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 187 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
+2018-10-28 11:27:17.798+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 187 checkpoint completed in 141ms
+2018-10-28 11:27:17.806+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 11:30:00.036+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 191 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:30:00.039+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 191 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:30:00.198+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 191 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:30:00.200+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 191 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:36:48.184+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3079 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 11:36:48.187+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3079 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 11:36:48.279+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3079 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 11:36:48.282+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3079 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 11:36:48.498+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3078 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 11:36:48.502+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3078 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 11:37:42.107+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 643 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:37:42.110+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 643 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:37:59.308+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 479 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:37:59.311+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 479 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:37:59.434+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 71 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 11:37:59.439+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 71 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 11:37:59.540+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 71 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 11:37:59.544+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 71 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 11:37:59.633+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 479 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:37:59.637+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 479 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:37:59.925+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 71 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 11:37:59.929+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 71 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 11:38:10.720+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 28 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:38:10.733+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 28 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 11:39:10.228+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 761 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 11:39:10.234+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 761 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 11:42:26.837+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 201 checkpoint started...
+2018-10-28 11:42:26.888+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 201 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 11:42:26.904+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 201 checkpoint completed in 62ms
+2018-10-28 11:42:26.907+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 11:42:29.613+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 270 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:42:29.617+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 270 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 11:42:29.801+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 270 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 11:42:29.807+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 270 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 11:42:29.900+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 270 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 11:42:29.903+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 270 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 11:42:30.085+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 270 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:42:30.087+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 270 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 11:42:30.277+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 270 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 11:42:30.280+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 270 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 11:57:35.929+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 207 checkpoint started...
+2018-10-28 11:57:36.040+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 207 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
+2018-10-28 11:57:36.068+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 207 checkpoint completed in 129ms
+2018-10-28 11:57:36.078+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 12:08:04.282+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 9578 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:08:04.293+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 9578 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:11:29.578+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 4699 seconds: MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 12:11:29.584+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 4699 seconds: EXPLAIN MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 12:11:39.215+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 3318 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = "5bd32daa66c9fbf68b0fc29d" AND k.id= "5bd33572a5f4ce626645b57b" WITH f,k MERGE (f)-[ph:PHU_HOP{id: "5bd59d23866bc4a4df1b484c"}]->(k) SET ph+={scores: 30} RETURN ph
+2018-10-28 12:11:39.224+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 3318 seconds: EXPLAIN MATCH (f:Food), (k:Keyword) WHERE f.id = "5bd32daa66c9fbf68b0fc29d" AND k.id= "5bd33572a5f4ce626645b57b" WITH f,k MERGE (f)-[ph:PHU_HOP{id: "5bd59d23866bc4a4df1b484c"}]->(k) SET ph+={scores: 30} RETURN ph
+2018-10-28 12:11:39.838+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1949 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:11:39.844+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1949 seconds: EXPLAIN MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:11:40.982+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 216 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:11:40.985+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 216 seconds: EXPLAIN MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:11:43.499+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2012 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:11:43.506+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2012 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:11:59.887+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1770 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:11:59.891+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1770 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:12:00.095+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1770 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 12:12:00.098+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1770 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 12:12:00.280+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1770 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 12:12:00.282+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1770 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 12:12:00.401+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1770 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:12:00.404+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1770 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:12:00.716+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1770 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 12:12:00.720+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1770 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 12:12:08.724+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 25 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:12:08.728+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 25 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:12:20.146+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 40 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:12:20.153+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 40 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:12:39.902+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 58 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:12:39.910+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 58 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:12:45.076+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 220 checkpoint started...
+2018-10-28 12:12:45.168+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 220 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 12:12:45.183+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 220 checkpoint completed in 102ms
+2018-10-28 12:12:45.187+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 12:15:00.086+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 180 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:15:00.089+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 180 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:15:00.300+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 179 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:15:00.304+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 179 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:19:09.436+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 19569 seconds: MATCH (n:Keyword) RETURN n LIMIT 25
+2018-10-28 12:19:09.439+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 19569 seconds: MATCH (n:Keyword) RETURN n LIMIT 25
+2018-10-28 12:20:08.284+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 5810 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 12:20:08.293+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 5810 seconds: MATCH (a)-[r]->(b) WHERE id(a) IN $existingNodeIds AND id(b) IN $newNodeIds RETURN r;
+2018-10-28 12:27:07.304+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 898 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:27:07.318+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 898 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:27:11.246+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 891 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:27:11.249+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 891 seconds: EXPLAIN MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:27:12.867+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 872 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:27:12.872+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 872 seconds: EXPLAIN MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:27:20.844+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 951 seconds: MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 12:27:20.846+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 951 seconds: EXPLAIN MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 12:27:21.816+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 14 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:27:21.822+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 14 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:27:24.932+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 12 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:27:24.936+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 12 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:27:52.620+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 772 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:27:52.622+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 772 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:27:53.105+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 772 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:27:53.108+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 772 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:27:54.212+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 234 checkpoint started...
+2018-10-28 12:27:54.262+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 234 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b].
+2018-10-28 12:27:54.292+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 234 checkpoint completed in 75ms
+2018-10-28 12:27:54.297+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 12:28:10.646+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 48 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:28:10.650+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 48 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:28:39.488+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 88 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:28:39.492+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 88 seconds: MATCH p=()-[r:PHU_HOP]->() RETURN p LIMIT 25
+2018-10-28 12:28:58.218+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 93 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:28:58.225+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 93 seconds: MATCH p=()-->() RETURN p LIMIT 25
+2018-10-28 12:35:00.087+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 427 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:35:00.092+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 427 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:35:00.355+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1379 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 12:35:00.358+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1379 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}, scores: 0, createdAt: {createdAt}, updatedAt: {updatedAt}}]->(f) SET pv.scores = {scores} RETURN pv
+2018-10-28 12:35:48.100+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 11722 seconds: MATCH p=()-[r:PHUC_VU]->() RETURN p LIMIT 25
+2018-10-28 12:35:48.103+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 11722 seconds: MATCH p=()-[r:PHUC_VU]->() RETURN p LIMIT 25
+2018-10-28 12:40:16.335+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 16239 seconds: MATCH ()-[ph:PHUC_VU]->() delete ph
+2018-10-28 12:40:16.340+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 16239 seconds: EXPLAIN MATCH ()-[ph:PHUC_VU]->() delete ph
+2018-10-28 12:40:21.415+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 780 seconds: MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 12:40:21.420+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 780 seconds: EXPLAIN MATCH ()-[ph:PHU_HOP]->() delete ph
+2018-10-28 12:40:21.846+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 730 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:40:21.880+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 730 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:40:42.645+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 342 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:40:42.648+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 342 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:40:43.233+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 63 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}}]->(f) SET pv+={scores: {scores}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN pv
+2018-10-28 12:40:43.237+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 63 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}}]->(f) SET pv+={scores: {scores}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN pv
+2018-10-28 12:40:51.604+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 29 seconds: CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:40:51.614+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 29 seconds: 
+CALL db.labels() YIELD label
+RETURN {name:'labels', data:COLLECT(label)[..1000]} as result
+UNION ALL
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN {name:'relationshipTypes', data:COLLECT(relationshipType)[..1000]} as result
+UNION ALL
+CALL db.propertyKeys() YIELD propertyKey
+RETURN {name:'propertyKeys', data:COLLECT(propertyKey)[..1000]} as result
+UNION ALL
+CALL dbms.functions() YIELD name, signature, description
+RETURN {name:'functions', data: collect({name: name, signature: signature, description: description})} AS result
+UNION ALL
+CALL dbms.procedures() YIELD name, signature, description
+RETURN {name:'procedures', data:collect({name: name, signature: signature, description: description})} as result
+UNION ALL
+MATCH () RETURN { name:'nodes', data:count(*) } AS result
+UNION ALL
+MATCH ()-[]->() RETURN { name:'relationships', data: count(*)} AS result
+
+2018-10-28 12:43:03.362+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 244 checkpoint started...
+2018-10-28 12:43:03.500+0000 INFO [o.n.k.i.s.c.CountsTracker] Rotated counts store at transaction 244 to [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.b], from [/var/lib/neo4j/data/databases/graph.db/neostore.counts.db.a].
+2018-10-28 12:43:03.508+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Checkpoint triggered by scheduler for time threshold @ txId: 244 checkpoint completed in 137ms
+2018-10-28 12:43:03.511+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] No log version pruned, last checkpoint was made in version 0
+2018-10-28 12:45:00.034+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 257 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:45:00.037+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 257 seconds: MERGE (food:Food {id: {id}}) SET food += {name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN food.name AS name
+2018-10-28 12:46:26.325+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 21448 seconds: MATCH (n:Food) RETURN n LIMIT 25
+2018-10-28 12:46:26.332+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 21448 seconds: MATCH (n:Food) RETURN n LIMIT 25
+2018-10-28 12:48:24.405+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2184 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 12:48:24.408+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2184 seconds: MERGE (keyword:Keyword {id: {id}}) SET keyword+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, type: {type}, action: {action}} RETURN keyword.name AS name
+2018-10-28 12:48:24.498+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 2184 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 12:48:24.502+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 2184 seconds: MERGE (shop:Shop {id: {id}}) SET shop+={name: {name}, description: {description}, createdAt: {createdAt}, updatedAt: {updatedAt}, address: {address}} RETURN shop.name AS name
+2018-10-28 12:48:24.601+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 1231 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:48:24.604+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 1231 seconds: MATCH (f:Food), (k:Keyword) WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k MERGE (f)-[ph:PHU_HOP{id: {id}}]->(k) SET ph+={scores: {scores},createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN ph
+2018-10-28 12:48:24.806+0000 INFO [o.n.c.i.CommunityCompatibilityFactory] Discarded stale query from the query cache after 461 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}}]->(f) SET pv+={scores: {scores}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN pv
+2018-10-28 12:48:24.808+0000 INFO [o.n.c.i.ExecutionEngine] Discarded stale query from the query cache after 461 seconds: MATCH (f:Food), (s:Shop) WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s MERGE (s)-[pv:PHUC_VU{id: {id}}]->(f) SET pv+={scores: {scores}, createdAt: {createdAt}, updatedAt: {updatedAt}} RETURN pv

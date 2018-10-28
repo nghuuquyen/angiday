@@ -1,5 +1,8 @@
 version: '3.1'
 
+networks:
+  angiday-default:
+
 services:
   web:
     build: ./web-app
@@ -7,6 +10,8 @@ services:
     command: npm start
     ports:
       - "3000:3000"
+    networks: 
+      -  angiday-default
     volumes:
       - ./web-app:/usr/src/app
       - /usr/src/app/node_modules
@@ -21,6 +26,8 @@ services:
     command: sails lift
     ports:
       - "1337:1337"
+    networks: 
+      -  angiday-default
     volumes:
       - ./api-server:/usr/src/app
       - /usr/src/app/node_modules
@@ -33,6 +40,8 @@ services:
     restart: always
     ports:
       - "27017:27017"
+    networks: 
+      -  angiday-default
     volumes:
       - ./docker/mongodb/db:/data/db
 
@@ -44,3 +53,17 @@ services:
       - ./docker/redis/data:/data
     entrypoint: redis-server --appendonly yes
     restart: always
+    networks: 
+      -  angiday-default
+  neo4j:
+    image: neo4j:latest
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ./docker/neo4j/data:/data
+      - ./docker/neo4j/logs:/logs
+    environment:
+      NEO4J_AUTH: "none"
+    networks: 
+      -  angiday-default

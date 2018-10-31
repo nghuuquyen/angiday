@@ -93,13 +93,13 @@
       // Adding new selected keywords to current selected food.
       vm.selectedFood.keywords = _.concat(vm.selectedFood.keywords, keywords);
 
+      let target = { id: vm.selectedFood.id };
       let data = {
-        id: vm.selectedFood.id,
         // Because sails js require format is list of word ids.
         keywords: _.map(vm.selectedFood.keywords, item => item.id)
       };
 
-      FoodService.update(data).$promise
+      FoodService.update(target, data).$promise
         .then(updatedFood => {
           toastr.success(`Update food ${updatedFood.name} keywords compeleted.`);
 
@@ -125,13 +125,13 @@
       // Adding new selected shops to current selected food.
       vm.selectedFood.shops = _.concat(vm.selectedFood.shops, shops);
 
+      let target = { id: vm.selectedFood.id };
       let data = {
-        id: vm.selectedFood.id,
         // Because sails js require format is list of shops ids.
         shops: _.map(vm.selectedFood.shops, item => item.id)
       };
 
-      FoodService.update(data).$promise
+      FoodService.update(target, data).$promise
         .then(updatedFood => {
           toastr.success(`Update food ${updatedFood.name} shops compeleted.`);
 

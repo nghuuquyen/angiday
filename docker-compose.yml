@@ -7,15 +7,13 @@ services:
   web:
     build: ./web-app
     restart: always
-    command: npm start
+    command: ["/bin/bash", "-c", "npm install && npm start"]
     ports:
       - "3000:3000"
     networks: 
       -  angiday-default
     volumes:
       - ./web-app:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/public
     depends_on:
       - mongodb
       - redis
@@ -23,14 +21,13 @@ services:
   api:
     build: ./api-server
     restart: always
-    command: sails lift
+    command: ["/bin/bash", "-c", "npm install && sails lift"]
     ports:
       - "1337:1337"
     networks: 
       -  angiday-default
     volumes:
       - ./api-server:/usr/src/app
-      - /usr/src/app/node_modules
     depends_on:
       - mongodb
       - redis    

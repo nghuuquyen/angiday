@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "npm test",
-    "start": "grunt",
+    "start": "bower install --allow-root && grunt",
     "start-production": "grunt run-prod"
   },
   "keywords": [

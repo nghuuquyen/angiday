@@ -1,0 +1,58 @@
+<section class="row" ng-controller="SearchResultController as vm">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-header">Search Results</div>
+      <div class="card-body">
+        <h2>Client Render</h2>
+        <!-- search input -->
+        <div class="input-group mb-3">
+          <input ng-model="vm.seachQuery" type="text" class="form-control" placeholder="Search">
+          <div class="input-group-append">
+            <button class="btn btn-success" type="submit" ng-click="vm.searchFood()">Go</button>
+          </div>
+        </div>
+        <!-- ./search input -->
+
+        <!-- foods list -->
+        <div class="media border p-3 agd-card-normal" ng-repeat="food in vm.foods track by $index">
+          <img src="https://via.placeholder.com/100x100" alt="John Doe" class="mr-3 mt-3 rounded-circle">
+          <div class="media-body">
+            <h6>{{food.name}}</h6>
+            <p>{{food.number_shops}} Shop served</p>
+          </div>
+        </div>
+        <!-- ./ foods list -->
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-header">Recommendations</div>
+      <div class="card-body">
+        <!-- recommends list -->
+        <div ng-repeat="item in vm.recommends track by $index">
+          <!-- food card -->
+          <div class="media border p-3 agd-card-normal" ng-if="item.type === 'food'">
+            <img src="https://via.placeholder.com/100x100" class="mr-3 mt-3 rounded-circle">
+            <div class="media-body bg-primary text-white">
+              <h6>{{item.name}}</h6>
+              <p>{{item.number_shops}} Shop served</p>
+            </div>
+          </div>
+          <!-- ./ food card -->
+
+          <!-- shop card -->
+          <div class="media border p-3 agd-card-normal" ng-if="item.type === 'food'">
+            <img src="https://via.placeholder.com/100x100" class="mr-3 mt-3 rounded-circle">
+            <div class="media-body bg-success text-white">
+              <h6>{{item.name}}</h6>
+              <p>{{item.address}}</p>
+            </div>
+          </div>
+          <!-- ./shop card -->
+        </div>
+        <!-- ./ recommends list -->
+      </div>
+    </div>
+  </div>
+</section>

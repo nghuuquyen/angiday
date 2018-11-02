@@ -1,0 +1,56 @@
+<section class="row">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-header">Search Results</div>
+      <div class="card-body">
+        <h2>Server Render</h2>
+        <!-- foods list -->
+        {{#each foods}}
+        <div class="media border p-3 agd-card-normal">
+          <img src="https://via.placeholder.com/100x100" alt="John Doe" class="mr-3 mt-3 rounded-circle">
+          <div class="media-body">
+            <h6>{{this.name}}</h6>
+            <p>{{this.number_shops}} Shop served</p>
+          </div>
+        </div>
+        {{/each}}
+        <!-- ./ foods list -->
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-header">Recommendations</div>
+      <div class="card-body">
+        <!-- recommends list -->
+        {{#each recommends}}
+
+        {{#ifCond this.type '===' 'food'}}
+        <!-- food card -->
+        <div class="media border p-3 agd-card-normal">
+            <img src="https://via.placeholder.com/100x100" class="mr-3 mt-3 rounded-circle">
+            <div class="media-body bg-primary text-white">
+              <h6>{{this.name}}</h6>
+              <p>{{this.number_shops}} Shop served</p>
+            </div>
+          </div>
+        <!-- ./ food card -->
+        {{/ifCond}}
+
+        {{#ifCond this.type '===' 'shop'}}
+        <!-- shop card -->
+        <div class="media border p-3 agd-card-normal">
+            <img src="https://via.placeholder.com/100x100" class="mr-3 mt-3 rounded-circle">
+            <div class="media-body bg-success text-white">
+              <h6>{{this.name}}</h6>
+              <p>{{this.address}}</p>
+            </div>
+          </div>
+        <!-- ./shop card -->
+        {{/ifCond}}
+        {{/each}}
+        <!-- ./ recommends list -->
+      </div>
+    </div>
+  </div>
+</section>

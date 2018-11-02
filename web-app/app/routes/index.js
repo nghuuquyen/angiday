@@ -6,5 +6,6 @@ let router = require('express').Router();
 router.use(require('./core.server.routes'));
 router.use(require('./authentication.server.routes'));
 router.use(require('./content-management.server.routes'));
+router.use(require('./demo.server.routes'));
 
 module.exports = router;

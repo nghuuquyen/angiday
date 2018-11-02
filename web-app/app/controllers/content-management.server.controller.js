@@ -11,9 +11,8 @@ module.exports = {
 *
 * @param  {object}   req  HTTP Request
 * @param  {object}   res  HTTP Response
-* @param  {Function} next Next middleware
 */
-function renderFoodManagementPage(req, res, next) {
+function renderFoodManagementPage(req, res) {
   res.render('pages/content-manage/food-management', {
     user : req.user
   });

@@ -19,10 +19,7 @@ angular.module(ApplicationConfiguration.applicationModuleName)
 
 angular.module(ApplicationConfiguration.applicationModuleName)
   .run(function ($rootScope, $state, Authentication, $transitions, $exceptionHandler) {
-
-    // Config API Host Endpoint
-    $rootScope.hosts = window.hosts;
-
+    
     $transitions.onStart({}, function ($transition) {
       var toState = $transition.to();
       var toParams = $transition.params("to");

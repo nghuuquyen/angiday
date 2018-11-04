@@ -10,11 +10,14 @@
 
 module.exports.routes = {
   'GET /': { view: 'pages/homepage' },
+
   /**
    * Food Module Routes
    */
   'DELETE /food/remove-keyword': { action: 'food/remove-keyword' },
-  'DELETE /food/remove-shop': { action: 'food/remove-shop' },
+  'DELETE /food/remove-shop':    { action: 'food/remove-shop' },
+  'GET /food/search':         { action: 'food/search' },
+
   /**
    * Keyword Module Routes
    */

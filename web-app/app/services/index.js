@@ -1,5 +1,5 @@
 "use strict";
 
 module.exports = {
-  // Do export something.
+  FoodService: require('./FoodService')
 };

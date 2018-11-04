@@ -17,6 +17,7 @@ module.exports.policies = {
   /**
    * Food APIs Group
    */
+  'food/search': true,
   'food/find': true,
   'food/findOne': true,
   'food/create': true,

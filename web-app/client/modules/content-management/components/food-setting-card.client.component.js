@@ -18,7 +18,15 @@
          * Food id, set to false if want to create new and string value food id 
          * if want to edit exists food.
          */
-        id: '='
+        id: '=',
+        /**
+         * Callback when update food successfull.
+         */
+        onUpdate: '&',
+        /**
+         * Callback when create food successfull.
+         */
+        onCreate: '&'
       },
     });
 
@@ -128,6 +136,9 @@
           toastr.success(`Creating food ${food.name} compeleted.`);
           // Must reset food form model.
           vm.food = getEmptyFoodModel();
+
+          // Trigger callback.
+          vm.onCreate({ food: food });
         });
     }
 
@@ -136,6 +147,9 @@
       return FoodService.update(data).$promise
         .then(food => {
           toastr.success(`Updating food ${food.name} compeleted.`);
+
+          // Trigger callback.
+          vm.onUpdate({ food: food });
         });
     }
 

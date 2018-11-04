@@ -40,6 +40,8 @@
     vm.removeFoodKeyword = removeFoodKeyword;
     vm.addShopsToFood = addShopsToFood;
     vm.removeFoodShop = removeFoodShop;
+    vm.onUpdateFoodSuccess = onUpdateFoodSuccess;
+    vm.onCreateFoodSuccess = onCreateFoodSuccess;
 
     /* ============= PRIVATE FUNCTION ============= **/
 
@@ -112,15 +114,15 @@
     }
 
     /**
- * @name addShopsToFood
- * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
- * @description
- * Saving list selected shops to food.
- * 
- * @param {Array} shops 
- * 
- * @return void
- */
+     * @name addShopsToFood
+     * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
+     * @description
+     * Saving list selected shops to food.
+     * 
+     * @param {Array} shops 
+     * 
+     * @return void
+     */
     function addShopsToFood(shops) {
       // Adding new selected shops to current selected food.
       vm.selectedFood.shops = _.concat(vm.selectedFood.shops, shops);
@@ -205,6 +207,31 @@
         .catch(err => {
           vm.message = `Something error: ${err.data}`;
         });
+    }
+
+    /**
+     * @name onUpdateFoodSuccess
+     * @description
+     * Handle event callback when one food that updated successfully.
+     * 
+     * @param {Object} food 
+     */
+    function onUpdateFoodSuccess(food) {
+      const updateIndex = vm.foods.findIndex(_food => _food.id === food.id);
+      if (updateIndex !== -1) {
+        vm.foods[updateIndex] = food;
+      }
+    }
+
+    /**
+     * @name onCreateFoodSuccess
+     * @description
+     * Handle event callback when one food that created successfully.
+     * 
+     * @param {Object} food 
+     */
+    function onCreateFoodSuccess(food) {
+      vm.foods.push(food);
     }
   }
 })();

@@ -3,14 +3,13 @@
     <div class="card">
       <div class="card-header">Search Results</div>
       <div class="card-body">
-        <h2>Server Render</h2>
         <!-- foods list -->
         {{#each foods}}
         <div class="media border p-3 agd-card-normal">
           <img src="https://via.placeholder.com/100x100" alt="John Doe" class="mr-3 mt-3 rounded-circle">
           <div class="media-body">
             <h6>{{this.name}}</h6>
-            <p>{{this.number_shops}} Shop served</p>
+            <p>{{this.shops.length}} Shop served</p>
           </div>
         </div>
         {{/each}}
@@ -31,7 +30,7 @@
             <img src="https://via.placeholder.com/100x100" class="mr-3 mt-3 rounded-circle">
             <div class="media-body bg-primary text-white">
               <h6>{{this.name}}</h6>
-              <p>{{this.number_shops}} Shop served</p>
+              <p>{{this.shops.length}} Shop served</p>
             </div>
           </div>
         <!-- ./ food card -->

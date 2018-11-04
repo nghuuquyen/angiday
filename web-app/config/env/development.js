@@ -2,7 +2,7 @@
 
 module.exports = {
   hosts: {
-    api: 'http://localhost:1337'
+    api: process.env.API_HOST || 'http://localhost:1337'
   },
   db: {
     // mongodb://[username:password@]host1[:port1]

@@ -12,10 +12,10 @@
     .controller('HomePageController', Controller);
 
   Controller.$inject = [
-    'KeywordService', '_'
+    'KeywordService', '_', '$location'
   ];
 
-  function Controller(KeywordService, _) {
+  function Controller(KeywordService, _, $location) {
     var vm = this;
 
     // ********* PUBLIC VARIABLES ********* //
@@ -70,7 +70,13 @@
      * @return void 
      */
     function doSearchFoodByTags() {
-      console.log('Selected tags by user is: ', vm.tags);
+      let word_ids = '';
+
+      for(let i in vm.tags) {
+        word_ids += vm.tags[i].id;
+      }
+      // Redirecting to search results page.
+      $location.path(`/search?word_ids=${word_ids}`).replace().reload(false);
     }
   }
 })();

@@ -6,7 +6,7 @@
 
   angular
     .module('core')
-    .controller('SearchResultController', Controller);
+    .controller('SearchResultV2Controller', Controller);
 
   Controller.$inject = [];
   function Controller() {

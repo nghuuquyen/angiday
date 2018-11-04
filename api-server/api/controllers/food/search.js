@@ -13,6 +13,7 @@
  * @response {Array} foods.name   - Food name.
  * @response {Array} foods.id     - Food ID.
  * @response {Array} foods.words  - Food words related.
+ * @response {Array} foods.shops  - Food shops served.
  * @response {Array} foods.rank   - Search rank number.
  */
 module.exports = async function search(req, res) {

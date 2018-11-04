@@ -11,13 +11,13 @@
     .module('content-management')
     .factory('KeywordService', Service);
 
-  Service.$inject = ['$resource', '$rootScope'];
+  Service.$inject = ['$resource', 'Host'];
 
   /* @ngInject */
-  function Service($resource, $rootScope) {
-    const base = $rootScope.hosts.api;
+  function Service($resource, Host) {
+    const apiGateway = Host.getApiGateway();
 
-    return $resource(base + '/keyword/:id', { id: '@id' }, {
+    return $resource(apiGateway + '/keyword/:id', { id: '@id' }, {
       update: {
         method: 'PATCH'
       },
@@ -28,7 +28,7 @@
        */
       search: {
         method: 'GET',
-        url: base + '/keyword/search',
+        url: apiGateway + '/keyword/search',
         isArray: true
       }
     });

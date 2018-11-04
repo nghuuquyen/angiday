@@ -11,13 +11,13 @@
     .module('content-management')
     .factory('FoodService', Service);
 
-  Service.$inject = ['$resource', '$rootScope'];
+  Service.$inject = ['$resource', 'Host'];
 
   /* @ngInject */
-  function Service($resource, $rootScope) {
-    const base = $rootScope.hosts.api;
+  function Service($resource, Host) {
+    const apiGateway = Host.getApiGateway();
 
-    return $resource(base + '/food/:id', { id: '@id' }, {
+    return $resource(apiGateway + '/food/:id', { id: '@id' }, {
       update: {
         method: 'PATCH'
       },
@@ -29,7 +29,7 @@
       search: {
         method: 'GET',
         isArray: true,
-        url: base + '/food/search'
+        url: apiGateway + '/food/search'
       },
       /**
        * @name removeKeyword
@@ -43,7 +43,7 @@
        */
       removeKeyword: {
         method: 'DELETE',
-        url: base + '/food/remove-keyword'
+        url: apiGateway + '/food/remove-keyword'
       },
       /**
        * @name removeShop
@@ -57,7 +57,7 @@
        */
       removeShop: {
         method: 'DELETE',
-        url: base + '/food/remove-shop'
+        url: apiGateway + '/food/remove-shop'
       }
     });
   }

@@ -11,13 +11,13 @@
     .module('content-management')
     .factory('ShopService', Service);
 
-  Service.$inject = ['$resource', '$rootScope'];
+  Service.$inject = ['$resource', 'Host'];
 
   /* @ngInject */
-  function Service($resource, $rootScope) {
-    const base = $rootScope.hosts.api;
+  function Service($resource, Host) {
+    const apiGateway = Host.getApiGateway();
 
-    return $resource(base + '/shop/:id', { id: '@id' }, {
+    return $resource(apiGateway + '/shop/:id', { id: '@id' }, {
       update: {
         method: 'PUT'
       },
@@ -28,7 +28,7 @@
        */
       search: {
         method: 'GET',
-        url: base + '/shop/search',
+        url: apiGateway + '/shop/search',
         isArray: true
       }
     });

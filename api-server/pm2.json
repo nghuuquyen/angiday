@@ -1,18 +1,18 @@
 {
   "apps": [
     {
-      "name": "web",
-      "script": "server.js",
+      "name": "api",
+      "script": "node app.js",
       "env_staging": {
         "NODE_ENV": "staging",
-        "PORT": "3000",
+        "PORT": "1441",
         "MAX_AGE" : "2592000",
         "EXPIRES" : "2592000",
         "CACHE_HTML" : false
       },
       "env_production" :{
         "NODE_ENV": "production",
-        "PORT": "3000",
+        "PORT": "1441",
         "MAX_AGE" : "2592000",
         "EXPIRES" : "2592000",
         "CACHE_HTML" : false

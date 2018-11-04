@@ -11,8 +11,11 @@
     .module('core')
     .controller('HomePageController', Controller);
 
-  Controller.$inject = ['$q'];
-  function Controller($q) {
+  Controller.$inject = [
+    'KeywordService', '_'
+  ];
+
+  function Controller(KeywordService, _) {
     var vm = this;
 
     // ********* PUBLIC VARIABLES ********* //
@@ -22,11 +25,7 @@
      * @description 
      * Input tags selected by user.
      */
-    vm.tags = [
-      { text: 'Ngon', id: '1' },
-      { text: 'Bổ', id: '2' },
-      { text: 'Rẻ', id: '3' }
-    ];
+    vm.tags = [];
 
     // ********* PUBLIC FUNCTIONS ********* //
     vm.loadTags = loadTags;
@@ -45,18 +44,21 @@
      * @return {Promise<Object>} List tags matching with input query string. 
      */
     function loadTags(query) {
-      var findTags = [
-        { text: 'ngon', id: '4' },
-        { text: 'Trà Sữa', id: '5' },
-        { text: 'Không gian đẹp', id: '6' },
-        { text: 'Không đường', id: '7' },
-        { text: 'Nóng', id: '8' },
-        { text: 'Cay', id: '9' },
-        { text: 'Ngọt', id: '10' },
-        { text: 'Có nước', id: '11' }
-      ];
-
-      return $q.when(findTags);
+      return KeywordService.search({ keyword: query }).$promise
+        .then(keywords => {
+          return _.map(keywords, keyword => {
+            // Transform to ng-tags input format.
+            return {
+              name: keyword.name,
+              text: keyword.name,
+              id: keyword.id,
+              score: keyword.score
+            };
+          });
+        })
+        .then(keywords => {
+          return keywords;
+        });
     }
 
     /**

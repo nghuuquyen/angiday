@@ -50,7 +50,7 @@ async function getAndInsetFood(timesamp) {
 
   const session = driver.session();
   if (session == null) {
-    sails.log.error("Connect neo4j that bai");
+    sails.log.error("Connect neo4j failed");
     return
   }
 
@@ -63,11 +63,13 @@ async function getAndInsetFood(timesamp) {
     let foodItem = null;
     try {
       const cypherStr = `
-        MERGE (food:Food {id: {id}})
-        SET food += {name: {name},
-            description: {description},
-            createdAt: {createdAt},
-            updatedAt: {updatedAt}}
+        MERGE (food:Food { food_id: {id} })
+        SET food += {
+          name: {name},
+          description: {description},
+          created_at: {createdAt},
+          updated_at: {updatedAt}
+        }
         RETURN food.name AS name`;
 
       const params = {
@@ -122,7 +124,7 @@ async function getAndInsetKeyword(timesamp) {
 
   const session = driver.session();
   if (session == null) {
-    sails.log.error("Connect neo4j that bai");
+    sails.log.error("Connect neo4j failed");
     return
   }
 
@@ -135,12 +137,14 @@ async function getAndInsetKeyword(timesamp) {
     let keywordItem = null;
     try {
       const cypherStr = `
-        MERGE (keyword:Keyword {id: {id}})
-        SET keyword+={name: {name},
+        MERGE (keyword:Keyword {keyword_id: {id}})
+        SET keyword += {
+            name: {name},
             description: {description},
-            createdAt: {createdAt},
-            updatedAt: {updatedAt},
-            type: {type}, action: {action}}
+            created_at: {createdAt},
+            updated_at: {updatedAt},
+            type: {type}, action: {action}
+        }
         RETURN keyword.name AS name`;
 
       const params = {
@@ -175,7 +179,7 @@ async function getAndInsetKeyword(timesamp) {
     }
 
   } else {
-    sails.log.info('rolled back');
+    sails.log.info('rolled back insert food.');
     tx.rollback();
   }
 
@@ -212,12 +216,14 @@ async function getAndInsetShop(timesamp) {
     let shopItem = null;
     try {
       const cypherStr = `
-        MERGE (shop:Shop {id: {id}})
-        SET shop+={name: {name},
-            description: {description},
-            createdAt: {createdAt},
-            updatedAt: {updatedAt},
-            address: {address}}
+        MERGE (shop:Shop {shop_id: {id}})
+        SET shop+={
+          name: {name},
+          description: {description},
+          created_at: {createdAt},
+          updated_at: {updatedAt},
+          address: {address}
+        }
         RETURN shop.name AS name`;
 
       const params = {
@@ -250,7 +256,7 @@ async function getAndInsetShop(timesamp) {
     }
 
   } else {
-    sails.log.info('rolled back');
+    sails.log.info('rolled back insert shop.');
     tx.rollback();
   }
 }
@@ -285,11 +291,14 @@ async function getAndInsetFoodKeywordRelation(timesamp) {
     try {
       const cypherStr = `
         MATCH (f:Food), (k:Keyword)
-        WHERE f.id = {foodID} AND k.id= {keywordID} WITH f,k
+        WHERE f.food_id = {foodID} AND k.keyword_id= {keywordID} WITH f,k
         MERGE (f)-[ph:RELATED]->(k)
-        SET ph+={ scores: {scores},
-            createdAt: {createdAt},
-            updatedAt: {updatedAt}} RETURN ph`;
+        SET ph += {
+          scores: {scores},
+          createdAt: {createdAt},
+          updatedAt: {updatedAt}
+        }
+        RETURN ph`;
 
       const params = {
         id: foodKeywordRelation.id,
@@ -322,7 +331,7 @@ async function getAndInsetFoodKeywordRelation(timesamp) {
       session.close();
     }
   } else {
-    sails.log.info('rolled back');
+    sails.log.info('rolled back insert food keyword relation.');
     tx.rollback();
   }
 
@@ -359,11 +368,13 @@ async function getAndInsetFoodShopRelation(timesamp) {
     try {
       const cypherStr = `
         MATCH (f:Food), (s:Shop)
-        WHERE f.id = {foodID} AND s.id= {shopID} WITH f,s
-        MERGE (s)-[pv:SERVED{id: {id}}]->(f)
-        SET pv+={scores: {scores},
-            createdAt: {createdAt},
-            updatedAt: {updatedAt}}
+        WHERE f.food_id = {foodID} AND s.shop_id = {shopID} WITH f,s
+        MERGE (s)-[pv:SERVED]->(f)
+        SET pv += {
+          scores: {scores},
+          created_at: {createdAt},
+          updated_at: {updatedAt}
+        }
         RETURN pv`;
 
       const params = {
@@ -397,7 +408,7 @@ async function getAndInsetFoodShopRelation(timesamp) {
       sails.log.error(error);
     }
   } else {
-    sails.log.error('rolled back');
+    sails.log.error('rolled back insert food shop relation.');
     tx.rollback();
   }
 }

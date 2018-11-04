@@ -22,7 +22,7 @@
             <div id="food_{{$index}}" class="collapse" data-parent="#accordion" ng-class="{'show': $index === 0}">
               <div class="card-body">
                 <p>{{food.description}}</p>
-                
+
                 <br />
                 <h5>Food Keywords</h5>
                 <!-- food keywords -->
@@ -35,7 +35,7 @@
                   </li>
                 </ul>
                 <!-- ./ food keywords -->
-          
+
                 <!-- keyword select or create  -->
                 <br />
                 <keyword-selection-card-component ng-if="vm.showKeywordSelectionCard" on-submit="vm.addKeywordsToFood(keywords);"></keyword-selection-card-component>
@@ -62,7 +62,7 @@
                   </li>
                 </ul>
                 <!-- ./ food shops -->
-          
+
                 <!-- keyword select or create  -->
                 <br />
                 <shop-selection-card-component ng-if="vm.showShopSelectionCard" on-submit="vm.addShopsToFood(shops);"></shop-selection-card-component>
@@ -79,13 +79,14 @@
             </div>
           </div>
           <hr />
-          <food-setting-card-component id="false"></food-setting-card-component>
+          <food-setting-card-component id="false" on-create="vm.onCreateFoodSuccess(food)"></food-setting-card-component>
         </div>
         <!-- ./ foods -->
       </div>
       <div class="col-sm-4">
         <div ng-if="vm.selectedFood">
-          <food-setting-card-component id="vm.selectedFood.id"></food-setting-card-component>
+          <food-setting-card-component on-update="vm.onUpdateFoodSuccess(food)"
+            id="vm.selectedFood.id"></food-setting-card-component>
         </div>
       </div>
     </div>

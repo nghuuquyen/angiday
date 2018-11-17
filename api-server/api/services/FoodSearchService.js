@@ -5,8 +5,12 @@
  * Get food, keyword, shop, FoodKeywordRelation, FoodShopRelation from mongoDB to Neo4j
  */
 
+const NEO4J_USERNAME = process.env.NEO4J_USERNAME || 'neo4j';
+const NEO4J_PASSWORD = process.env.NEO4J_PASSWORD || 'neo4j';
+const NEO4J_CONNECT_STRING = process.env.NEO4J_CONNECTION_STRING || 'bolt://localhost:7687';
+
 const neo4j = require('neo4j-driver').v1;
-const driver = neo4j.driver("bolt://neo4j:7687", neo4j.auth.basic("neo4j", "annq"));
+const driver = neo4j.driver(NEO4J_CONNECT_STRING, neo4j.auth.basic(NEO4J_USERNAME, NEO4J_PASSWORD));
 
 module.exports = {
   searchFoods
@@ -52,7 +56,7 @@ async function searchFoods(keywords) {
       let atts = ['id', 'name', 'description', 'keywords', 'shops'];
       let food = {};
 
-      for(let i in atts) {
+      for (let i in atts) {
         food[atts[i]] = record.get(atts[i]);
       }
 

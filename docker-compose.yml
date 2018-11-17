@@ -21,9 +21,9 @@ services:
   api:
     build: ./api-server
     restart: always
-    command: ["/bin/bash", "-c", "npm install && sails lift"]
+    command: ["/bin/bash", "-c", "npm install && node app"]
     ports:
-      - "1337:1337"
+      - "1441:1441"
     networks: 
       -  angiday-default
     volumes:

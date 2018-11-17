@@ -10,12 +10,12 @@ COPY . /usr/src/app
 # Update npm
 RUN npm i npm@latest -g
 
-# Install Sails JS 
+# Install Sails JS
 RUN npm install sails -g
 
 # Install application libraries.
 RUN npm install
 
-EXPOSE 1337
+EXPOSE 1441
 
 CMD [ "node", "app" ]

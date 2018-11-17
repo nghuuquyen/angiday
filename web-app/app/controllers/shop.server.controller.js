@@ -1,12 +1,12 @@
 /**
- * @name food.server.controller
+ * @name shop.server.controller
  * @module controllers
  * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
  * @description
- * Food controller
+ * Shop controller
  */
 "use strict";
-const FoodService = require('../services').FoodService;
+const ShopService = require('../services').ShopService;
 const _ = require('lodash');
 
 let recommends = [
@@ -20,51 +20,51 @@ let recommends = [
 ];
 
 module.exports = {
-  renderFoodDetailPage,
-  renderFoodIndexPage
+  renderShopDetailPage,
+  renderShopIndexPage
 };
 
 /**
- * @name renderFoodIndexPage
+ * @name renderShopIndexPage
  * @description
- * Render food index page.
+ * Render shop index page.
  * 
  * @param {Object}   req  HTTP request object.
  * @param {Object}   res  HTTP response object.
  * @param {Function} next Next middleware 
  */
-function renderFoodIndexPage(req, res, next) {
-  res.render('pages/food/foods', {});
+function renderShopIndexPage(req, res, next) {
+  res.render('pages/shop/shops', {});
 }
 
+
 /**
- * @name renderFoodDetailPage
+ * @name renderShopDetailPage
  * @description
- * Render food detail page.
+ * Render shop detail page.
  * 
- * @param {Object}   req  HTTP request object.
- * @param {Object}   res  HTTP response object.
- * @param {Function} next Next middleware 
+ * @param {Object} req  HTTP request object.
+ * @param {Object} res  HTTP response object.
  * 
- * @path GET /food/:food_id
+ * @path GET /shop/:shop_id
  * 
  * @todo 
- * Step 1. Get food id from request URL.
- * Step 2. Call API get food detail data and list shop served.
+ * Step 1. Get shop id from request URL.
+ * Step 2. Call API get shop detail data and list food which shop served.
  * Step 3. Binding data to view HTML page.
  * Step 4. Return view page.
  */
-function renderFoodDetailPage(req, res, next) {
-  const foodId = _.escape((req.params.food_id || '').trim());
+function renderShopDetailPage(req, res, next) {
+  const shopId = _.escape((req.params.shop_id || '').trim());
 
-  if (!foodId) {
-    throw new Error('Missing food id parameter.');
+  if (!shopId) {
+    throw new Error('Missing shop id parameter.');
   }
 
-  FoodService.findOne(foodId, { populate: 'shops, keywords' })
-    .then(food => {
-      res.render('pages/food/food-detail', {
-        food: food,
+  ShopService.findOne(shopId, { populate: 'foods' })
+    .then(shop => {
+      res.render('pages/shop/shop-detail', {
+        shop,
         recommends: recommends
       });
     })

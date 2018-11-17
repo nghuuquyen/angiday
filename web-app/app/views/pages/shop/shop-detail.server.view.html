@@ -3,8 +3,8 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/" target="_self">Trang Chủ</a></li>
-        <li class="breadcrumb-item"><a href="/food" target="_self">Món Ăn</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{food.name}}</li>
+        <li class="breadcrumb-item"><a href="/shop" target="_self">Quán Ăn</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{shop.name}}</li>
       </ol>
     </nav>
   </div>
@@ -13,7 +13,7 @@
     <!-- food detail -->
     <div class="card">
       <div class="card-header pannel-orange-bg">
-        Thông Tin Món Ăn
+        Thông Tin Quán Ăn
       </div>
       <div class="card-body">
         <div class="col-md-12">
@@ -21,10 +21,15 @@
           <div class="card mb-4">
             <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
             <div class="card-body">
-              <h2 class="card-title">{{food.name}}</h2>
+              <h2 class="card-title">{{shop.name}}</h2>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid
                 atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate
                 voluptatibus possimus, veniam magni quis!</p>
+              <hr/>
+              <button class="btn btn-warning btn-block text-white">
+                <b> <i class="fas fa-check-square"></i> Tạo Kèo Đi Quán Này</b>
+              </button>
+              <hr/>
             </div>
 
             <!-- food images gallery-->
@@ -48,26 +53,22 @@
     <!-- shops -->
     <div class="card">
       <div class="card-header pannel-orange-bg">
-        Danh Sách Quán Ăn Phục Vụ
+        Danh Sách Món Ăn Quán Phục Vụ
       </div>
       <div class="card-body">
         <!-- shops list -->
-        {{#each food.shops}}
+        {{#each shop.foods}}
         <div class="media border p-3 agd-card-normal">
-          <img src="https://via.placeholder.com/150x150" class="mr-3">
+          <img src="https://via.placeholder.com/150x150" alt="{{this.name}}" class="img-thumbnail mr-3">
           <div class="media-body">
             <div class="row">
-              <div class="col-sm-8">
-                <h6>
-                  <span class="badge badge-warning">9 Điểm</span>
-                  {{this.name}}
-                </h6>
-                <p><i class="fas fa-map-marker-alt"></i> Cách bạn 900 mét.</p>
-                <p>Địa chỉ, Số 12, đường Nguyễn Văn Linh</p>
+              <div class="col-sm-9">
+                <h6>{{this.name}}</h6>
+                <p>{{this.shops.length}} Shop served</p>
               </div>
-              <div class="col-sm-4">
-                <a class="btn btn-warning float-right" href="/shop/{{this.id}}" target="_self">
-                  <i class="fas fa-utensils"></i> Chọn Quán Này
+              <div class="col-sm-3">
+                <a class="btn btn-warning" href="/food/{{this.id}}" target="_self">
+                  <i class="fas fa-utensils"></i> Xem chi tiết
                 </a>
               </div>
             </div>
@@ -77,34 +78,6 @@
         <!-- ./ shops list -->
       </div>
       <!-- ./ shops -->
-
-      <!-- cooking recipes -->
-      <div class="card">
-        <div class="card-header pannel-orange-bg">
-          Công Thức Nấu
-        </div>
-        <div class="card-body">
-          <div class="col-md-12">
-            <!-- post item -->
-            <div class="card mb-4" ng-repeat="i in [1,2,3,4,5]">
-              <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-              <div class="card-body">
-                <h2 class="card-title">Tiêu Đề Công Thức</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid
-                  atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate
-                  voluptatibus possimus, veniam magni quis!</p>
-                <a href="#" class="btn btn-primary">Xem đầy đủ công thức &rarr;</a>
-              </div>
-              <div class="card-footer text-muted">
-                Posted on November, 2018 by
-                <a href="#">An Gi Day</a>
-              </div>
-            </div>
-            <!-- ./ post item -->
-          </div>
-        </div>
-      </div>
-      <!-- ./ cooking recipes -->
     </div>
   </div>
 

@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+        <li class="breadcrumb-item"><a href="/" target="_self">Trang Chủ</a></li>
         <li class="breadcrumb-item active" aria-current="page">Kết Quả Tìm Kiếm</li>
       </ol>
     </nav>
@@ -44,7 +44,7 @@
 
         {{#ifCond this.type '===' 'food'}}
         <!-- food card -->
-        <div class="media border p-3 agd-card-normal" style="background-color: #c7e5ff;">
+        <div class="media border p-3 agd-card-normal" style="background-color: #c5ef8e;">
           <img src="https://via.placeholder.com/100x100" alt="{{this.name}}" class="img-thumbnail mr-3">
           <div class="media-body">
             <a href="/food/{{this.id}}" target="_self">

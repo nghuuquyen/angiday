@@ -3,35 +3,42 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Kết Quả Tìm Kiếm</li>
+        <li class="breadcrumb-item"><a href="/food">Món Ăn</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{food.name}}</li>
       </ol>
     </nav>
   </div>
 
   <div class="col-sm-8">
     <div class="card">
-      <div class="card-header pannel-orange-bg">Kết Quả Tìm Kiếm</div>
+      <div class="card-header pannel-orange-bg">
+        Danh Sách Quán Ăn Phục Vụ
+      </div>
       <div class="card-body">
-        <!-- foods list -->
-        {{#each foods}}
+        <!-- shops list -->
+        {{#each food.shops}}
         <div class="media border p-3 agd-card-normal">
-          <img src="https://via.placeholder.com/150x150" alt="{{this.name}}" class="img-thumbnail mr-3">
+          <img src="https://via.placeholder.com/150x150" class="mr-3">
           <div class="media-body">
             <div class="row">
-              <div class="col-sm-9">
-                <h6>{{this.name}}</h6>
-                <p>{{this.shops.length}} Shop served</p>
+              <div class="col-sm-8">
+                <h6>
+                  <span class="badge badge-warning">9 Điểm</span>
+                  {{this.name}} 
+                </h6>
+                <p><i class="fas fa-map-marker-alt"></i> Cách bạn 900 mét.</p>
+                <p>Địa chỉ, Số 12, đường Nguyễn Văn Linh</p> 
               </div>
-              <div class="col-sm-3">
-                <a class="btn btn-warning" href="/food/{{this.id}}" target="_self">
-                  <i class="fas fa-utensils"></i> Xem chi tiết
+              <div class="col-sm-4">
+                <a class="btn btn-warning float-right" href="/food/{{this.id}}" target="_self">
+                  <i class="fas fa-utensils"></i> Chọn Quán Này
                 </a>
               </div>
             </div>
           </div>
         </div>
         {{/each}}
-        <!-- ./ foods list -->
+        <!-- ./ shops list -->
       </div>
     </div>
   </div>
@@ -45,12 +52,9 @@
         {{#ifCond this.type '===' 'food'}}
         <!-- food card -->
         <div class="media border p-3 agd-card-normal" style="background-color: #c7e5ff;">
-          <img src="https://via.placeholder.com/100x100" alt="{{this.name}}" class="img-thumbnail mr-3">
+          <img src="https://via.placeholder.com/100x100" class="mr-3">
           <div class="media-body">
-            <a href="/food/{{this.id}}" target="_self">
-              <h6><i class="fas fa-utensils"></i> {{this.name}}</h6>
-            </a>
-
+            <h6><i class="fas fa-utensils"></i> {{this.name}}</h6>
             <p>{{this.shops.length}} Shop served</p>
           </div>
         </div>
@@ -60,13 +64,10 @@
         {{#ifCond this.type '===' 'shop'}}
         <!-- shop card -->
         <div class="media border p-3 agd-card-normal" style="background-color: #ebf7cf;">
-          <img src="https://via.placeholder.com/100x100" alt="{{this.name}}" class="img-thumbnail mr-3">
+          <img src="https://via.placeholder.com/100x100" class="mr-3">
           <div class="media-body">
-            <a href="/shop/{{this.id}}" target="_self">
-              <h6><i class="fas fa-building"></i> {{this.name}}</h6>
-            </a>
-            <small><i class="fas fa-map-marker-alt"></i> Cách bạn 900 mét.</small>
-            <small>Địa chỉ, Số 12, đường Nguyễn Văn Linh</small>
+            <h6><i class="fas fa-building"></i> {{this.name}}</h6>
+            <p>{{this.address}}</p>
           </div>
         </div>
         <!-- ./shop card -->

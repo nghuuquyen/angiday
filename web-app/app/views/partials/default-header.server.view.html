@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-sm orange-bg navbar-dark fixed-top">
   <!-- Brand -->
-  <a class="navbar-brand" href="/" target="_self">AnGiDay</a>
+  <a class="navbar-brand" href="/" target="_self">Ăn Gì Đây ?</a>
 
   <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -11,10 +11,10 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">Trang Chủ</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Giới Thiệu</a>
       </li>
       {{#if user}}
       <!-- if user logged -->
@@ -23,14 +23,14 @@
           Hi {{user.username}}
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="/u" target="_self">Dashboard</a>
-          <a class="dropdown-item" href="/signout" target="_self">Logout</a>
+          <a class="dropdown-item" href="/u" target="_self">Bảng điều khiển</a>
+          <a class="dropdown-item" href="/signout" target="_self">Đăng xuất</a>
         </div>
       </li>
       <!-- ./ if user logged -->
       {{else}}
       <li class="nav-item">
-        <a class="nav-link" target="_self" href="/signin">Signin</a>
+        <a class="nav-link" target="_self" href="/signin">Đăng ký</a>
       </li>
       {{/if}}
     </ul>

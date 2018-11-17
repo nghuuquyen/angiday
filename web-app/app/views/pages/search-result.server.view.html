@@ -1,15 +1,33 @@
-<section class="row">
+<section class="row" style="margin: 25px auto;">
+  <div class="col-sm-12">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/" target="_self">Trang Chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Kết Quả Tìm Kiếm</li>
+      </ol>
+    </nav>
+  </div>
+
   <div class="col-sm-8">
     <div class="card">
-      <div class="card-header">Search Results</div>
+      <div class="card-header pannel-orange-bg">Kết Quả Tìm Kiếm</div>
       <div class="card-body">
         <!-- foods list -->
         {{#each foods}}
         <div class="media border p-3 agd-card-normal">
-          <img src="https://via.placeholder.com/100x100" alt="John Doe" class="mr-3 mt-3 rounded-circle">
+          <img src="https://via.placeholder.com/150x150" alt="{{this.name}}" class="img-thumbnail mr-3">
           <div class="media-body">
-            <h6>{{this.name}}</h6>
-            <p>{{this.shops.length}} Shop served</p>
+            <div class="row">
+              <div class="col-sm-9">
+                <h6>{{this.name}}</h6>
+                <p>{{this.shops.length}} Shop served</p>
+              </div>
+              <div class="col-sm-3">
+                <a class="btn btn-warning" href="/food/{{this.id}}" target="_self">
+                  <i class="fas fa-utensils"></i> Xem chi tiết
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         {{/each}}
@@ -19,32 +37,38 @@
   </div>
   <div class="col-sm-4">
     <div class="card">
-      <div class="card-header">Recommendations</div>
+      <div class="card-header pannel-orange-bg">Có Thể Bạn Sẽ Thích</div>
       <div class="card-body">
         <!-- recommends list -->
         {{#each recommends}}
 
         {{#ifCond this.type '===' 'food'}}
         <!-- food card -->
-        <div class="media border p-3 agd-card-normal">
-            <img src="https://via.placeholder.com/100x100" class="mr-3 mt-3 rounded-circle">
-            <div class="media-body bg-primary text-white">
-              <h6>{{this.name}}</h6>
-              <p>{{this.shops.length}} Shop served</p>
-            </div>
+        <div class="media border p-3 agd-card-normal" style="background-color: #c5ef8e;">
+          <img src="https://via.placeholder.com/100x100" alt="{{this.name}}" class="img-thumbnail mr-3">
+          <div class="media-body">
+            <a href="/food/{{this.id}}" target="_self">
+              <h6><i class="fas fa-utensils"></i> {{this.name}}</h6>
+            </a>
+
+            <p>{{this.shops.length}} Shop served</p>
           </div>
+        </div>
         <!-- ./ food card -->
         {{/ifCond}}
 
         {{#ifCond this.type '===' 'shop'}}
         <!-- shop card -->
-        <div class="media border p-3 agd-card-normal">
-            <img src="https://via.placeholder.com/100x100" class="mr-3 mt-3 rounded-circle">
-            <div class="media-body bg-success text-white">
-              <h6>{{this.name}}</h6>
-              <p>{{this.address}}</p>
-            </div>
+        <div class="media border p-3 agd-card-normal" style="background-color: #ebf7cf;">
+          <img src="https://via.placeholder.com/100x100" alt="{{this.name}}" class="img-thumbnail mr-3">
+          <div class="media-body">
+            <a href="/shop/{{this.id}}" target="_self">
+              <h6><i class="fas fa-building"></i> {{this.name}}</h6>
+            </a>
+            <small><i class="fas fa-map-marker-alt"></i> Cách bạn 900 mét.</small>
+            <small>Địa chỉ, Số 12, đường Nguyễn Văn Linh</small>
           </div>
+        </div>
         <!-- ./shop card -->
         {{/ifCond}}
         {{/each}}

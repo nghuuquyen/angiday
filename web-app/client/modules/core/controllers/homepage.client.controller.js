@@ -73,7 +73,7 @@
       let word_ids = vm.tags.map(item => item.id).join(',');
 
       // Redirecting to search results page.
-      $window.location.replace($window.location.origin + `/search?word_ids=${word_ids}`)
+      $window.location.replace($window.location.origin + `/search?word_ids=${word_ids}`);
     }
   }
 })();

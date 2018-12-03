@@ -1,0 +1,88 @@
+<section>
+  <br />
+  <div class="col-sm-12">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/cms/food" target="_self">Quản lý món ăn</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{vm.food.name}}</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- error message panel -->
+      <p class="text-danger">{{vm.message}}</p>
+      <!-- ./ error message panel -->
+
+      <div class="col-sm-12">
+        <div ng-if="vm.food">
+          <food-setting-card-component on-update="vm.onUpdateFoodSuccess(vm.food)" id="vm.food.id"></food-setting-card-component>
+        </div>
+        <br />
+        
+        <!-- food keywords -->
+        <div class="card">
+          <div class="card-header">Từ Khoá</div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex" ng-repeat="keyword in vm.food.keywords track by $index">
+                {{ keyword.name }}
+                <a class="ml-auto">
+                  <i class="fas fa-trash" ng-click="vm.removeFoodKeyword(vm.food, keyword)"></i>
+                </a>
+              </li>
+            </ul>
+
+            <!-- keyword select or create  -->
+            <br />
+            <keyword-selection-card-component ng-if="vm.showKeywordSelectionCard" on-submit="vm.addKeywordsToFood(keywords);"></keyword-selection-card-component>
+            <br />
+
+            <button type="button" ng-if="!vm.showKeywordSelectionCard" class="btn btn-block sc-dashed-btn" ng-click="vm.showKeywordSelectionCard = true;">
+              <i class="fas fa-plus-square"></i> Thêm từ khoá
+            </button>
+            <button type="button" ng-if="vm.showKeywordSelectionCard" class="btn btn-danger" ng-click="vm.showKeywordSelectionCard = false;">
+              <i class="fas fa-ban"></i> Huỷ bỏ thêm từ khoá
+            </button>
+            <!-- ./ keyword select or create  -->
+          </div>
+        </div>
+        <!-- ./ food keywords -->
+
+        <br />
+
+        <!-- food shops -->
+        <div class="card">
+          <div class="card-header">Quán ăn phục vụ</div>
+          <div class="card-body">
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex" ng-repeat="shop in vm.food.shops track by $index">
+                {{ shop.name }}
+                <a class="ml-auto">
+                  <i class="fas fa-trash" ng-click="vm.removeFoodShop(vm.food, shop)"></i>
+                </a>
+              </li>
+            </ul>
+
+
+            <!-- keyword select or create  -->
+            <br />
+            <shop-selection-card-component ng-if="vm.showShopSelectionCard" on-submit="vm.addShopsToFood(shops);"></shop-selection-card-component>
+            <br />
+
+            <button type="button" ng-if="!vm.showShopSelectionCard" class="btn btn-block sc-dashed-btn" ng-click="vm.showShopSelectionCard = true;">
+              <i class="fas fa-plus-square"></i> Thêm quán ăn
+            </button>
+            <button type="button" ng-if="vm.showShopSelectionCard" class="btn btn-danger" ng-click="vm.showShopSelectionCard = false;">
+              <i class="fas fa-ban"></i> Huỷ bỏ thêm quán ăn
+            </button>
+            <!-- ./ keyword select or create  -->
+          </div>
+        </div>
+        <!-- ./ food shops -->
+      </div>
+    </div>
+  </div>
+</section>

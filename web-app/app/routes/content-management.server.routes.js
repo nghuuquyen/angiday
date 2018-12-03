@@ -3,7 +3,7 @@
 const router = require('express').Router();
 const Ctrl = require('../controllers').ContentManagement;
 
-// Public home page.
-router.route('/secure/food-management').get(Ctrl.renderFoodManagementPage);
+// Content management pages.
+router.route('/cms/*').get(Ctrl.renderCMSindexPage);
 
 module.exports = router;

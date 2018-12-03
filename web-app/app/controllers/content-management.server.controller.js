@@ -1,19 +1,19 @@
 "use strict";
 
 module.exports = {
-  renderFoodManagementPage
+  renderCMSindexPage
 };
 
 /**
-* @name renderFoodManagementPage
+* @name renderCMSindexPage
 * @description
-* Do render food management page.
+* Do render CMS index page page.
 *
 * @param  {object}   req  HTTP Request
 * @param  {object}   res  HTTP Response
 */
-function renderFoodManagementPage(req, res) {
-  res.render('pages/content-manage/food-management', {
+function renderCMSindexPage(req, res) {
+  res.render('pages/content-manage/index', {
     user : req.user
   });
 }

@@ -85,8 +85,8 @@
      */
     function prepareUpdateOrCreateAction() {
       if (vm.id) {
-        vm.formTitle = 'Food Edition Form';
-        vm.submitBtnTitle = 'Update';
+        vm.formTitle = 'Thông Tin Món Ăn';
+        vm.submitBtnTitle = 'Cập nhật';
 
         // Update exsits food, we need call api to get food data.
         FoodService.get({ id: vm.id }).$promise
@@ -102,7 +102,7 @@
           });
       } else {
         vm.formTitle = 'Food Creation Form';
-        vm.submitBtnTitle = 'Save';
+        vm.submitBtnTitle = 'Lưu';
       }
     }
 

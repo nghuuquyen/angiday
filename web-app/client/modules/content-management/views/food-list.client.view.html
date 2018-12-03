@@ -1,0 +1,50 @@
+<section>
+  <br />
+  <div class="col-sm-12">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/cms/food" target="_self">Quản lý món ăn</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <button ui-sref="food-management.create" type="button" class="btn btn-success">Tạo mới món ăn</button>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <!-- error message panel -->
+        <p class="text-danger">{{vm.message}}</p>
+        <!-- ./ error message panel -->
+
+        <!-- oods table -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Tên Món Ăn</th>
+              <th>Từ Khoá</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="food in vm.foods track by $index">
+              <td>{{$index + 1 }}</td>
+              <td>{{food.name}}</td>
+              <td>
+                <span class="badge badge-primary ml-2" ng-repeat="keyword in food.keywords track by $index">
+                  {{keyword.name}}
+                </span>
+              </td>
+              <td>
+                <a ui-sref="food-management.edit({ foodId: food.id })">Chỉnh sửa</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- ./ foods table -->
+      </div>
+    </div>
+</section>

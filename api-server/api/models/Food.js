@@ -18,10 +18,17 @@ module.exports = {
       via: 'food',
       through: 'foodkeywordrelation'
     },
+    recipes: {
+      collection: 'recipe',
+      via: 'food'
+    },
     shops: {
       collection: 'shop',
       via: 'food',
       through: 'foodshoprelation'
+    },
+    images: {
+      type: 'array'
     }
   }
 };

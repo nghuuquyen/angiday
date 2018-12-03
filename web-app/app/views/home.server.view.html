@@ -2,98 +2,37 @@
   <div class="jumbotron jumbotron-bg row">
     <div class="col-sm-3"></div>
     <div class="col-sm-6 text-center">
-        <h1>Ăn Gì Đây ?</h1>
-        <p>Ứng Dụng Tìm Kiếm Món Ăn, Công Thức, Địa Điểm Ăn Vặt</p>
-    
-        <tags-input ng-model="vm.tags" min-length="1" style="height: 60px; color: black;" ng-model="tags" placeholder="Bạn muốn tìm gì ?" add-from-autocomplete-only="true">
-          <auto-complete source="vm.loadTags($query)" load-on-focus="true" load-on-empty="true"></auto-complete>
-        </tags-input>
-        <br />
-        <div align="center">
-          <button ng-click="vm.doSearchFoodByTags()" type="button" class="btn">Tìm Kiếm</button>
-        </div>
+      <h1>Ăn Gì Đây ?</h1>
+      <p>Ứng Dụng Tìm Kiếm Món Ăn, Công Thức, Địa Điểm Ăn Vặt</p>
+
+      <tags-input ng-model="vm.tags" min-length="1" style="height: 60px; color: black;" ng-model="tags" placeholder="Bạn muốn tìm gì ?"
+        add-from-autocomplete-only="true">
+        <auto-complete source="vm.loadTags($query)" load-on-focus="true" load-on-empty="true"></auto-complete>
+      </tags-input>
+      <br />
+      <div align="center">
+        <button ng-click="vm.doSearchFoodByTags()" type="button" class="btn">Tìm Kiếm</button>
+      </div>
     </div>
   </div>
 
-  <div class="container marketing">
-    <!-- Three columns of text below the carousel -->
+  <div class="container">
+    <!-- Content Row -->
     <div class="row">
-      <div class="col-lg-4">
-        <img class="rounded-circle" src="https://via.placeholder.com/200x200" alt="Generic placeholder image" width="200"
-          height="200">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-          vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
-          magna.</p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="rounded-circle" src="https://via.placeholder.com/200x200" alt="Generic placeholder image" width="200"
-          height="200">
-        <h2>Heading</h2>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras
-          mattis
-          consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-          nibh.</p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="rounded-circle" src="https://via.placeholder.com/200x200" alt="Generic placeholder image" width="200"
-          height="200">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-          porta
-          felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-          massa justo sit amet risus.</p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-
-
-    <!-- START THE FEATURETTES -->
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">Step 1</h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
-          semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-          commodo.</p>
-      </div>
-      <div class="col-md-5">
-        <img class="featurette-image img-fluid mx-auto" src="https://via.placeholder.com/500x500" alt="Generic placeholder image">
+      <div class="col-md-4 mb-4" ng-repeat="i in [1,2,3,4,5,6,8]">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Card One</h2>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam,
+              maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">More Info</a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Step 2</h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
-          semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-          commodo.</p>
-      </div>
-      <div class="col-md-5 order-md-1">
-        <img class="featurette-image img-fluid mx-auto" src="https://via.placeholder.com/500x500" alt="Generic placeholder image">
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">Step 3</h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod
-          semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-          commodo.</p>
-      </div>
-      <div class="col-md-5">
-        <img class="featurette-image img-fluid mx-auto" src="https://via.placeholder.com/500x500" alt="Generic placeholder image">
-      </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <!-- /END THE FEATURETTES -->
-
-  </div><!-- /.container -->
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
 </main>

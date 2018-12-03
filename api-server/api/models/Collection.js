@@ -2,9 +2,10 @@
  * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
  * @module models
  * @description
- * Application shop model.
+ * Application collection model.
  */
 module.exports = {
+  tableName: 'collection',
   attributes: {
     name: {
       type: 'string'
@@ -12,18 +13,11 @@ module.exports = {
     description: {
       type: 'string'
     },
-    address: {
-      type: 'string'
-    },
-    foods: {
-      collection: 'food',
-      via: 'shop',
-      through: 'foodshoprelation'
-    },
-    links: {
-      type: 'array'
-    },
-    images: {
+    /**
+     * items[].type - Might 'food', 'keyword', 'shop'
+     * items[].id   - Object ID.
+     */
+    items: {
       type: 'array'
     }
   }

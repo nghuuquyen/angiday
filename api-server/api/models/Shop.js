@@ -21,10 +21,10 @@ module.exports = {
       through: 'foodshoprelation'
     },
     links: {
-      type: 'array'
+      type: 'json'
     },
     images: {
-      type: 'array'
+      type: 'json'
     }
   }
 };

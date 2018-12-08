@@ -12,6 +12,7 @@
     "bcrypt-nodejs": "0.0.3",
     "dotenv": "^6.0.0",
     "elasticsearch": "15.1.1",
+    "faker": "^4.1.0",
     "googleapis": "^35.0.0",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
@@ -33,7 +34,11 @@
     "sails-hook-orm": "^2.0.0-16",
     "sails-hook-sockets": "^1.4.0",
     "sails-mongo": "^1.0.1",
-    "validator": "^10.8.0"
+    "validator": "^10.8.0",
+    "md5": "^2.2.1",
+    "shortid": "^2.2.8",
+    "slug": "^0.9.1",
+    "q": "^1.4.1"
   },
   "devDependencies": {},
   "scripts": {

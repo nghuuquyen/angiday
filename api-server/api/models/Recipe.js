@@ -26,9 +26,7 @@ module.exports = {
       type: 'string'
     },
     numberOfServings: {
-      collection: 'food',
-      via: 'shop',
-      through: 'foodshoprelation'
+      type: 'number'
     },
     preTime: {
       type: 'number'

@@ -28,7 +28,7 @@ module.exports = {
       through: 'foodshoprelation'
     },
     images: {
-      type: 'array'
+      type: 'json'
     }
   }
 };

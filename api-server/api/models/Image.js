@@ -11,8 +11,7 @@ module.exports = {
   schema: true,
   attributes: {
     host: {
-      type: 'string',
-      url: true
+      type: 'string'
     },
     url: {
       type: 'string'
@@ -30,32 +29,19 @@ module.exports = {
       type: 'string'
     },
     size: {
-      type: 'integer'
-    },
-    slug: {
-      type: 'string',
-      unique: true
-    },
-    author: {
-      model: 'user'
-    },
-    username: {
-      type: 'string'
-    },
-    authorName: {
-      type: 'string'
+      type: 'number'
     },
     large: {
-      type: 'object'
+      type: 'json'
     },
     medium: {
-      type: 'object'
+      type: 'json'
     },
     small: {
-      type: 'object'
+      type: 'json'
     },
     thumb: {
-      type: 'object'
+      type: 'json'
     }
   }
 };

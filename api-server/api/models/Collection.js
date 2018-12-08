@@ -18,7 +18,7 @@ module.exports = {
      * items[].id   - Object ID.
      */
     items: {
-      type: 'array'
+      type: 'json'
     }
   }
 };

@@ -15,14 +15,16 @@ module.exports.bootstrap = async function (done) {
   //get Data Daily
   //GetDataDaily.getData();
 
-  UserInteractionService.saveLog(
-    '1234',
-    'food_id_1234',
-    'food_interactive',
-    'view',
-    20181208,
-    {}
-  );
+  for (let i = 1; i <= 5000; i++) {
+    UserInteractionService.saveLog(
+      '1234',
+      'food_id_1234_' + i,
+      'food_interactive',
+      'view',
+      20181208,
+      {}
+    );
+  }
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

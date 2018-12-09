@@ -23,6 +23,7 @@ let actionScoresHandlers = {
   }
 };
 
+
 /**
  * @name isExistEventLable
  * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
@@ -64,77 +65,120 @@ function isExistAction(eventLabel, actionName) {
 async function saveLog(userId, resourceId, eventLabel, actionName, date, actionData) {
   actionData = actionData || {};
 
-  if (!eventLabel) throw new Error('eventLabel param is required.');
-  if (!actionName) throw new Error('actionName param is required.');
-  if (!userId) throw new Error('userId param is required.');
-  if (!resourceId) throw new Error('resourceId param is required.');
+  if (!eventLabel)
+    throw new Error('eventLabel param is required.');
+  if (!actionName)
+    throw new Error('actionName param is required.');
+  if (!userId)
+    throw new Error('userId param is required.');
+  if (!resourceId)
+    throw new Error('resourceId param is required.');
 
-  if (!isExistEventLable(eventLabel)) throw new Error(`eventLabel ${eventLabel} doesn't support.`);
-  if (!isExistAction(eventLabel, actionName)) throw new Error(`actionName ${actionName} doesn't support.`);
+  if (!isExistEventLable(eventLabel))
+    throw new Error(`eventLabel ${eventLabel} doesn't support.`);
+  if (!isExistAction(eventLabel, actionName))
+    throw new Error(`actionName ${actionName} doesn't support.`);
 
+  let db = UserAggregation.getDatastore().manager;
+  let collection = db.collection(UserAggregation.tableName);
+
+  // Get score calculating function from registry.
   let actionScoreCalcFunction = actionScoresHandlers[eventLabel][actionName];
 
-  if (!actionScoreCalcFunction) throw new Error('Scores calculation function is not define.');
+  if (!actionScoreCalcFunction)
+    throw new Error('Scores calculation function is not define.');
 
-  let additionScores = 0;
-
-  try {
-    additionScores = await actionScoreCalcFunction(userId, resourceId, actionData);
-  } catch (err) {
-    sails.log.error(err);
-    return false;
-  }
-
-  // Nothing to do.
+  // Step 1. Based on action data, calculating addition scores
+  let additionScores = await actionScoreCalcFunction(userId, resourceId, actionData);
   if (additionScores < 0) return true;
 
-  let updateTarget = {
-    'date': date,
-    'user': userId,
-    'data.resourceId': resourceId,
-    'data.eventLabel': eventLabel
+  // Step 2. Get target aggregation record for update scores.
+  let updateDocument = await collection.findOne({
+    'date': date, 'user': userId
+  });
+
+  // If not found, create new one.
+  if (!updateDocument) {
+    sails.log.debug('Create new one aggregation record.');
+    updateDocument = await collection.save({
+      'date': date, 'user': userId, 'data': []
+    });
+  }
+
+  // Step 3. Update exist interactive record or add new interactive record.
+  let data = {
+    'eventLabel': eventLabel,
+    'resourceId': resourceId,
+    'additionScores': additionScores
+  };
+
+  let success = await addToExistInteractiveRecord(updateDocument, data);
+
+  if (!success) {
+    return createNewInteractiveRecord(updateDocument, data);
+  }
+}
+
+/**
+ * @name addToExistInteractiveRecord
+ * @description
+ *
+ * @param {Object} targetDocument - Target update document.
+ * @param {Object} data           - Data used for update
+ */
+async function addToExistInteractiveRecord(targetDocument, data) {
+  sails.log.debug('addToExistInteractiveRecord');
+
+  let db = UserAggregation.getDatastore().manager;
+  let collection = db.collection(UserAggregation.tableName);
+
+  let targetUpdate = {
+    '_id': targetDocument._id,
+    'data.resourceId': data.resourceId,
+    'data.eventLabel': data.eventLabel
   };
 
   let updateData = {
-    $inc: { 'data.$.scores': additionScores },
-    $set: { "data.$.updatedAt": new Date() }
+    $inc: { 'data.$.scores': data.additionScores },
+    $set: { 'data.$.updatedAt': new Date() }
   }
+
+  let res = await collection.update(targetUpdate, updateData);
+
+  return (res.result.n && res.result.nModified) ? true : false;
+}
+
+/**
+ * @name createNewInteractiveRecord
+ * @description
+ *
+ * @param {Object} targetDocument - Target update document.
+ * @param {Object} data           - Data used for update
+ */
+async function createNewInteractiveRecord(targetDocument, data) {
+  sails.log.debug('createNewInteractiveRecord');
 
   let db = UserAggregation.getDatastore().manager;
-  let rawMongoCollection = db.collection(UserAggregation.tableName);
+  let collection = db.collection(UserAggregation.tableName);
 
-  // Step 1. trying to update log data record.
-  let res = await rawMongoCollection.update(updateTarget, updateData);
-
-  // If update success, this will return true.
-  if (res.result.n && res.result.nModified) return true;
-
-  // Step 2. If not found record, will create new one user aggreation log.
-  let createData = {
-    'date': date,
-    'user': userId,
-    'data': [
-      { 'resourceId': resourceId, 'eventLabel': eventLabel, 'scores': 0 }
-    ]
+  let targetUpdate = {
+    '_id': targetDocument._id
   };
 
-  res = await rawMongoCollection.save(createData);
-  let isSaveSuccess = res.result.n && res.result.ok;
-
-  if (!isSaveSuccess) {
-    sails.log.error('Has problem on create new user aggreation log record.');
-    return false;
+  let updateData = {
+    $push: {
+      'data': {
+        "resourceId": data.resourceId,
+        "eventLabel": data.eventLabel,
+        "scores": data.additionScores,
+        "updatedAt": new Date()
+      }
+    }
   }
 
-  res = await rawMongoCollection.update(updateTarget, updateData);
-  let isUpdateSuccess = res.result.n && res.result.ok;
+  let res = await collection.update(targetUpdate, updateData);
 
-  if (!isUpdateSuccess) {
-    sails.log.error('Has problem on update user aggreation log record.');
-    return false;
-  }
-
-  return true;
+  return (res.result.n && res.result.nModified) ? true : false;
 }
 
 /**
@@ -160,7 +204,7 @@ async function calcViewFoodActionScores(userId, resourceId, actionData) {
  * @param {Object} actionData  Action data
  */
 async function calcCommentFoodActionScores(userId, resourceId, actionData) {
-  return 10;
+  return await Q.when(10);
 }
 
 /**
@@ -173,7 +217,7 @@ async function calcCommentFoodActionScores(userId, resourceId, actionData) {
  * @param {Object} actionData  Action data
  */
 async function calcVoteFoodActionScores(userId, resourceId, actionData) {
-  return 15;
+  return await Q.when(15);
 }
 
 
@@ -187,7 +231,7 @@ async function calcVoteFoodActionScores(userId, resourceId, actionData) {
  * @param {Object} actionData  Action data
  */
 async function calcViewKeywordActionScores(userId, resourceId, actionData) {
-  return 5;
+  return await Q.when(5);
 }
 
 /**
@@ -200,7 +244,7 @@ async function calcViewKeywordActionScores(userId, resourceId, actionData) {
  * @param {Object} actionData  Action data
  */
 async function calcCommentKeywordActionScores(userId, resourceId, actionData) {
-  return 10;
+  return await Q.when(10);
 }
 
 /**
@@ -213,5 +257,5 @@ async function calcCommentKeywordActionScores(userId, resourceId, actionData) {
  * @param {Object} actionData  Action data
  */
 async function calcVoteKeywordActionScores(userId, resourceId, actionData) {
-  return 15;
+  return await Q.when(15);
 }

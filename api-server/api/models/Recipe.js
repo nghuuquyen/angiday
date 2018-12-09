@@ -8,7 +8,7 @@ module.exports = {
   tableName: 'recipe',
   attributes: {
     image: {
-      model: 'image'
+      type: 'json'
     },
     food: {
       model: 'food'
@@ -20,10 +20,10 @@ module.exports = {
       type: 'string'
     },
     directions: {
-      type: 'string'
+      type: 'json'
     },
     ingredients: {
-      type: 'string'
+      type: 'json'
     },
     numberOfServings: {
       type: 'number'

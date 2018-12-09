@@ -27,7 +27,7 @@ module.exports = {
       via: 'food',
       through: 'foodshoprelation'
     },
-    images: {
+    image: {
       type: 'json'
     }
   }

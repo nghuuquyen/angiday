@@ -115,7 +115,7 @@ async function saveLog(userId, resourceId, eventLabel, actionName, date, actionD
   let success = await addToExistInteractiveRecord(updateDocument, data);
 
   if (!success) {
-    return createNewInteractiveRecord(updateDocument, data);
+    return await createNewInteractiveRecord(updateDocument, data);
   }
 }
 

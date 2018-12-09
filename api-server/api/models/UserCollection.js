@@ -5,7 +5,7 @@
  * Application user ollection model.
  */
 module.exports = {
-  tableName: 'collection',
+  tableName: 'user_collection',
   attributes: {
     user: {
       model: 'user'

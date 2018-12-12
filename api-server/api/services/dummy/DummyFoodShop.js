@@ -42,6 +42,11 @@ async function getDummyFoodShopRelationList(limit) {
   let shops = await Shop.find().limit(THRESHOLD_SHOP_DUMMY);
   let foods = await Food.find().limit(THRESHOLD_FOOD_DUMMY);
 
+  if(shops.length < 0 || foods.length < 0 ) {
+    sails.log.error('Might foods and keywords still not dummy ?');
+    return;
+  }
+
   while (limit > 0) {
     // Get random one food from collection.
     let shop = shops[Math.floor(Math.random() * shops.length)];

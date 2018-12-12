@@ -13,7 +13,7 @@ module.exports = {
 async function startDummyShop() {
   sails.log.debug('Do:: startDummyShop');
 
-  let total = await Keyword.count();
+  let total = await Shop.count();
 
   if (total >= THRESHOLD_DUMMY) {
     sails.log.debug('Touch to max threshold dummy number.', THRESHOLD_DUMMY);
@@ -24,7 +24,7 @@ async function startDummyShop() {
   let items = getDummyShopList(THRESHOLD_DUMMY - total);
 
   for (let i in items) {
-    await Keyword.create(items[i]);
+    await Shop.create(items[i]);
   }
 
   sails.log.debug('Done:: startDummyShop');

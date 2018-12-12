@@ -15,7 +15,8 @@ module.exports.bootstrap = async function (done) {
   //get Data Daily
   //GetDataDaily.getData();
 
-  DummyDataService.startDummy();
+  // await DummyDataService.startDummy();
+  Neo4jDailyBatch.runDailyBatchImport();
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

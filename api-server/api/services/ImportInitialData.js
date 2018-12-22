@@ -8,16 +8,21 @@ async function start() {
   sails.log.debug('Total users: --------', dataset.users.length);
 
 
-  // Group 1
-  await clearData();
-  await importUsers(dataset.users);
-  await importFoods(dataset.foods);
-  await importKeywords(dataset.keywords);
-  await importCollections(dataset.collections);
+  // ====== Group 1 ======
+  // await clearData();
+  // await importUsers(dataset.users);
+  // await importFoods(dataset.foods);
+  // await importKeywords(dataset.keywords);
+  // await importCollections(dataset.collections);
 
-  // Group 2
+  // ====== Group 2 ======
   // await importFoodCollectionsRelation(dataset.collections);
   // await importFoodKeywordRelations(dataset.foods);
+  // await importUserCollectionsRelation(dataset.userCollections);
+
+  // ====== Group 3 ======
+  // await importUserKeywordInteractions();
+  // await importUserFoodInteractions();
 }
 
 async function clearData() {
@@ -115,6 +120,30 @@ async function importFoodCollectionsRelation(collections) {
   sails.log.debug('=== Done Import Collections ===');
 }
 
+
+async function importUserCollectionsRelation(userCollections) {
+  sails.log.debug('=== Start Import User Collections ===');
+  for (let i in userCollections) {
+    try {
+      let u = await User.findOne({ username: userCollections[i].username });
+      let collections = await Collection.find({ code: { in: userCollections[i].collections } });
+
+      for (let j in collections) {
+        let c = collections[j];
+
+        let conds = { user: u.id, collection: c.id };
+
+        await UserCollection.findOrCreate(conds, conds);
+      }
+    } catch (err) {
+      sails.log.error(err);
+      break;
+    }
+  }
+  sails.log.debug('=== Done Import User Collections ===');
+}
+
+
 async function importFoodKeywordRelations(foods) {
   sails.log.debug('=== Start Import FoodKeywordRelations ===');
   let keywords = await Keyword.find({});
@@ -145,6 +174,47 @@ async function importFoodKeywordRelations(foods) {
     }
   }
   sails.log.debug('=== Done Import FoodKeywordRelations ===');
+}
+
+
+async function importUserKeywordInteractions() {
+  sails.log.debug('=== Start Import UserKeywordInteractions ===');
+  let keywords = await Keyword.find({});
+  let users    = await User.find({});
+
+  for (let i in users) {
+    let u = users[i];
+    let numberOfWords = Math.floor(Math.random() * 15);
+
+    for(let j = 1; j <= numberOfWords; j++) {
+      let k = keywords[Math.floor(Math.random() * keywords.length)];
+      let actionTypes = ['vote', 'search', 'click'];
+      let t = actionTypes[Math.floor(Math.random() * actionTypes.length)];
+
+      UserInteractiveLog.keywordInteractiveLog(u.username, k.id, t);
+    }
+  }
+  sails.log.debug('=== Done Import UserKeywordInteractions ===');
+}
+
+async function importUserFoodInteractions() {
+  sails.log.debug('=== Start Import UserFoodInteractions ===');
+  let foods = await Food.find({});
+  let users = await User.find({});
+
+  for (let i in users) {
+    let u = users[i];
+    let numberOfFoods = Math.floor(Math.random() * 15);
+
+    for(let j = 1; j <= numberOfFoods; j++) {
+      let f = foods[Math.floor(Math.random() * foods.length)];
+      let actionTypes = ['vote', 'search', 'click'];
+      let t = actionTypes[Math.floor(Math.random() * actionTypes.length)];
+
+      UserInteractiveLog.foodInteractiveLog(u.username, f.id, t);
+    }
+  }
+  sails.log.debug('=== Done Import UserFoodInteractions ===');
 }
 
 

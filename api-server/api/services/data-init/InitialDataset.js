@@ -471,10 +471,67 @@ let users = [
   }
 ];
 
+
+// 'mon_an_cho_bua_sang',
+// 'mon_an_cung_ban_be',
+// 'mon_an_mua_dong',
+// 'mon_an_cho_bua_toi',
+// 'mon_an_cho_bua_trua',
+// 'an_nhau',
+// 'do_uong',
+
+let userCollections = [
+  {
+    username: 'admin',
+    collections: [ 'mon_an_cho_bua_sang', 'mon_an_cung_ban_be', 'mon_an_mua_dong' ]
+  },
+  {
+    username: 'user01',
+    collections: [ 'mon_an_cung_ban_be', 'mon_an_mua_dong' ]
+  },
+  {
+    username: 'user02',
+    collections: [ 'mon_an_mua_dong', 'mon_an_cho_bua_toi' ]
+  },
+  {
+    username: 'user03',
+    collections: [ 'mon_an_cho_bua_toi', 'mon_an_cho_bua_trua' ]
+  },
+  {
+    username: 'user04',
+    collections: [ 'mon_an_cho_bua_trua', 'an_nhau' ]
+  },
+  {
+    username: 'user05',
+    collections: [ 'an_nhau', 'do_uong' ]
+  },
+  {
+    username: 'user06',
+    collections: ['mon_an_cho_bua_toi' ]
+  },
+  {
+    username: 'user07',
+    collections: [ 'mon_an_mua_dong' ]
+  },
+  {
+    username: 'user08',
+    collections: [ 'mon_an_cho_bua_toi' ]
+  },
+  {
+    username: 'user09',
+    collections: [ 'mon_an_mua_dong' ]
+  },
+  {
+    username: 'user10',
+    collections: [ 'mon_an_mua_dong' ]
+  }
+];
+
 module.exports = {
   keywords,
   foods,
   collections,
-  users
+  users,
+  userCollections
 };
 

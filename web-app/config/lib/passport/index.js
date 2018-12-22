@@ -4,6 +4,7 @@
 */
 const passport = require('passport');
 const User = require('mongoose').model('User');
+const UserService = require('../../../app/services').UserService;
 
 module.exports = function init(app, db) {
   // 1. Add passport's middleware.
@@ -41,10 +42,19 @@ function initLocalStrategy() {
 
   // Deserialize sessions
   passport.deserializeUser(function (id, done) {
-    User.findOne({
-      _id: id
-    }, '-salt -password', function (err, user) {
-      done(err, user);
-    });
+    UserService.findOne(id)
+      .then(user => {
+        let userProfile = {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          fullName: user.fullName
+        };
+
+        done(null, userProfile);
+      })
+      .catch(err => {
+        done(err, null);
+      });
   });
 }

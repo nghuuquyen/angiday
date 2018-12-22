@@ -15,6 +15,15 @@ module.exports.policies = {
    */
   '*': false,
   /**
+   * User APIs Group
+   */
+  'user/create' : true,
+  'user/findOne' : true,
+  'user/update' : true,
+  'user/find-by-username-or-email' : true,
+  'user/signin' : true,
+
+  /**
    * Food APIs Group
    */
   'food/search': true,

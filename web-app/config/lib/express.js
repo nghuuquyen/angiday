@@ -107,11 +107,11 @@ function initRouteErrorHandle(app) {
   // Error handle
   app.use(function(err, req, res, next) {
     // Must logging error.
-    logger.error(err, {
-      url: req.url,
-      username: _.get(req, 'user.username')
-    });
-
+    // logger.error(err, {
+    //   url: req.url,
+    //   username: _.get(req, 'user.username')
+    // });
+    
     const _status = err.status || 500;
     res.status(_status);
 

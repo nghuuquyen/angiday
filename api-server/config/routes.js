@@ -12,6 +12,12 @@ module.exports.routes = {
   'GET /': { view: 'pages/homepage' },
 
   /**
+   * User Module Routes
+   */
+  'GET /user/find_by_username_or_email/:usernameOrEmail':  { action: 'user/find-by-username-or-email' },
+  'POST /user/signin':  { action: 'user/signin' },
+
+  /**
    * Food Module Routes
    */
   'DELETE /food/remove-keyword': { action: 'food/remove-keyword' },

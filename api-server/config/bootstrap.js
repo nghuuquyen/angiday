@@ -13,7 +13,7 @@ module.exports.bootstrap = async function (done) {
   // Create indexing
   MongodbIndexing.doIndexing();
 
-  ImportInitialData.start();
+  // await ImportInitialData.start();
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)

@@ -4,14 +4,13 @@
 /**
 * Module dependencies
 */
-const mongoose = require('mongoose');
 const passport = require('passport');
-const User = mongoose.model('User');
+const UserService = require('../services').UserService;
 const logger = require('../../config/lib/logger');
 
 const VIEWS = {
-  SIGNIN_PAGE : 'pages/user/signin',
-  SIGNUP_PAGE : 'pages/user/signup'
+  SIGNIN_PAGE: 'pages/user/signin',
+  SIGNUP_PAGE: 'pages/user/signup'
 };
 
 /**
@@ -20,7 +19,7 @@ const VIEWS = {
 *
 * @type {String}
 */
-const REDIRECT_URL_AFTER_LOGGED = '/u';
+const REDIRECT_URL_AFTER_LOGGED = '/';
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
@@ -39,18 +38,18 @@ module.exports = {
 function renderSigninPage(req, res) {
 
   // Check user in session or passport session.
-  if(req.user || req.isAuthenticated()) {
+  if (req.user || req.isAuthenticated()) {
     return res.redirect(REDIRECT_URL_AFTER_LOGGED);
   }
 
   res.render(VIEWS.SIGNIN_PAGE, {
-    messages : 'Flash messages here'
+    messages: 'Flash messages here'
   });
 }
 
 function renderSignupPage(req, res) {
   res.render(VIEWS.SIGNUP_PAGE, {
-    messages : 'Flash messages here'
+    messages: 'Flash messages here'
   });
 }
 
@@ -63,22 +62,15 @@ function renderSignupPage(req, res) {
 * @param  {object} res HTTP response
 */
 function signup(req, res) {
-  // For security measurement we remove the roles from the req.body object
-  delete req.body.roles;
+  let userData = {
+    username: req.body.username,
+    fullName: req.body.lastName + ' ' + req.body.firstName,
+    password: req.body.password,
+    email: req.body.email
+  };
 
-  // Init user and add missing fields
-  var user = new User(req.body);
-  user.provider = 'local';
-  user.displayName = user.firstName + ' ' + user.lastName;
-
-  // Then save the user
-  user.save(function (err) {
-    if (err) {
-      logger.error(err);
-      return res.status(422).render(VIEWS.SIGNUP_PAGE, {
-        message: err.message
-      });
-    } else {
+  UserService.create(userData)
+    .then(user => {
       // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;
@@ -93,8 +85,12 @@ function signup(req, res) {
 
         res.redirect(REDIRECT_URL_AFTER_LOGGED);
       });
-    }
-  });
+    }).catch(err => {
+      logger.error(err);
+      return res.status(422).render(VIEWS.SIGNUP_PAGE, {
+        message: err.message
+      });
+    });
 }
 
 /**
@@ -115,9 +111,16 @@ function signin(req, res, next) {
       user.password = undefined;
       user.salt = undefined;
 
-      req.login(user, function (err) {
+      let userProfile = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        fullName: user.fullName
+      };
+
+      req.login(userProfile, function (err) {
         if (err) {
-          logger.error(err);
+          console.log(err);
           return res.status(400).render(VIEWS.SIGNIN_PAGE, {
             message: err.message
           });

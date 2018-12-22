@@ -15,7 +15,7 @@
           url: '/cms/food',
           views: {
             'content': {
-              templateUrl: 'client/modules/content-management/views/food-list.client.view.html',
+              templateUrl: 'client/modules/content-management/views/food-list.client.view.html',
               controller: 'FoodManagementController',
               controllerAs: 'vm'
             }

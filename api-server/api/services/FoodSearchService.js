@@ -34,14 +34,13 @@ async function searchFoods(keywords) {
 
   try {
     const cypherStr = `
-      WITH {keywords} AS keywords
-      MATCH (s:Shop)-[:SERVED]->(f:Food)-[:RELATED]->(k:Keyword)
-      WHERE k.keyword_id IN keywords
-      RETURN f.food_id AS id,
+      WITH   {keywords} AS keywords
+      MATCH  (f:Food)-[:RELATED]->(k:Keyword)
+      WHERE  k.id IN keywords
+      RETURN f.id   AS id,
              f.name AS name,
-             f.description AS description,
-             COLLECT(DISTINCT { id: k.keyword_id, name: k.name }) AS keywords,
-             COLLECT(DISTINCT { id: s.shop_id, name: s.name }) AS shops`;
+             COLLECT(DISTINCT { id: k.id, name: k.name }) AS keywords
+    `;
     const params = {
       keywords: keywords
     };
@@ -52,8 +51,8 @@ async function searchFoods(keywords) {
     session.close();
 
     // Transform search results.
-    let foods = searchResults.records.map(record => {
-      let atts = ['id', 'name', 'description', 'keywords', 'shops'];
+    let foods = await searchResults.records.map(record => {
+      let atts = ['id', 'name', 'keywords'];
       let food = {};
 
       for (let i in atts) {

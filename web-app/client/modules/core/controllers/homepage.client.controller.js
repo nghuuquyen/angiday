@@ -12,12 +12,14 @@
     .controller('HomePageController', Controller);
 
   Controller.$inject = [
-    'KeywordService', '_', '$window'
+    'KeywordService', '_', '$window', 'Authentication'
   ];
 
-  function Controller(KeywordService, _, $window) {
+  function Controller(KeywordService, _, $window, Authentication) {
     var vm = this;
 
+    alert('Hello, ' + Authentication.user.fullName);
+    
     // ********* PUBLIC VARIABLES ********* //
     vm.topPopularFoods = [
       {

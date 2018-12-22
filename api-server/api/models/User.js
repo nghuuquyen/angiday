@@ -53,9 +53,6 @@ module.exports = {
       type: 'json'
     }
   },
-  customToJSON: function () {
-    return _.omit(this, ['password'])
-  },
   beforeCreate: async function (values, proceed) {
     values.password = UserServices.hashUserPassword(values.password);
     // If user role not set, doing set default to 'user'.

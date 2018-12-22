@@ -16,6 +16,8 @@ module.exports = {
 * @param  {Function} next Next middleware
 */
 function renderHomePage(req, res, next) {
+  console.log('Do render homepage');
+  console.log(req.user);
   res.render('home', {
     user : req.user
   });

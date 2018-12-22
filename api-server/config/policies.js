@@ -22,6 +22,10 @@ module.exports.policies = {
   'user/update' : true,
   'user/find-by-username-or-email' : true,
   'user/signin' : true,
+  'user/food-new-feeds' : true,
+  'user/similar-food-by-food' : true,
+  'user/top-popular-foods' : true,
+  'user/user-recommedation-foods' : true,
 
   /**
    * Food APIs Group

@@ -17,6 +17,11 @@ module.exports.routes = {
   'GET /user/find_by_username_or_email/:usernameOrEmail':  { action: 'user/find-by-username-or-email' },
   'POST /user/signin':  { action: 'user/signin' },
 
+  'GET /user/food-new-feeds/:userId':  { action: 'user/food-new-feeds' },
+  'GET /user/similar-food-by-food/:foodId':  { action: 'user/similar-food-by-food' },
+  'GET /user/top-popular-foods':  { action: 'user/top-popular-foods' },
+  'GET /user/user-recommedation-foods/:userId':  { action: 'user/user-recommedation-foods' },
+
   /**
    * Food Module Routes
    */

@@ -1,6 +1,6 @@
-const THRESHOLD_DUMMY = 10000;
-const THRESHOLD_USER_DUMMY = 5000;
-const THRESHOLD_COLLECTION_DUMMY = 5000;
+const THRESHOLD_DUMMY = 100;
+const THRESHOLD_USER_DUMMY = 100;
+const THRESHOLD_COLLECTION_DUMMY = 100;
 
 module.exports = {
   startDummyUserCollection

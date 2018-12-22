@@ -29,7 +29,7 @@
      * @var Number 
      * Limit food items display for each page.
      */
-    vm.pageLimit = -1; // -1 mean no limit
+    vm.pageLimit = 100; // -1 mean no limit
 
     // Initial controller.
     activeController();

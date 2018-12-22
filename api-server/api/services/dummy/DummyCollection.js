@@ -1,6 +1,6 @@
 const faker = require('faker');
 const THRESHOLD_DUMMY = 100;
-const THRESHOLD_FOOD_DUMMY = 5000;
+const THRESHOLD_FOOD_DUMMY = 100;
 
 module.exports = {
   startDummyCollection

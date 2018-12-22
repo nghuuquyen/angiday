@@ -1,7 +1,7 @@
 const faker = require('faker');
-const THRESHOLD_DUMMY = 10000;
-const THRESHOLD_SHOP_DUMMY = 5000;
-const THRESHOLD_KEYWORD_DUMMY = 5000;
+const THRESHOLD_DUMMY = 100;
+const THRESHOLD_SHOP_DUMMY = 100;
+const THRESHOLD_KEYWORD_DUMMY = 100;
 
 module.exports = {
   startDummyShopKeyword

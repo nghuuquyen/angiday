@@ -10,39 +10,29 @@ const _ = require('lodash');
  * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
  * @module models
  * @description
- * Application collection model.
+ * Application food collection relation model.
  */
 module.exports = {
-  tableName: 'collection',
+  tableName: 'food_collection_relation',
+  schema: true,
   attributes: {
-    name: {
-      type: 'string'
+    collection: {
+      model: 'collection'
     },
-    code: {
-      type: 'string',
-      unique: true
+    food: {
+      model: 'food'
     },
-    description: {
-      type: 'string'
-    },
-    imageUrl: {
-      type: 'string'
-    },
-    foods: {
-      collection: 'food',
-      via: 'collection',
-      through: 'foodcollectionrelation'
+    scores: {
+      type: 'number'
     }
   },
   afterCreate: async function (values, proceed) {
-    //sails.log.debug('Start afterCreate collection create.', values);
+    //sails.log.debug('Start afterCreate food collection relation create.', values);
 
     const session = driver.session();
     let inserString = `
-      MERGE (c:Collection { id: '${ values.id }' })
-      SET c.name = '${values.name}',
-          c.code = '${values.code}',
-          c.imageUrl = '${values.imageUrl}'
+      MATCH (c:Collection { id: '${ values.collection }' }), (f:Food { id: '${ values.food }' })
+      MERGE (c)-[:HAS]->(f)
     `;
     //sails.log.debug('Cypher string ', inserString);
 

@@ -1,5 +1,5 @@
 const faker = require('faker');
-const THRESHOLD_DUMMY_USER = 10000;
+const THRESHOLD_DUMMY_USER = 100;
 
 module.exports = {
   startDummyUsers

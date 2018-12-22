@@ -1,4 +1,41 @@
 <main role="main" ng-controller="HomePageController as vm">
+  <div class="row">
+    <div class="col-sm-4" style="padding: 0 !important;">
+      <div class="card">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[2].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <div class="card-body" style="margin-top: -176px;background: #00000096;color: #FFF;">
+          <h4 class="card-title">\{{vm.topPopularFoods[2].name}}</h4>
+          <p class="card-text">\{{vm.topPopularFoods[2].description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" style="padding: 0 !important;">
+      <div class="card">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[4].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <div class="card-body" style="margin-top: -176px;background: #00000096;color: #FFF;">
+          <h4 class="card-title">\{{vm.topPopularFoods[4].name}}</h4>
+          <p class="card-text">\{{vm.topPopularFoods[4].description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" style="padding: 0 !important;">
+      <div class="card">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[1].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <div class="card-body" style="margin-top: -176px;background: #00000096;color: #FFF;">
+          <h4 class="card-title">\{{vm.topPopularFoods[1].name}}</h4>
+          <p class="card-text">\{{vm.topPopularFoods[1].description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card" align="center" ng-repeat="c in vm.collections track by $index" style="width: 150px;">
+      <img src="\{{c.imageUrl}}" width="70" height="70" class="rounded-circle" alt="Cinque Terre">
+      <small>\{{c.name}}</small>
+    </div>
+  </div>
+
   <div class="jumbotron jumbotron-bg row">
     <div class="col-sm-3"></div>
     <div class="col-sm-6 text-center">
@@ -17,17 +54,37 @@
   </div>
 
   <div class="container">
+    <h3>Cá nhân hoá trang của bạn</h3>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="card" align="center" ng-repeat="c in vm.suggestCollections track by $index" style="width: 150px; margin-left: 10px;">
+        <div class="row">
+          <div class="col-sm-3">
+            <button class="btn btn-warn" style="background: orange;">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+          <div class="col-sm-9">
+            <small>\{{c.name}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  
+  <div class="container">
     <!-- Content Row -->
     <div class="row">
-      <div class="col-md-4 mb-4" ng-repeat="i in [1,2,3,4,5,6,8]">
+      <div class="col-md-4 mb-4" ng-repeat="food in vm.topPopularFoods track by $index">
         <div class="card h-100">
+          <img class="card-img-top" src="\{{food.imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
           <div class="card-body">
-            <h2 class="card-title">Card One</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam,
-              maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+            <h2 class="card-title">\{{food.name}}</h2>
+            <p class="card-text">\{{food.description}}</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">More Info</a>
           </div>
         </div>
       </div>

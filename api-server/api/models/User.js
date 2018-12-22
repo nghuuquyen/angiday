@@ -1,10 +1,16 @@
+const NEO4J_USERNAME = process.env.NEO4J_USERNAME || 'neo4j';
+const NEO4J_PASSWORD = process.env.NEO4J_PASSWORD || 'neo4j';
+const NEO4J_CONNECT_STRING = process.env.NEO4J_CONNECTION_STRING || 'bolt://localhost:7687';
+
+const neo4j = require('neo4j-driver').v1;
+const driver = neo4j.driver(NEO4J_CONNECT_STRING, neo4j.auth.basic(NEO4J_USERNAME, NEO4J_PASSWORD));
+const _ = require('lodash');
+
 /**
 * User.js
 *
 * @description ::
 */
-
-const _ = require('lodash');
 
 module.exports = {
   schema: true,
@@ -50,13 +56,30 @@ module.exports = {
   customToJSON: function () {
     return _.omit(this, ['password'])
   },
-  beforeCreate: function (values, next) {
+  beforeCreate: async function (values, proceed) {
     values.password = UserServices.hashUserPassword(values.password);
     // If user role not set, doing set default to 'user'.
     if (!values.roles) {
       values.roles = ['user'];
-    } else {
-      next();
     }
+
+    return proceed();
+  },
+  afterCreate: async function (values, proceed) {
+    //sails.log.debug('Start afterCreate user create.', values);
+
+    const session = driver.session();
+    let inserString = `
+          MERGE (u:User { id: '${ values.id}' })
+          SET u.username = '${values.username}',
+              u.fullName = '${values.fullName}',
+              u.email = '${values.email}'
+        `;
+    //sails.log.debug('Cypher string ', inserString);
+
+    await session.run(inserString);
+    await session.close();
+
+    return proceed();
   }
 };

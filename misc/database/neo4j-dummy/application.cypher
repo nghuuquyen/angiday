@@ -18,6 +18,7 @@ WITH f, other, intersection, s1, s2
 
 WITH f, other, intersection, s1 + FILTER(x in s2 WHERE NOT x IN s1) AS union, s1, s2 
 WITH f, other, s1, s2, ((1.0*intersection)/SIZE(union)) AS jaccard 
+WHERE jaccard > 0.5
 RETURN f.id   AS food_id, 
        f.name AS food_name, 
        COLLECT({ food_id: other.id, food_name: other.name, jaccard: jaccard }) AS related_foods

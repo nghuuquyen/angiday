@@ -29,11 +29,13 @@ module.exports.routes = {
   'DELETE /food/remove-shop':    { action: 'food/remove-shop' },
   'GET /food/search':         { action: 'food/search' },
   'GET /food/get-food-detail':         { action: 'food/get-food-detail' },
+  'POST /food/user-tracking':         { action: 'food/user-tracking' },
 
   /**
    * Keyword Module Routes
    */
   'GET /keyword/search': { action: 'keyword/search' },
+  'POST /keyword/user-tracking':         { action: 'keyword/user-tracking' },
 
   /**
    * Shop Module Routes

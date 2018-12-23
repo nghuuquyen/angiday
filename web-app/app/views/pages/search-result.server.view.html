@@ -30,13 +30,13 @@
             <div class="container">
               <h3>Từ Khoá</h3>
               {{#each this.keywords}}
-              <a href="/search?word_ids={{this.id}}" target="_self">
+              <a href="/search?word_ids={{this.id}}" ng-click="keywordTracking('{{this.id}}', 'click')" target="_self">
                 <span class="badge badge-primary">{{this.name}}</span>
               </a>
               {{/each}}
             </div>
             <hr/>
-            <a class="btn btn-warning" href="/food/{{this.id}}" target="_self">
+            <a class="btn btn-warning" href="/food/{{this.id}}" ng-click="foodTracking('{{this.id}}', 'click')" target="_self">
               <i class="fas fa-utensils"></i> Xem chi tiết
             </a>
           </div>
@@ -58,7 +58,7 @@
           <img src="{{this.imageUrl}}" class="mr-3" style="width: 100px; height: 100px;">
           <div class="media-body">
             <h6>
-              <a href="/food/{{this.id}}" target="_self">{{this.name}}
+              <a href="/food/{{this.id}}" ng-click="foodTracking('{{this.id}}', 'click')" target="_self">{{this.name}}
                 <span class="badge badge-warning">{{this.rank.low}}</span></a>
             </h6>
             <p class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical; word-break: break-all;">

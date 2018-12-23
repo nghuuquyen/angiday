@@ -20,36 +20,7 @@ angular.module(ApplicationConfiguration.applicationModuleName)
 angular.module(ApplicationConfiguration.applicationModuleName)
   .run(function ($rootScope, $state, Authentication, $transitions, $exceptionHandler) {
     
-    $transitions.onStart({}, function ($transition) {
-      // var toState = $transition.to();
-      // var toParams = $transition.params("to");
-
-      // if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
-      //   var allowed = false;
-
-      //   if (toState.data.roles.indexOf("guest") !== -1) {
-      //     allowed = true;
-      //   } else {
-      //     toState.data.roles.forEach(function (role) {
-      //       if (Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1) {
-      //         allowed = true;
-      //         return true;
-      //       }
-      //     });
-      //   }
-
-
-      //   if (!allowed) {
-      //     if (Authentication.user !== undefined && typeof Authentication.user === 'object') {
-      //       return $transition.router.stateService.target('forbidden');
-      //     } else {
-      //       return $state.go('authentication.signin').then(function () {
-      //         storePreviousState(toState, toParams);
-      //       });
-      //     }
-      //   }
-      // }
-    });
+    $transitions.onStart({}, function ($transition) {});
 
     $transitions.onError({}, function (trans) {
       var err = trans.error();

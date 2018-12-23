@@ -19,8 +19,9 @@ async function keywordInteractiveLog(username, keywordId, actionType) {
   if (actionType === 'search') scores = 3;
   if (actionType === 'click') scores = 4;
 
-  let u = await User.findOne({ username: username });
+  let u = await User.findOne({ or: [{ username: username }, { id: username }] });
   let k = await Keyword.findOne({ id: keywordId });
+  sails.log.debug(u,k);
 
   if (!u || !k) return;
 
@@ -31,12 +32,14 @@ async function keywordInteractiveLog(username, keywordId, actionType) {
     ON MATCH  SET r.scores  = r.scores + ${scores}
     ON CREATE SET r.scores = ${scores}
   `;
-  //sails.log.debug('Cypher string ', inserString);
+  sails.log.debug('Cypher string ', inserString);
 
   await session.run(inserString);
   await session.close();
 
   sails.log.debug('Done: keywordInteractiveLog', username, keywordId, actionType);
+
+  return true;
 }
 
 async function foodInteractiveLog(username, foodId, actionType) {
@@ -46,8 +49,9 @@ async function foodInteractiveLog(username, foodId, actionType) {
   if (actionType === 'search') scores = 3;
   if (actionType === 'click') scores = 4;
 
-  let u = await User.findOne({ username: username });
+  let u = await User.findOne({ or: [{ username: username }, { id: username }] });
   let f = await Food.findOne({ id: foodId });
+  sails.log.debug(u,f);
 
   if (!u || !f) return;
 
@@ -58,9 +62,11 @@ async function foodInteractiveLog(username, foodId, actionType) {
     ON MATCH  SET r.scores  = r.scores + ${scores}
     ON CREATE SET r.scores = ${scores}
   `;
-  //sails.log.debug('Cypher string ', inserString);
+  sails.log.debug('Cypher string ', inserString);
 
   await session.run(inserString);
   await session.close();
   sails.log.debug('Done: foodInteractiveLog', username, foodId, actionType);
+
+  return true;
 }

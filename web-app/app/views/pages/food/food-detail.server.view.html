@@ -27,7 +27,7 @@
             <div class="container">
               <h3>Từ Khoá</h3>
               {{#each food.keywords}}
-              <a href="/search?word_ids={{this.id}}" target="_self">
+              <a href="/search?word_ids={{this.id}}" ng-click="keywordTracking('{{this.id}}', 'click')" target="_self">
                 <span class="badge badge-primary">{{this.name}}</span>
               </a>
               {{/each}}
@@ -42,7 +42,7 @@
                 {{#each food.smilarFoods}}
                 <div class="col-lg-3 col-md-4 col-xs-6">
                   <img style="width: 150px; height: 150px;" class="img-fluid img-thumbnail" src="{{this.imageUrl}}" alt="">
-                  <a href="/food/{{this.id}}" target="_self" class="d-block mb-4 h-100">
+                  <a href="/food/{{this.id}}" ng-click="foodTracking('{{this.id}}', 'click')" target="_self" class="d-block mb-4 h-100">
                     {{this.name}}
                   </a>
                 </div>
@@ -137,7 +137,7 @@
           <img src="{{this.imageUrl}}" class="mr-3" style="width: 100px; height: 100px;">
           <div class="media-body">
             <h6>
-              <a href="/food/{{this.id}}" target="_self">{{this.name}}
+              <a href="/food/{{this.id}}" ng-click="foodTracking('{{this.id}}', 'click')" target="_self">{{this.name}}
                 <span class="badge badge-warning">{{this.rank.low}}</span></a>
             </h6>
             <p class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical; word-break: break-all;">

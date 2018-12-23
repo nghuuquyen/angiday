@@ -57,6 +57,7 @@ function renderFoodDetailPage(req, res, next) {
   FoodService.getFoodDetail(foodId, userId)
     .then(food => {
       res.render('pages/food/food-detail', {
+        user: req.user,
         food: food
       });
     })

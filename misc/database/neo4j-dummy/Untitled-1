@@ -15,7 +15,6 @@ WITH SUM( (r.r1.scores - u1_mean) * (r.r2.scores - u2_mean) ) AS nom,
      SQRT( SUM( (r.r1.scores - u1_mean)^2) * sum( (r.r2.scores - u2_mean) ^2)) AS denom,
      u1, u2
 WHERE denom <> 0
-
 WITH u1, u2, nom/denom AS pearson_similarty
 WITH u1, u2, pearson_similarty
 ORDER BY pearson_similarty DESC

@@ -31,6 +31,16 @@
         method: 'GET',
         isArray: true,
         url: apiGateway + '/user/user-recommedation-foods/:userId'
+      },
+      getAllCollections: {
+        method: 'GET',
+        isArray: true,
+        url: apiGateway + '/collection'
+      },
+      getFoodDetail: {
+        method: 'GET',
+        isArray: true,
+        url: apiGateway + '/food/get-food-detail'
       }
     });
   }

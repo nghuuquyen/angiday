@@ -49,6 +49,12 @@ module.exports = {
     },
     image: {
       type: 'json'
+    },
+    eShops: {
+      type: 'json'
+    },
+    eRecipes: {
+      type: 'json'
     }
   },
   afterCreate: async function (values, proceed) {

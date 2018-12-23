@@ -60,12 +60,14 @@ function renderFoodDetailPage(req, res, next) {
   if (!foodId) {
     throw new Error('Missing food id parameter.');
   }
+  let userId = null;
 
-  FoodService.findOne(foodId, { populate: 'shops, keywords' })
+  if(req.user) userId = req.user.id;
+
+  FoodService.getFoodDetail(foodId, userId)
     .then(food => {
       res.render('pages/food/food-detail', {
-        food: food,
-        recommends: recommends
+        food: food
       });
     })
     .catch(err => {

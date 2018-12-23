@@ -28,6 +28,7 @@ module.exports.routes = {
   'DELETE /food/remove-keyword': { action: 'food/remove-keyword' },
   'DELETE /food/remove-shop':    { action: 'food/remove-shop' },
   'GET /food/search':         { action: 'food/search' },
+  'GET /food/get-food-detail':         { action: 'food/get-food-detail' },
 
   /**
    * Keyword Module Routes

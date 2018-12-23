@@ -82,7 +82,7 @@ async function getSimilarFoodByFood(foodId) {
 
       WITH f, other, intersection, s1 + FILTER(x in s2 WHERE NOT x IN s1) AS union, s1, s2
       WITH f, other, s1, s2, ((1.0*intersection)/SIZE(union)) AS jaccard
-      WHERE jaccard > 0.4
+      WHERE jaccard > 0.1
       MATCH (:User)-[r:INTERACTIVE]->(f)
       WITH DISTINCT other, SUM(r.scores) AS rank
       RETURN other.id       AS id,
@@ -93,6 +93,7 @@ async function getSimilarFoodByFood(foodId) {
     `;
 
     searchResults = await session.run(cypherStr);
+    //sails.log.debug(cypherStr);
 
     // Must close session.
     session.close();
@@ -152,7 +153,6 @@ async function getUserRecommedationFoods(userId) {
       ORDER BY pearson_similarty DESC
       LIMIT 15
       MATCH (u2)-[*0..2]-(f:Food)
-      WHERE NOT EXISTS((u1)-[:FOLLOW]->(:Collection)-[:HAS]->(f))
       MATCH (:User)-[r:INTERACTIVE]->(f)
       WITH DISTINCT f, SUM(r.scores) AS rank
       RETURN f.id       AS id,

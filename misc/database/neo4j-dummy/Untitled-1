@@ -52,3 +52,4 @@ MATCH (u1:User { username: 'user02' })-[:FOLLOW]->(:Collection)-[:HAS]->(f:Food)
 MATCH (:User)-[r:INTERACTIVE]->(f)
 RETURN DISTINCT f, SUM(r.scores) AS rank
 ORDER BY rank DESC
+

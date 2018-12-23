@@ -13,7 +13,7 @@ module.exports.policies = {
    * For security problem, default all routes default is deny. You need
    * manual open it.
    */
-  '*': false,
+  '*': true,
   /**
    * User APIs Group
    */
@@ -26,6 +26,11 @@ module.exports.policies = {
   'user/similar-food-by-food' : true,
   'user/top-popular-foods' : true,
   'user/user-recommedation-foods' : true,
+
+   /**
+   * Collection APIs Group
+   */
+  'collection/*' : true,
 
   /**
    * Food APIs Group

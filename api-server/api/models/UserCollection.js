@@ -33,29 +33,31 @@ module.exports = {
     }
   },
   afterCreate: async function (values, proceed) {
-    //sails.log.debug('Start afterCreate user collection create.', values);
+    sails.log.debug('Start afterCreate user collection create.', values);
 
     const session = driver.session();
     let inserString = `
       MATCH (u:User { id: '${ values.user }' }), (c:Collection { id: '${ values.collection }' })
       MERGE (u)-[r:FOLLOW]->(c)
     `;
-    //sails.log.debug('Cypher string ', inserString);
+    sails.log.debug('Cypher string ', inserString);
 
     await session.run(inserString);
     await session.close();
 
     return proceed();
   },
-  afterDestroy: async function (values, proceed) {
-    //sails.log.debug('Start afterCreate user collection create.', values);
+  beforeDestroy: async function (values, proceed) {
+    sails.log.debug('Start beforeDestroy user collection removed.', values);
+
+    let userCollection = await UserCollection.findOne({ id: values.where.id });
 
     const session = driver.session();
     let inserString = `
-      MATCH (:User { id: '${ values.user }' })-[r:FOLLOW]->(:Collection { id: '${ values.collection }' })
+      MATCH (:User { id: '${ userCollection.user }' })-[r:FOLLOW]->(:Collection { id: '${ userCollection.collection }' })
       DELETE r
     `;
-    //sails.log.debug('Cypher string ', inserString);
+    sails.log.debug('Cypher string ', inserString);
 
     await session.run(inserString);
     await session.close();

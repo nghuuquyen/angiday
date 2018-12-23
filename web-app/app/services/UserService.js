@@ -10,8 +10,31 @@ module.exports = {
   findOne,
   create,
   findByUsernameOrEmail,
-  signin
+  signin,
+  getUserRecommendationFoods,
+  getTopPopularFoods
 };
+
+
+function getUserRecommendationFoods(userId) {
+  if (!userId) throw new Error('userId is undefined.');
+
+  let configs = {
+    method: 'GET',
+    url: hostAPI + `/user/user-recommedation-foods/${userId}`
+  };
+
+  return axios(configs).then(res => res.data);
+}
+
+function getTopPopularFoods() {
+  let configs = {
+    method: 'GET',
+    url: hostAPI + `/user/top-popular-foods`
+  };
+
+  return axios(configs).then(res => res.data);
+}
 
 /**
  * @name findOne

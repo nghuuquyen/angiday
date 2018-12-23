@@ -37,9 +37,13 @@ async function searchFoods(keywords) {
       WITH   {keywords} AS keywords
       MATCH  (f:Food)-[:RELATED]->(k:Keyword)
       WHERE  k.id IN keywords
-      RETURN f.id   AS id,
-             f.name AS name,
+      MATCH (:User)-[r:INTERACTIVE]->(f)
+      RETURN f.id       AS id,
+             f.name     AS name,
+             f.imageUrl AS imageUrl,
+             SUM(r.scores) AS rank,
              COLLECT(DISTINCT { id: k.id, name: k.name }) AS keywords
+      ORDER BY rank DESC
     `;
     const params = {
       keywords: keywords
@@ -52,7 +56,7 @@ async function searchFoods(keywords) {
 
     // Transform search results.
     let foods = await searchResults.records.map(record => {
-      let atts = ['id', 'name', 'keywords'];
+      let atts = ['id', 'name', 'keywords', 'imageUrl'];
       let food = {};
 
       for (let i in atts) {
@@ -61,6 +65,12 @@ async function searchFoods(keywords) {
 
       return food;
     });
+
+    for(let i in foods) {
+      let fullFoodData = await Food.findOne({ id: foods[i].id }).populate('keywords');
+      foods[i].description = fullFoodData.description;
+      foods[i].keywords =    fullFoodData.keywords;
+    }
 
     return foods;
 

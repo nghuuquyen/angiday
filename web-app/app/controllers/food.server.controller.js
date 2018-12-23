@@ -9,16 +9,6 @@
 const FoodService = require('../services').FoodService;
 const _ = require('lodash');
 
-let recommends = [
-  { name: 'Bánh bèo', number_shops: 15, type: 'food', id: '1' },
-  { name: 'Quán ăn 1', address: 'Da Nang', type: 'shop', id: '2' },
-  { name: 'Bánh nậm', number_shops: 12, type: 'food', id: '3' },
-  { name: 'Quán ăn 2', address: 'Da Nang', type: 'shop', id: '4' },
-  { name: 'Bánh ướt', number_shops: 10, type: 'food', id: '5' },
-  { name: 'Quán ăn 3', address: 'Da Nang', type: 'shop', id: '6' },
-  { name: 'Bánh xèo', number_shops: 10, type: 'food', id: '7' },
-];
-
 module.exports = {
   renderFoodDetailPage,
   renderFoodIndexPage

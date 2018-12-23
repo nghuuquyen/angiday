@@ -13,23 +13,35 @@
       <div class="card-header pannel-orange-bg">Kết Quả Tìm Kiếm</div>
       <div class="card-body">
         <!-- foods list -->
+
         {{#each foods}}
-        <div class="media border p-3 agd-card-normal">
-          <img src="https://via.placeholder.com/150x150" alt="{{this.name}}" class="img-thumbnail mr-3">
-          <div class="media-body">
-            <div class="row">
-              <div class="col-sm-9">
-                <h6>{{this.name}}</h6>
-                <p>{{this.shops.length}} Shop served</p>
-              </div>
-              <div class="col-sm-3">
-                <a class="btn btn-warning" href="/food/{{this.id}}" target="_self">
-                  <i class="fas fa-utensils"></i> Xem chi tiết
-                </a>
-              </div>
+        <div class="row">
+          <div class="col-md-7">
+            <a href="#">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="{{this.imageUrl}}" alt="{{this.name}}" style="width: 100%;">
+            </a>
+          </div>
+          <div class="col-md-5">
+            <h1>{{this.name}}</h1>
+            <p class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 10;-webkit-box-orient: vertical; word-break: break-all;">
+              {{this.description}}
+            </p>
+            <hr />
+            <div class="container">
+              <h3>Từ Khoá</h3>
+              {{#each this.keywords}}
+              <a href="/search?word_ids={{this.id}}" target="_self">
+                <span class="badge badge-primary">{{this.name}}</span>
+              </a>
+              {{/each}}
             </div>
+            <hr/>
+            <a class="btn btn-warning" href="/food/{{this.id}}" target="_self">
+              <i class="fas fa-utensils"></i> Xem chi tiết
+            </a>
           </div>
         </div>
+        <hr/>
         {{/each}}
         <!-- ./ foods list -->
       </div>
@@ -41,36 +53,20 @@
       <div class="card-body">
         <!-- recommends list -->
         {{#each recommends}}
-
-        {{#ifCond this.type '===' 'food'}}
         <!-- food card -->
         <div class="media border p-3 agd-card-normal">
-          <img src="https://via.placeholder.com/100x100" alt="{{this.name}}" class="img-thumbnail mr-3">
+          <img src="{{this.imageUrl}}" class="mr-3" style="width: 100px; height: 100px;">
           <div class="media-body">
-            <a href="/food/{{this.id}}" target="_self">
-              <h6><i class="fas fa-utensils"></i> {{this.name}}</h6>
-            </a>
-
-            <p>{{this.shops.length}} Shop served</p>
+            <h6>
+              <a href="/food/{{this.id}}" target="_self">{{this.name}}
+                <span class="badge badge-warning">{{this.rank.low}}</span></a>
+            </h6>
+            <p class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical; word-break: break-all;">
+              {{this.description}}
+            </p>
           </div>
         </div>
         <!-- ./ food card -->
-        {{/ifCond}}
-
-        {{#ifCond this.type '===' 'shop'}}
-        <!-- shop card -->
-        <div class="media border p-3 agd-card-normal">
-          <img src="https://via.placeholder.com/100x100" alt="{{this.name}}" class="img-thumbnail mr-3">
-          <div class="media-body">
-            <a href="/shop/{{this.id}}" target="_self">
-              <h6><i class="fas fa-building"></i> {{this.name}}</h6>
-            </a>
-            <small><i class="fas fa-map-marker-alt"></i> Cách bạn 900 mét.</small>
-            <small>Địa chỉ, Số 12, đường Nguyễn Văn Linh</small>
-          </div>
-        </div>
-        <!-- ./shop card -->
-        {{/ifCond}}
         {{/each}}
         <!-- ./ recommends list -->
       </div>

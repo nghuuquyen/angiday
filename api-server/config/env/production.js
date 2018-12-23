@@ -119,6 +119,7 @@ module.exports = {
   ***************************************************************************/
   blueprints: {
     shortcuts: false,
+    rest: true
   },
 
 
@@ -148,11 +149,12 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cors: {
-      // allowOrigins: [
-      //   'https://example.com',
-      // ]
-    },
-
+      allRoutes: true,
+      allowOrigins: [
+        'http://localhost:3000', 'http://127.0.0.1:3000', 'http://158.69.205.160:3000'
+      ],
+      allowCredentials: false
+    }
   },
 
 
@@ -250,10 +252,9 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-    // onlyAllowOrigins: [
-    //   'https://example.com',
-    //   'https://staging.example.com',
-    // ],
+    onlyAllowOrigins: [
+      'http://158.69.205.160:1441'
+    ],
 
 
     /***************************************************************************
@@ -390,7 +391,4 @@ module.exports = {
     //--------------------------------------------------------------------------
 
   },
-
-
-
 };

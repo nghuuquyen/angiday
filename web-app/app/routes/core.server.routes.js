@@ -2,9 +2,13 @@
 
 const router = require('express').Router();
 const CoreCtrl = require('../controllers').Core;
+const SearchFood = require('../controllers').SearchFood;
 
 // Public home page.
 router.route('/').get(CoreCtrl.renderHomePage);
+
+// Public search results page.
+router.route('/search').get(SearchFood.renderSearchFoodPage);
 
 // Public about page.
 router.route('/about').get((req, res) => {

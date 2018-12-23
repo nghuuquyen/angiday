@@ -1,10 +1,95 @@
-<div class="container page-content">
+<main role="main" ng-controller="HomePageController as vm">
   <div class="row">
-    <div class="jumbotron">
-      <h1>Wellcome {{user.username}} to AnGiDay!</h1>
-      <p>
-        <a class="btn btn-primary btn-lg" href="/signin" target="_self" role="button">Try now</a>
-      </p>
+    <div class="col-sm-4" style="padding: 0 !important;">
+      <div class="card">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[2].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <div class="card-body" style="margin-top: -176px;background: #00000096;color: #FFF;">
+          <h4 class="card-title">\{{vm.topPopularFoods[2].name}}</h4>
+          <p class="card-text">\{{vm.topPopularFoods[2].description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" style="padding: 0 !important;">
+      <div class="card">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[4].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <div class="card-body" style="margin-top: -176px;background: #00000096;color: #FFF;">
+          <h4 class="card-title">\{{vm.topPopularFoods[4].name}}</h4>
+          <p class="card-text">\{{vm.topPopularFoods[4].description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" style="padding: 0 !important;">
+      <div class="card">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[1].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <div class="card-body" style="margin-top: -176px;background: #00000096;color: #FFF;">
+          <h4 class="card-title">\{{vm.topPopularFoods[1].name}}</h4>
+          <p class="card-text">\{{vm.topPopularFoods[1].description}}</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="row">
+    <div class="card" align="center" ng-repeat="c in vm.collections track by $index" style="width: 150px;">
+      <img src="\{{c.imageUrl}}" width="70" height="70" class="rounded-circle" alt="Cinque Terre">
+      <small>\{{c.name}}</small>
+    </div>
+  </div>
+
+  <div class="jumbotron jumbotron-bg row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 text-center">
+      <h1>Ăn Gì Đây ?</h1>
+      <p>Ứng Dụng Tìm Kiếm Món Ăn, Công Thức, Địa Điểm Ăn Vặt</p>
+
+      <tags-input ng-model="vm.tags" min-length="1" style="height: 60px; color: black;" ng-model="tags" placeholder="Bạn muốn tìm gì ?"
+        add-from-autocomplete-only="true">
+        <auto-complete source="vm.loadTags($query)" load-on-focus="true" load-on-empty="true"></auto-complete>
+      </tags-input>
+      <br />
+      <div align="center">
+        <button ng-click="vm.doSearchFoodByTags()" type="button" class="btn">Tìm Kiếm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h3>Cá nhân hoá trang của bạn</h3>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="card" align="center" ng-repeat="c in vm.suggestCollections track by $index" style="width: 150px; margin-left: 10px;">
+        <div class="row">
+          <div class="col-sm-3">
+            <button class="btn btn-warn" style="background: orange;">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+          <div class="col-sm-9">
+            <small>\{{c.name}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  
+  <div class="container">
+    <!-- Content Row -->
+    <div class="row">
+      <div class="col-md-4 mb-4" ng-repeat="food in vm.topPopularFoods track by $index">
+        <div class="card h-100">
+          <img class="card-img-top" src="\{{food.imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+          <div class="card-body">
+            <a href="/food/\{{food.id}}" target="_self"><h2 class="card-title">\{{food.name}}</h2></a>
+            <p class="card-text">\{{food.description}}</p>
+          </div>
+          <div class="card-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</main>

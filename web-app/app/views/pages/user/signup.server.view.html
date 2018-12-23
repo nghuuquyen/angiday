@@ -1,16 +1,19 @@
-<div class="container page-content">
-  <h2>Sign up</h2>
-  <hr/>
+<div class="container page-content" ng-controller="HomePageController as vm">
+  <br /><br />
+
+  <h2>Đăng Ký Tài Khoản Mới</h2>
+  <hr />
   <p>
-    You have account <a href="/signin" target="_self">Sign in now</a>
+    Bạn đã có tải khoản ? <a href="/signin" target="_self">Đăng Nhập Ngay</a>
   </p>
+
   <form class="form-horizontal" method="POST" action="/signup">
     {{#if message}}
     <div class="alert alert-danger" role="alert">{{message}}</div>
     {{/if}}
     <!-- firstname -->
     <div class="form-group">
-      <label for="firstName" class="col-sm-2 control-label">First Name</label>
+      <label for="firstName" class="col-sm-2 control-label">Tên</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" name="firstName" placeholder="First name">
       </div>
@@ -19,7 +22,7 @@
 
     <!-- lastname -->
     <div class="form-group">
-      <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+      <label for="lastName" class="col-sm-2 control-label">Họ</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" name="lastName" placeholder="Last name">
       </div>
@@ -28,16 +31,16 @@
 
     <!-- username -->
     <div class="form-group">
-      <label for="username" class="col-sm-2 control-label">Username</label>
+      <label for="username" class="col-sm-2 control-label">Tên tài khoản</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" name="username" placeholder="Username">
+        <input type="text" class="form-control" name="username" placeholder="Tên tài khoản">
       </div>
     </div>
     <!-- ./ username -->
 
     <!-- email -->
     <div class="form-group">
-      <label for="email" class="col-sm-2 control-label">Email</label>
+      <label for="email" class="col-sm-2 control-label">Địa chỉ email</label>
       <div class="col-sm-10">
         <input type="email" class="form-control" name="email" placeholder="Email">
       </div>
@@ -46,16 +49,37 @@
 
     <!-- password -->
     <div class="form-group">
-      <label for="password" class="col-sm-2 control-label">Password</label>
+      <label for="password" class="col-sm-2 control-label">Mật khẩu</label>
       <div class="col-sm-10">
         <input type="password" class="form-control" name="password" placeholder="Password">
       </div>
     </div>
     <!-- ./ password -->
 
+    <div class="container">
+        <h4>Cá nhân hoá trang của bạn</h4>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="card" align="center" ng-repeat="c in vm.suggestCollections track by $index" style="width: 150px; margin-left: 10px;margin-top: 10px;">
+            <div class="row">
+              <div class="col-sm-3">
+                <button class="btn btn-warn" style="background: orange;">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
+              <div class="col-sm-9">
+                <small>\{{c.name}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Sign up</button>
+        <button type="submit" class="btn btn-warn" style="background: orange;">Tạo tài khoản</button>
       </div>
     </div>
   </form>

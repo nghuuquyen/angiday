@@ -3,21 +3,19 @@
     {
       "name": "web",
       "script": "server.js",
-      "env_uat": {
-        "NODE_ENV": "uat",
-        "PORT": "2441",
+      "env_staging": {
+        "NODE_ENV": "staging",
+        "PORT": "3000",
         "MAX_AGE" : "2592000",
         "EXPIRES" : "2592000",
-        "CACHE_HTML" : false,
-        "PRERENDER_SERVICE_URL" : "http://localhost:1234"
+        "CACHE_HTML" : false
       },
       "env_production" :{
         "NODE_ENV": "production",
-        "PORT": "2325",
+        "PORT": "3000",
         "MAX_AGE" : "2592000",
         "EXPIRES" : "2592000",
-        "CACHE_HTML" : false,
-        "PRERENDER_SERVICE_URL" : "http://localhost:1234"
+        "CACHE_HTML" : false
       }
     }
   ]

@@ -8,8 +8,8 @@ angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfig
 angular.module(ApplicationConfiguration.applicationModuleName)
   .config(['$locationProvider', '$httpProvider', '$logProvider',
     function ($locationProvider, $httpProvider, $logProvider) {
-      $httpProvider.defaults.withCredentials = true;
-
+      // $httpProvider.defaults.withCredentials = true;
+      
       $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
@@ -19,36 +19,36 @@ angular.module(ApplicationConfiguration.applicationModuleName)
 
 angular.module(ApplicationConfiguration.applicationModuleName)
   .run(function ($rootScope, $state, Authentication, $transitions, $exceptionHandler) {
-
+    
     $transitions.onStart({}, function ($transition) {
-      var toState = $transition.to();
-      var toParams = $transition.params("to");
+      // var toState = $transition.to();
+      // var toParams = $transition.params("to");
 
-      if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
-        var allowed = false;
+      // if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
+      //   var allowed = false;
 
-        if (toState.data.roles.indexOf("guest") !== -1) {
-          allowed = true;
-        } else {
-          toState.data.roles.forEach(function (role) {
-            if (Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1) {
-              allowed = true;
-              return true;
-            }
-          });
-        }
+      //   if (toState.data.roles.indexOf("guest") !== -1) {
+      //     allowed = true;
+      //   } else {
+      //     toState.data.roles.forEach(function (role) {
+      //       if (Authentication.user.roles !== undefined && Authentication.user.roles.indexOf(role) !== -1) {
+      //         allowed = true;
+      //         return true;
+      //       }
+      //     });
+      //   }
 
 
-        if (!allowed) {
-          if (Authentication.user !== undefined && typeof Authentication.user === 'object') {
-            return $transition.router.stateService.target('forbidden');
-          } else {
-            return $state.go('authentication.signin').then(function () {
-              storePreviousState(toState, toParams);
-            });
-          }
-        }
-      }
+      //   if (!allowed) {
+      //     if (Authentication.user !== undefined && typeof Authentication.user === 'object') {
+      //       return $transition.router.stateService.target('forbidden');
+      //     } else {
+      //       return $state.go('authentication.signin').then(function () {
+      //         storePreviousState(toState, toParams);
+      //       });
+      //     }
+      //   }
+      // }
     });
 
     $transitions.onError({}, function (trans) {
@@ -61,7 +61,6 @@ angular.module(ApplicationConfiguration.applicationModuleName)
     $transitions.onSuccess({}, function ($transition) {
       var fromParams = $transition.params("from");
       var fromState = $transition.from();
-      var toState = $transition.to();
 
       storePreviousState(fromState, fromParams);
     });

@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-header">{{vm.formTitle || 'Thông Tin Món Ăn'}}</div>
+  <div class="card-body">
+    <div class="alert alert-danger" role="alert" ng-if="vm.message">
+      {{vm.message}}
+    </div>
+    <form>
+      <div class="form-group">
+        <label for="name">Tên món ăn:</label>
+        <input type="text" class="form-control" id="name" ng-model="vm.food.name">
+      </div>
+      <div class="form-group">
+        <label for="description">Mô tả:</label>
+        <textarea class="form-control" rows="5" id="description" ng-model="vm.food.description"></textarea>
+      </div>
+      <button type="button" class="btn btn-block btn-primary" ng-click="vm.submitFoodForm()">
+        {{vm.submitBtnTitle || 'Lưu'}}
+      </button>
+    </form>
+  </div>
+</div>

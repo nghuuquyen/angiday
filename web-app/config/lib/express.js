@@ -76,7 +76,7 @@ function initLocalVariables(app) {
   // Client JS and CSS files for browser client load.
   app.locals.jsFiles = config.files.client.js;
   app.locals.cssFiles = config.files.client.css;
-
+  
   // Deploy time will used for make sure client update all assets file cached,
   // when we deploy new version.
   app.locals.deployTime = (new Date()).getTime();
@@ -107,11 +107,11 @@ function initRouteErrorHandle(app) {
   // Error handle
   app.use(function(err, req, res, next) {
     // Must logging error.
-    logger.error(err, {
-      url: req.url,
-      username: _.get(req, 'user.username')
-    });
-
+    // logger.error(err, {
+    //   url: req.url,
+    //   username: _.get(req, 'user.username')
+    // });
+    
     const _status = err.status || 500;
     res.status(_status);
 

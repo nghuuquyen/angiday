@@ -1,5 +1,7 @@
 "use strict";
 
 module.exports = {
-  // Do export something.
+  FoodService: require('./FoodService'),
+  ShopService: require('./ShopService'),
+  UserService: require('./UserService')
 };

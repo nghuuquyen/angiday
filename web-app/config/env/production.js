@@ -1,6 +1,12 @@
 "use strict";
 
 module.exports = {
+  hosts: {
+    // Internal API endpoint.
+    api: process.env.API_HOST || 'http://localhost:1337',
+    // Public API gateway, used for client connecting to.
+    apiGateway: process.env.API_GATEWAY || 'http://localhost:1337'
+  },
   db: {
     // mongodb://[username:password@]host1[:port1]
     uri: process.env.MONGO_URI,

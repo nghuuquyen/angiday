@@ -5,7 +5,7 @@
  * Application campaign model.
  */
 module.exports = {
-  tableName: 'search_tracking',
+  tableName: 'campaign',
   attributes: {
     user: {
       type: 'string'

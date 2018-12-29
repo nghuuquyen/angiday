@@ -14,28 +14,29 @@ module.exports.routes = {
   /**
    * User Module Routes
    */
-  'GET /user/find_by_username_or_email/:usernameOrEmail':  { action: 'user/find-by-username-or-email' },
-  'POST /user/signin':  { action: 'user/signin' },
+  'GET /user/find_by_username_or_email/:usernameOrEmail': { action: 'user/find-by-username-or-email' },
+  'POST /user/signin': { action: 'user/signin' },
 
-  'GET /user/food-new-feeds/:userId':  { action: 'user/food-new-feeds' },
-  'GET /user/similar-food-by-food/:foodId':  { action: 'user/similar-food-by-food' },
-  'GET /user/top-popular-foods':  { action: 'user/top-popular-foods' },
-  'GET /user/user-recommedation-foods/:userId':  { action: 'user/user-recommedation-foods' },
+  'GET /user/food-new-feeds/:userId': { action: 'user/food-new-feeds' },
+  'GET /user/similar-food-by-food/:foodId': { action: 'user/similar-food-by-food' },
+  'GET /user/top-popular-foods': { action: 'user/top-popular-foods' },
+  'GET /user/user-recommedation-foods/:userId': { action: 'user/user-recommedation-foods' },
 
   /**
    * Food Module Routes
    */
   'DELETE /food/remove-keyword': { action: 'food/remove-keyword' },
-  'DELETE /food/remove-shop':    { action: 'food/remove-shop' },
-  'GET /food/search':         { action: 'food/search' },
-  'GET /food/get-food-detail':         { action: 'food/get-food-detail' },
-  'POST /food/user-tracking':         { action: 'food/user-tracking' },
+  'DELETE /food/remove-shop': { action: 'food/remove-shop' },
+  'GET /food/search': { action: 'food/search' },
+  'GET /food/get-food-detail': { action: 'food/get-food-detail' },
+  'POST /food/user-tracking': { action: 'food/user-tracking' },
 
   /**
    * Keyword Module Routes
    */
   'GET /keyword/search': { action: 'keyword/search' },
-  'POST /keyword/user-tracking':         { action: 'keyword/user-tracking' },
+  'POST /keyword/user-tracking': { action: 'keyword/user-tracking' },
+  'GET /search/user-interactive': { action: 'search/search-user-interactive' },
 
   /**
    * Shop Module Routes

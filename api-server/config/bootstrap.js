@@ -11,7 +11,7 @@
 
 module.exports.bootstrap = async function (done) {
   // Create indexing
-  MongodbIndexing.doIndexing();
+  await MongodbIndexing.doIndexing();
 
   // await ImportInitialData.start();
 

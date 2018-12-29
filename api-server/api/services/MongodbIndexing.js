@@ -19,6 +19,7 @@ function createMongodbIndexing() {
   const keywordCollection = db.collection(Keyword.tableName);
   const foodCollection = db.collection(Food.tableName);
   const shopCollection = db.collection(Shop.tableName);
+  const searchTrackingCollection = db.collection(SearchTracking.tableName);
 
   sails.log('Do create indexing for mongodb database.');
   // Create indexing on keyword.
@@ -37,6 +38,11 @@ function createMongodbIndexing() {
   shopCollection.createIndex({
     "name": "text",
     "description": "text"
+  });
+
+  // Create indexing search tracking.
+  searchTrackingCollection.createIndex({
+    "texts": "text"
   });
 
   sails.log('Done create indexing for mongodb database.');

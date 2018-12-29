@@ -1,0 +1,165 @@
+<section class="container">
+  <br />
+  <div class="row">
+    <div class="col-sm-8">
+      <h3>Campagin Create</h3>
+    </div>
+    <div class="col-sm-4 text-right">
+      <button type="button" class="btn btn-primary">Save Content</button>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">
+          <h5>I. Basic Configurations</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">
+                <b>Campagin Name</b>
+              </label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">
+                <b>Description</b>
+              </label>
+              <div class="col-sm-9">
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">
+                <b>Start Date:</b>
+              </label>
+              <div class="col-sm-9">
+                <input class="form-control" type="date" id="exampleInput" name="input" ng-model="example.value"
+                  placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" required />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <div class="card">
+        <div class="card-header">
+          <h5>II. Reach Statistical</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-3 col-form-label">
+                <b>Total Reach User</b>
+              </label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="50">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <!-- distribution -->
+      <div class="card">
+        <div class="card-header">
+          <h5>III. Distribution Content</h5>
+        </div>
+        <div class="card-body">
+          <h5>Keywords</h5>
+          <tags-input ng-model="vm.tags" min-length="1" style="height: 60px; color: black;" ng-model="tags"></tags-input>
+          <hr />
+          <h5>Foods</h5>
+          <!-- food items -->
+          <div class="card" ng-repeat="i in [1,2,3]" style="margin-bottom: 10px; background-color: #fbfbfb;">
+            <div class="card-body">
+              <h4 class="card-title">{{$index + 1}}. Food Name</h4>
+              <hr />
+              <div class="row">
+                <div class="col-sm-4">
+                  <img class="card-img-top" src="https://via.placeholder.com/100x100/" alt="Card image" style="max-width: 200px;">
+                </div>
+                <div>
+                  <b>Description</b>
+                  <hr />
+                  <b>Keywords</b>
+                  <hr />
+                </div>
+              </div>
+              <br />
+              <b>Content</b>
+              <hr />
+              <textarea ui-tinymce="tinymceOptions" ng-model="vm.cas" class="form-control" name="questionContent"
+                placeholder="Question Content" required>
+              </textarea>
+            </div>
+          </div>
+          <!-- ./ food items -->
+        </div>
+      </div>
+      <!-- ./ distribution -->
+    </div>
+    <div class="col-sm-4">
+      <!-- suggestion -->
+      <div class="card">
+        <div class="card-header">
+          <h5>User Interactive Search</h5>
+        </div>
+
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search text" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Search</button>
+            </div>
+          </div>
+
+          <hr />
+          <h6>1. Top User Input Search Text</h6>
+          <hr />
+          <ul>
+            <li>Cras justo odio</li>
+            <li>Dapibus ac facilisis in</li>
+            <li>Morbi leo risus</li>
+            <li>Porta ac consectetur ac</li>
+            <li>Vestibulum at eros</li>
+          </ul>
+          <hr />
+          <h6>2. Top Clicked Keywords</h6>
+          <div style="max-height: 200px; overflow: scroll;">
+            <ul class="list-group">
+              <li ng-repeat="i in [1,2,3]" class="list-group-item">
+                {{ $index + 1 }}. Dapibus ac facilisis in <span class="badge badge-primary">Use</span>
+              </li>
+            </ul>
+          </div>
+          <hr />
+          <h6>3. Top Clicked Foods</h6>
+          <div style="max-height: 200px; overflow: scroll;">
+            <ul class="list-group">
+              <li ng-repeat="i in [1,2,3]" class="list-group-item">
+                {{ $index + 1 }}. Dapibus ac facilisis in <span class="badge badge-primary">Use</span>
+              </li>
+            </ul>
+          </div>
+          <hr />
+          <h6>4. System Keywords</h6>
+          <div style="max-height: 200px; overflow: scroll;">
+            <ul class="list-group">
+              <li ng-repeat="i in [1,2,3]" class="list-group-item">
+                {{ $index + 1 }}. Dapibus ac facilisis in <span class="badge badge-primary">Use</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- ./ suggestion -->
+    </div>
+  </div>
+</section>

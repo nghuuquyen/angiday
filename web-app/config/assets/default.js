@@ -25,7 +25,9 @@ module.exports = {
         'public/lib/angular-modal-service/dst/angular-modal-service.min.js',
         'public/lib/lodash/dist/lodash.min.js',
         'public/lib/angular-toastr/dist/angular-toastr.tpls.min.js',
-        'public/lib/angular-messages/angular-messages.min.js'
+        'public/lib/angular-messages/angular-messages.min.js',
+        'public/lib/tinymce/tinymce.min.js',
+        'public/lib/angular-ui-tinymce/dist/tinymce.min.js'
       ],
       tests: []
     },

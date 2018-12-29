@@ -7,9 +7,8 @@
 
       $stateProvider
         /*
-        * Course Results Page.
+        * CMS Page.
         * -----
-        * For student or lecturer see course results.
         */
         .state('food-management', {
           url: '/cms/food',
@@ -38,6 +37,36 @@
               templateUrl: 'client/modules/content-management/views/food-edit.client.view.html',
               controller: 'FoodEditController',
               controllerAs: 'vm'
+            }
+          }
+        })
+        /*
+        * Campagin Page.
+        * -----
+        */
+        .state('campaign-management', {
+          url: '/cms/campaign',
+          views: {
+            'content': {
+              templateUrl: 'client/modules/content-management/views/campagin-list.client.view.html'
+            }
+          }
+        })
+        .state('campaign-management.create', {
+          url: '/create',
+          views: {
+            'content@': {
+              templateUrl: 'client/modules/content-management/views/campagin-create.client.view.html',
+              controller: 'CampaginCreateController',
+              controllerAs: 'vm'
+            }
+          }
+        })
+        .state('campaign-management.edit', {
+          url: '/:campaignId',
+          views: {
+            'content@': {
+              templateUrl: 'client/modules/content-management/views/campagin-edit.client.view.html'
             }
           }
         });

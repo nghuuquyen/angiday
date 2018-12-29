@@ -64,3 +64,9 @@ services:
       NEO4J_AUTH: "none"
     networks: 
       -  angiday-default
+  elasticsearch:
+    build: ./docker/elasticsearch
+    ports:
+      - "9200:9200"
+    networks: 
+      -  angiday-default

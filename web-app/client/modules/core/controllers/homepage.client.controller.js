@@ -13,11 +13,11 @@
 
   Controller.$inject = [
     'KeywordService', '_', '$window', 'Authentication', 'RecomendationService',
-    'UserCollectionService'
+    'UserCollectionService', 'SearchTrackingService', 'Utilities'
   ];
 
   function Controller(KeywordService, _, $window, Authentication, RecomendationService,
-    UserCollectionService) {
+    UserCollectionService, SearchTrackingService, Utilities) {
 
     var vm = this;
     vm.topPopularFoods = [];
@@ -25,7 +25,7 @@
     // ********* PUBLIC VARIABLES ********* //
     vm.showButtonUpdateNewFeed = false;
     vm.userLogged = Authentication.user ? true : false;
-    
+
     /**
      * @var Array  
      * @description 
@@ -38,7 +38,7 @@
     vm.doSearchFoodByTags = doSearchFoodByTags;
     vm.doFollowCollection = doFollowCollection;
     vm.updateFoodNewFeeds = updateFoodNewFeeds;
-    
+
     // ********* PRIVATE FUNCTIONS ********* //
 
     if (Authentication.user) {
@@ -150,10 +150,28 @@
      * @return void 
      */
     function doSearchFoodByTags() {
-      let word_ids = vm.tags.map(item => item.id).join(',');
+      let word_ids = vm.tags.filter(item => {
+        if (item.id) return item;
+      }).map(item => item.id).join(',');
 
-      // Redirecting to search results page.
-      $window.location.replace($window.location.origin + `/search?word_ids=${word_ids}`);
+      let keywords = vm.tags.filter(item => {
+        if (item.id) return item;
+      }).map(item => item.id);
+
+      let texts = vm.tags.filter(item => {
+        if (!item.id) return item;
+      }).map(item => item.text.replace(/-/g, ' '));
+
+      SearchTrackingService.save({
+        user: vm.userLogged ? Authentication.user.id : '',
+        keywords: keywords,
+        texts: texts
+      }).$promise.then(track => {
+        Utilities.sessionStorageManager.setValue('search_id', track);
+
+        // Redirecting to search results page.
+        $window.location.replace($window.location.origin + `/search?word_ids=${word_ids}`);
+      });
     }
   }
 })();

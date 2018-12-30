@@ -14,7 +14,8 @@
     <div class="col-sm-8">
     </div>
     <div class="col-sm-4 text-right">
-      <button ng-click="vm.updateCampaign()" type="button" class="btn btn-primary">Save Content</button>
+      <button ng-click="vm.updateCampaign()" type="button" class="btn btn-primary">Save Draft</button>
+      <button ng-click="vm.updateCampaign(true)" type="button" class="btn btn-success">Save & Confirm</button>
     </div>
   </div>
   <hr />
@@ -26,6 +27,18 @@
         </div>
         <div class="card-body">
           <form>
+
+
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">
+                <b>Campaign Status</b>
+              </label>
+              <div class="col-sm-9">
+                <span ng-if="vm.campaign.confirmed" class="badge badge-success">Confirmed</span>
+                <span ng-if="!vm.campaign.confirmed" class="badge badge-primary">Draft</span>
+              </div>
+            </div>
+
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">
                 <b>Campaign Name</b>
@@ -68,7 +81,7 @@
                 <b>Total Reach User</b>
               </label>
               <div class="col-sm-9">
-                <input type="text" readonly class="form-control-plaintext" value="50">
+                <input type="text" readonly class="form-control-plaintext" value="{{vm.totalReachUser || 0}}">
               </div>
             </div>
           </form>
@@ -82,13 +95,22 @@
         </div>
         <div class="card-body">
           <h5>Keywords</h5>
-          <tags-input ng-model="vm.campaign.keywords" min-length="1" style="height: 60px; color: black;"></tags-input>
+          <tags-input on-tag-added="vm.calculatingReachUser()" on-tag-removed="vm.calculatingReachUser()" ng-model="vm.campaign.keywords"
+            min-length="1" style="height: 60px; color: black;" add-from-autocomplete-only="true">
+            <auto-complete source="vm.loadTags($query)" load-on-focus="true" load-on-empty="true"></auto-complete>
+          </tags-input>
           <hr />
           <h5>Foods</h5>
           <!-- food items -->
           <div class="card" ng-repeat="food in vm.campaign.foods" style="margin-bottom: 10px; background-color: #fbfbfb;">
             <div class="card-body">
-              <h4 class="card-title">{{$index + 1}}. {{food.name}}</h4>
+              <h4 class="card-title">
+                {{$index + 1}}. {{food.name}}
+              </h4>
+              <div class="text-right">
+                <button ng-click="vm.removeFood(food)" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                  Remove</button>
+              </div>
               <hr />
               <div class="row">
                 <div class="col-sm-4">
@@ -124,7 +146,7 @@
       <!-- suggestion -->
       <div class="card">
         <div class="card-header">
-          <h5>User Interactive Search</h5>
+          <h5>Food Search</h5>
         </div>
 
         <div class="card-body">
@@ -135,18 +157,16 @@
             </div>
           </div>
 
-          <hr />
-          <div ng-if="vm.searchResult.texts">
-            <h6>1. Top User Input Search Text</h6>
-            <hr />
+          <div ng-if="vm.searchResult.texts.length">
+            <h6>Top User Input Search Text</h6>
             <ul>
               <li ng-repeat="text in vm.searchResult.texts track by $index">{{text}}</li>
             </ul>
             <hr />
           </div>
 
-          <div ng-if="vm.searchResult.keywords">
-            <h6>2. Top Clicked Keywords</h6>
+          <div ng-if="vm.searchResult.keywords.length">
+            <h6>Top Clicked Keywords</h6>
             <div style="max-height: 200px; overflow: scroll;">
               <ul class="list-group">
                 <li ng-repeat="keyword in vm.searchResult.keywords track by $index" class="list-group-item">
@@ -157,8 +177,8 @@
             <hr />
           </div>
 
-          <div ng-if="vm.searchResult.foods">
-            <h6>3. Top Clicked Foods</h6>
+          <div ng-if="vm.searchResult.foods.length">
+            <h6>Top Clicked Foods</h6>
             <div style="max-height: 200px; overflow: scroll;">
               <ul class="list-group">
                 <li ng-repeat="food in vm.searchResult.foods track by $index" class="list-group-item">
@@ -169,12 +189,24 @@
             <hr />
           </div>
 
-          <div ng-if="vm.searchResults.systemKeywords">
-            <h6>4. System Keywords</h6>
+          <div ng-if="vm.searchResult.systemKeywords.length">
+            <h6>System Keywords</h6>
             <div style="max-height: 200px; overflow: scroll;">
               <ul class="list-group">
-                <li ng-repeat="keyword in vm.systemKeywords.foods track by $index" class="list-group-item">
+                <li ng-repeat="keyword in vm.searchResult.systemKeywords track by $index" class="list-group-item">
                   {{ $index + 1 }}. {{keyword.name}} <span ng-click="vm.useKeyword(keyword)" class="badge badge-primary">Use</span>
+                </li>
+              </ul>
+            </div>
+            <hr />
+          </div>
+
+          <div ng-if="vm.searchResult.systemFoods.length">
+            <h6>Foods Matching</h6>
+            <div style="max-height: 200px; overflow: scroll;">
+              <ul class="list-group">
+                <li ng-repeat="food in vm.searchResult.systemFoods track by $index" class="list-group-item">
+                  {{ $index + 1 }}. {{food.name}} <span ng-click="vm.useFood(food)" class="badge badge-primary">Use</span>
                 </li>
               </ul>
             </div>

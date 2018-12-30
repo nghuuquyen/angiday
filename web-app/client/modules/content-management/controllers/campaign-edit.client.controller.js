@@ -5,8 +5,10 @@
     .module('content-management')
     .controller('CampaignEditController', Controller);
 
-  Controller.$inject = ['CampaignService', '$stateParams', 'toastr'];
-  function Controller(CampaignService, $stateParams, toastr) {
+  Controller.$inject = [
+    'CampaignService', '$stateParams', 'toastr', 'KeywordService', '_'
+  ];
+  function Controller(CampaignService, $stateParams, toastr, KeywordService, _) {
     var vm = this;
     vm.searchText = '';
     vm.searchResult = {};
@@ -17,6 +19,39 @@
     vm.useKeyword = useKeyword;
     vm.useFood = useFood;
     vm.updateCampaign = updateCampaign;
+    vm.loadTags = loadTags;
+    vm.calculatingReachUser = calculatingReachUser;
+    vm.removeFood = removeFood;
+
+
+    /**
+     * @name loadTags
+     * @author Quyen Nguyen Huu <<nghuuquyen@gmail.com>>
+     * @description
+     * Funcation called when user input keyword to search input, it perform 
+     * autocomplete feature.
+     * 
+     * @param {String} query 
+     * @return {Promise<Object>} List tags matching with input query string. 
+     */
+    function loadTags(query) {
+      return KeywordService.search({ keyword: query }).$promise
+        .then(keywords => {
+          return _.map(keywords, keyword => {
+            // Transform to ng-tags input format.
+            return {
+              name: keyword.name,
+              text: keyword.name,
+              id: keyword.id,
+              score: keyword.score
+            };
+          });
+        })
+        .then(keywords => {
+          return keywords;
+        });
+    }
+
 
     function searchUserInteractive() {
       CampaignService.searchUserInteractive({ q: vm.searchText })
@@ -32,10 +67,19 @@
           vm.campaign = campaign;
 
           vm.campaign.startDate = new Date(vm.campaign.startDate);
+
+          calculatingReachUser();
         });
     }
 
-    function updateCampaign() {
+    function updateCampaign(isConfirmed) {
+
+      if (isConfirmed === true) {
+        vm.campaign.confirmed = true;
+      } else {
+        vm.campaign.confirmed = false;
+      }
+
       CampaignService.update({ id: vm.campaign.id }, vm.campaign)
         .$promise.then(() => {
           toastr.success(`Update campaign ${vm.campaign.name} compeleted.`);
@@ -45,16 +89,56 @@
     function useFood(food) {
       let index = vm.campaign.foods.findIndex(item => item.id === food.id);
 
-      if (index === -1)
+      if (index === -1) {
         vm.campaign.foods.push(food);
+        calculatingReachUser();
+      }
     }
 
     function useKeyword(keyword) {
       let index = vm.campaign.keywords.findIndex(item => item.id === keyword.id);
 
       keyword.text = keyword.name;
-      if (index === -1)
+      if (index === -1) {
         vm.campaign.keywords.push(keyword);
+        calculatingReachUser();
+      }
+    }
+
+    function calculatingReachUser() {
+
+      if (vm.campaign.foods.length === 0 && vm.campaign.keywords.length === 0) {
+        vm.totalReachUser = 0;
+        vm.reachUsers = [];
+
+        return;
+      }
+
+      let foodsIds;
+      let keywordIds;
+
+      if (vm.campaign.foods.length > 0) {
+        foodsIds = vm.campaign.foods.map(food => food.id).join(',');
+      }
+
+      if (vm.campaign.keywords.length > 0) {
+        keywordIds = vm.campaign.keywords.map(keyword => keyword.id).join(',');
+      }
+
+      CampaignService.searchUser({ foods: foodsIds, keywords: keywordIds })
+        .$promise.then(users => {
+          vm.totalReachUser = users.length;
+          vm.reachUsers = users;
+        });
+    }
+
+    function removeFood(food) {
+      let index = vm.campaign.foods.findIndex(item => item.id === food.id);
+
+      if (index !== -1) {
+        vm.campaign.foods.splice(index, 1);
+        calculatingReachUser();
+      }
     }
   }
 })();

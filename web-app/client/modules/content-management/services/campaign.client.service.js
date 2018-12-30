@@ -24,6 +24,11 @@
       searchUserInteractive: {
         method: 'GET',
         url: apiGateway + '/search/user-interactive'
+      },
+      searchUser: {
+        method: 'GET',
+        url: apiGateway + '/search/user',
+        isArray: true
       }
     });
   }

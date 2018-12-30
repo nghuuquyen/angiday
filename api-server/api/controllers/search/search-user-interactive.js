@@ -5,6 +5,7 @@ module.exports = async function searchUserInteractive(req, res) {
   const db = SearchTracking.getDatastore().manager;
   const searchTrackingCollection = db.collection(SearchTracking.tableName);
   const keywordCollection = db.collection(Keyword.tableName);
+  const foodCollection = db.collection(Food.tableName);
 
   if (!searchText) return res.badRequest('Missing q params');
 
@@ -22,6 +23,14 @@ module.exports = async function searchUserInteractive(req, res) {
   let texts = [];
 
   let systemKeywords = await keywordCollection
+    .find(
+      { $text: { $search: searchText } },
+      { score: { $meta: "textScore" } }
+    )
+    .sort({ score: { $meta: "textScore" } })
+    .toArray();
+
+  let systemFoods = await foodCollection
     .find(
       { $text: { $search: searchText } },
       { score: { $meta: "textScore" } }
@@ -49,6 +58,7 @@ module.exports = async function searchUserInteractive(req, res) {
     foods,
     keywords,
     texts,
-    systemKeywords
+    systemKeywords,
+    systemFoods
   });
 }

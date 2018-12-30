@@ -26,6 +26,10 @@ module.exports = {
     },
     startDate: {
       type: 'string'
+    },
+    confirmed: {
+      type: 'boolean',
+      defaultsTo: false
     }
   }
 };

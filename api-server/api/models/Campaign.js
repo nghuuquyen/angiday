@@ -7,19 +7,25 @@
 module.exports = {
   tableName: 'campaign',
   attributes: {
-    user: {
+    name: {
       type: 'string'
     },
-    keywords: {
-      type: 'json',
-      defaultsTo: []
+    description: {
+      type: 'string'
     },
     foods: {
       type: 'json',
       defaultsTo: []
     },
-    texts: {
-      type: 'json'
+    keywords: {
+      type: 'json',
+      defaultsTo: []
+    },
+    owner: {
+      model: 'user'
+    },
+    startDate: {
+      type: 'string'
     }
   }
 };

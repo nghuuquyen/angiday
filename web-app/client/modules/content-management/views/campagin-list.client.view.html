@@ -1,5 +1,48 @@
-<section class="container">
-  <h3>Campagin List</h3>
-  <hr/>
+<section>
+  <br />
+  <div class="col-sm-12">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/cms/campaign" target="_self">Campaign Management</a></li>
+      </ol>
+    </nav>
+  </div>
 
+  <div class="container">
+    <div class="row">
+      <button ui-sref="campaign-management.create" type="button" class="btn btn-success">Create New Campaign</button>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <!-- error message panel -->
+        <p class="text-danger">{{vm.message}}</p>
+        <!-- ./ error message panel -->
+
+        <!-- campagin table -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Campagin Name</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="c in vm.campaigns track by $index">
+              <td>{{$index + 1 }}</td>
+              <td>{{c.name}}</td>
+              <td>
+                <p>{{c.description}}</p>
+              </td>
+              <td>
+                <a ui-sref="campagin-management.edit({ campaginId: c.id })">Edit</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- ./ campagin table -->
+      </div>
+    </div>
 </section>

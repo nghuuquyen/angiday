@@ -42,7 +42,7 @@ module.exports = async function searchUserInteractive(req, res) {
     }
   }
 
-  let foods = await Food.find({ id: { in: food_ids } });
+  let foods = await Food.find({ id: { in: food_ids } }).populate('keywords');
   let keywords = await Keyword.find({ id: { in: keywords_ids } });
 
   return res.json({

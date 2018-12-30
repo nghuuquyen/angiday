@@ -48,7 +48,9 @@
           url: '/cms/campaign',
           views: {
             'content': {
-              templateUrl: 'client/modules/content-management/views/campagin-list.client.view.html'
+              templateUrl: 'client/modules/content-management/views/campagin-list.client.view.html',
+              controller: 'CampaignListController',
+              controllerAs: 'vm'
             }
           }
         })
@@ -57,7 +59,7 @@
           views: {
             'content@': {
               templateUrl: 'client/modules/content-management/views/campagin-create.client.view.html',
-              controller: 'CampaginCreateController',
+              controller: 'CampaignCreateController',
               controllerAs: 'vm'
             }
           }
@@ -66,7 +68,9 @@
           url: '/:campaignId',
           views: {
             'content@': {
-              templateUrl: 'client/modules/content-management/views/campagin-edit.client.view.html'
+              templateUrl: 'client/modules/content-management/views/campagin-edit.client.view.html',
+              controller: 'CampaignEditController',
+              controllerAs: 'vm'
             }
           }
         });

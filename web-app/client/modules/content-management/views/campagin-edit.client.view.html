@@ -66,6 +66,8 @@
                   placeholder="yyyy-MM-dd" required />
               </div>
             </div>
+
+            <a href="/cms/campaign/preview/{{vm.campaign.id}}" target="_blank">Xem Thử Nội Dung Gửi</a>
           </form>
         </div>
       </div>
@@ -94,6 +96,9 @@
           <h5>III. Nội Dung</h5>
         </div>
         <div class="card-body">
+          <a href="/cms/campaign/preview/{{vm.campaign.id}}" target="_blank">Xem Thử Nội Dung</a>
+          <hr />
+
           <h5>Từ Khoá Được Chọn</h5>
           <tags-input on-tag-added="vm.calculatingReachUser()" on-tag-removed="vm.calculatingReachUser()" ng-model="vm.campaign.keywords"
             min-length="1" style="height: 60px; color: black;" add-from-autocomplete-only="true">

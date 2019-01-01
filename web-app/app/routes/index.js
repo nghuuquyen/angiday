@@ -9,5 +9,6 @@ router.use(require('./content-management.server.routes'));
 router.use(require('./demo.server.routes'));
 router.use(require('./food.server.server.routes'));
 router.use(require('./shop.server.server.routes'));
+router.use(require('./campaign.server.routes'));
 
 module.exports = router;

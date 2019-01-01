@@ -1,0 +1,46 @@
+<section class="container" style="max-width: 640px;background-color: #f7dbb5;margin: 15px auto;">
+  <nav class="navbar navbar-expand-sm orange-bg navbar-dark row">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/" target="_self">Ăn Gì Đây ?</a>
+  </nav>
+
+  <br />
+
+  <div class="row" style="padding: 15px;">
+    <div class="card mb-4 col-sm-12">
+      <div class="card-body">
+        <h2 class="card-title">{{campaign.name}}</h2>
+        Chào bạn,
+
+        <p class="card-text">{{campaign.description}}</p>
+
+        {{#each campaign.keywords}}
+        <a href="/search?word_ids={{this.id}}&utm_content={{../campaign.id}}&utm_campagin={{../campaign.name}}" target="_self">
+          <span class="badge badge-primary">{{this.name}}</span>
+        </a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding: 15px;">
+    {{#each campaign.foods}}
+    <!-- post item -->
+    <div class="card mb-4">
+      <img class="card-img-top" src="{{this.imageUrl}}" alt="Card image cap">
+      <div class="card-body">
+        <h2>
+          <a href="/food/{{this._id}}?utm_content={{../campaign.id}}&utm_campagin={{../campaign.name}}" target="_blank"
+            class="card-title">
+            {{this.name}}
+          </a>
+        </h2>
+        <p class="card-text">{{this.description}}</p>
+        <hr />
+        <p class="card-text">{{{this.content}}}</p>
+      </div>
+    </div>
+    <!-- ./ post item -->
+    {{/each}}
+  </div>
+</section>

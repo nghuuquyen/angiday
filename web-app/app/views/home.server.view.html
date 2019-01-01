@@ -2,33 +2,31 @@
   <div class="row">
     <div class="col-sm-4" style="padding: 0 !important;">
       <div class="card">
-        <img class="card-img-top" src="\{{vm.topPopularFoods[0].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[0].imageUrl}}" style="height:250px; width: 100%;">
         <div class="card-body">
-          <h4 class="card-title">\{{vm.topPopularFoods[0].name}}</h4>
-          <p class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">
-            \{{vm.topPopularFoods[0].description}}
+          <h4 class="card-title" ng-bind="vm.topPopularFoods[0].name"></h4>
+          <p ng-bind="vm.topPopularFoods[0].description" class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">
+           
           </p>
         </div>
       </div>
     </div>
     <div class="col-sm-4" style="padding: 0 !important;">
       <div class="card">
-        <img class="card-img-top" src="\{{vm.topPopularFoods[1].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[1].imageUrl}}" style="height:250px; width: 100%;">
         <div class="card-body">
-          <h4 class="card-title">\{{vm.topPopularFoods[1].name}}</h4>
-          <p class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">
-            \{{vm.topPopularFoods[1].description}}
+          <h4 class="card-title" ng-bind="vm.topPopularFoods[1].name"></h4>
+          <p ng-bind="vm.topPopularFoods[1].description" class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">
           </p>
         </div>
       </div>
     </div>
     <div class="col-sm-4" style="padding: 0 !important;">
       <div class="card">
-        <img class="card-img-top" src="\{{vm.topPopularFoods[3].imageUrl}}" alt="Card image cap" style="height:250px; width: 100%;">
+        <img class="card-img-top" src="\{{vm.topPopularFoods[3].imageUrl}}" style="height:250px; width: 100%;">
         <div class="card-body">
-          <h4 class="card-title">\{{vm.topPopularFoods[3].name}}</h4>
-          <p class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">
-            \{{vm.topPopularFoods[3].description}}
+          <h4 class="card-title" ng-bind="vm.topPopularFoods[3].name"></h4>
+          <p ng-bind="vm.topPopularFoods[3].description" class="card-text" style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;">
           </p>
         </div>
       </div>
@@ -39,7 +37,7 @@
     <div class="col-sm-12" style="margin: 15px;">
       <div class="card" align="center" ng-repeat="c in vm.collections track by $index" style="width: 150px; float: left;">
         <img src="\{{c.imageUrl}}" width="70" height="70" class="rounded-circle" alt="Cinque Terre">
-        <small>\{{c.name}}</small>
+        <small ng-bind="c.name"></small>
       </div>
     </div>
   </div>

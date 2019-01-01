@@ -169,8 +169,18 @@
       }).$promise.then(track => {
         Utilities.sessionStorageManager.setValue('search_id', track);
 
-        // Redirecting to search results page.
-        $window.location.replace($window.location.origin + `/search?word_ids=${word_ids}`);
+        if (word_ids.length === 0) {
+          KeywordService.search({ keyword: texts.join(' ') }).$promise
+            .then(keywords => {
+              word_ids = keywords.map(item => item.id).join(',');
+
+              // Redirecting to search results page.
+              $window.location.replace($window.location.origin + `/search?word_ids=${word_ids}`);
+            });
+        } else {
+          // Redirecting to search results page.
+          $window.location.replace($window.location.origin + `/search?word_ids=${word_ids}`);
+        }
       });
     }
   }

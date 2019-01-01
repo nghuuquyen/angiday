@@ -3,14 +3,14 @@
   <div class="col-sm-12">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/cms/campaign" target="_self">Campaign Management</a></li>
+        <li class="breadcrumb-item"><a href="/cms/campaign" target="_self">Quản lý chiến dịch</a></li>
       </ol>
     </nav>
   </div>
 
   <div class="container">
     <div class="row">
-      <button ui-sref="campaign-management.create" type="button" class="btn btn-success">Create New Campaign</button>
+      <button ui-sref="campaign-management.create" type="button" class="btn btn-success">Tạo mới</button>
     </div>
 
     <div class="row">
@@ -24,8 +24,8 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Campagin Name</th>
-              <th>Description</th>
+              <th>Tên</th>
+              <th>Mô Tả</th>
               <th></th>
             </tr>
           </thead>
@@ -37,7 +37,7 @@
                 <p>{{c.description}}</p>
               </td>
               <td>
-                <a ui-sref="campaign-management.edit({ campaignId: c.id })">Edit</a>
+                <a ui-sref="campaign-management.edit({ campaignId: c.id })">Chỉnh sửa</a>
               </td>
             </tr>
           </tbody>

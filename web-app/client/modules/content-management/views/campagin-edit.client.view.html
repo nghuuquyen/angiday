@@ -2,7 +2,7 @@
 <div class="col-sm-12">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/cms/campaign" target="_self">Campaign management</a></li>
+      <li class="breadcrumb-item"><a href="/cms/campaign" target="_self">Quản lý chiến dịch</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{vm.campaign.name}}</li>
     </ol>
   </nav>
@@ -14,8 +14,8 @@
     <div class="col-sm-8">
     </div>
     <div class="col-sm-4 text-right">
-      <button ng-click="vm.updateCampaign()" type="button" class="btn btn-primary">Save Draft</button>
-      <button ng-click="vm.updateCampaign(true)" type="button" class="btn btn-success">Save & Confirm</button>
+      <button ng-click="vm.updateCampaign()" type="button" class="btn btn-primary">Lưu nháp</button>
+      <button ng-click="vm.updateCampaign(true)" type="button" class="btn btn-success">Lưu và xác nhận</button>
     </div>
   </div>
   <hr />
@@ -23,7 +23,7 @@
     <div class="col-sm-8">
       <div class="card">
         <div class="card-header">
-          <h5>I. Basic Configurations</h5>
+          <h5>I. Thông Tin Cơ Bản</h5>
         </div>
         <div class="card-body">
           <form>
@@ -31,17 +31,17 @@
 
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">
-                <b>Campaign Status</b>
+                <b>Trạng thái</b>
               </label>
               <div class="col-sm-9">
-                <span ng-if="vm.campaign.confirmed" class="badge badge-success">Confirmed</span>
-                <span ng-if="!vm.campaign.confirmed" class="badge badge-primary">Draft</span>
+                <span ng-if="vm.campaign.confirmed" class="badge badge-success">Đã xác nhận</span>
+                <span ng-if="!vm.campaign.confirmed" class="badge badge-primary">Lưu nháp</span>
               </div>
             </div>
 
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">
-                <b>Campaign Name</b>
+                <b>Tên chiến dịch</b>
               </label>
               <div class="col-sm-9">
                 <input ng-model="vm.campaign.name" class="form-control" type="text" />
@@ -50,7 +50,7 @@
 
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">
-                <b>Description</b>
+                <b>Mô tả</b>
               </label>
               <div class="col-sm-9">
                 <textarea ng-model="vm.campaign.description" class="form-control" rows="3"></textarea>
@@ -59,7 +59,7 @@
 
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">
-                <b>Start Date:</b>
+                <b>Ngày bắt đầu:</b>
               </label>
               <div class="col-sm-9">
                 <input class="form-control" type="date" id="exampleInput" name="input" ng-model="vm.campaign.startDate"
@@ -72,13 +72,13 @@
       <br />
       <div class="card">
         <div class="card-header">
-          <h5>II. Reach Statistical</h5>
+          <h5>II. Số Người Tiếp Cận</h5>
         </div>
         <div class="card-body">
           <form>
             <div class="form-group row">
               <label for="staticEmail" class="col-sm-3 col-form-label">
-                <b>Total Reach User</b>
+                <b>Tổng Số Người Tiếp Cận</b>
               </label>
               <div class="col-sm-9">
                 <input type="text" readonly class="form-control-plaintext" value="{{vm.totalReachUser || 0}}">
@@ -91,16 +91,16 @@
       <!-- distribution -->
       <div class="card">
         <div class="card-header">
-          <h5>III. Distribution Content</h5>
+          <h5>III. Nội Dung</h5>
         </div>
         <div class="card-body">
-          <h5>Keywords</h5>
+          <h5>Từ Khoá Được Chọn</h5>
           <tags-input on-tag-added="vm.calculatingReachUser()" on-tag-removed="vm.calculatingReachUser()" ng-model="vm.campaign.keywords"
             min-length="1" style="height: 60px; color: black;" add-from-autocomplete-only="true">
             <auto-complete source="vm.loadTags($query)" load-on-focus="true" load-on-empty="true"></auto-complete>
           </tags-input>
           <hr />
-          <h5>Foods</h5>
+          <h5>Món Ăn</h5>
           <!-- food items -->
           <div class="card" ng-repeat="food in vm.campaign.foods" style="margin-bottom: 10px; background-color: #fbfbfb;">
             <div class="card-body">
@@ -117,10 +117,10 @@
                   <img class="card-img-top" src="{{food.imageUrl}}" alt="Card image" style="max-width: 200px;">
                 </div>
                 <div class="col-sm-8">
-                  <b>Description</b>
+                  <b>Mô tả ngắn</b>
                   <p>{{food.description}}</p>
                   <hr />
-                  <b>Keywords</b>
+                  <b>Từ khoá</b>
                   <div>
                     <a ng-repeat="w in food.keywords" href="/search?word_ids={{w.id}}" target="_blank">
                       <span class="badge badge-primary">{{w.name}}</span>
@@ -130,7 +130,7 @@
                 </div>
               </div>
               <br />
-              <b>Content</b>
+              <b>Nội Dung Bài Viết</b>
               <hr />
               <textarea ui-tinymce="tinymceOptions" ng-model="food.content" class="form-control" name="questionContent"
                 placeholder="Question Content" required>
@@ -146,19 +146,19 @@
       <!-- suggestion -->
       <div class="card">
         <div class="card-header">
-          <h5>Food Search</h5>
+          <h5>Tìm Kiếm Món Ăn và Từ Khoá</h5>
         </div>
 
         <div class="card-body">
           <div class="input-group mb-3">
-            <input ng-model="vm.searchText" type="text" class="form-control" placeholder="Search text" aria-describedby="basic-addon2">
+            <input ng-model="vm.searchText" type="text" class="form-control" placeholder="Từ khoá ..." aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button ng-click="vm.searchUserInteractive()" class="btn btn-outline-secondary" type="button">Search</button>
+              <button ng-click="vm.searchUserInteractive()" class="btn btn-outline-secondary" type="button">Tìm kiếm</button>
             </div>
           </div>
 
           <div ng-if="vm.searchResult.texts.length">
-            <h6>Top User Input Search Text</h6>
+            <h6>Từ khoá được người dùng tìm kiếm</h6>
             <ul>
               <li ng-repeat="text in vm.searchResult.texts track by $index">{{text}}</li>
             </ul>
@@ -166,7 +166,7 @@
           </div>
 
           <div ng-if="vm.searchResult.keywords.length">
-            <h6>Top Clicked Keywords</h6>
+            <h6>Từ khoá được người dùng nhấp</h6>
             <div style="max-height: 200px; overflow: scroll;">
               <ul class="list-group">
                 <li ng-repeat="keyword in vm.searchResult.keywords track by $index" class="list-group-item">
@@ -178,7 +178,7 @@
           </div>
 
           <div ng-if="vm.searchResult.foods.length">
-            <h6>Top Clicked Foods</h6>
+            <h6>Món ăn được người dùng nhấp</h6>
             <div style="max-height: 200px; overflow: scroll;">
               <ul class="list-group">
                 <li ng-repeat="food in vm.searchResult.foods track by $index" class="list-group-item">
@@ -190,7 +190,7 @@
           </div>
 
           <div ng-if="vm.searchResult.systemKeywords.length">
-            <h6>System Keywords</h6>
+            <h6>Từ khoá phù hợp</h6>
             <div style="max-height: 200px; overflow: scroll;">
               <ul class="list-group">
                 <li ng-repeat="keyword in vm.searchResult.systemKeywords track by $index" class="list-group-item">
@@ -202,7 +202,7 @@
           </div>
 
           <div ng-if="vm.searchResult.systemFoods.length">
-            <h6>Foods Matching</h6>
+            <h6>Món ăn phù hợp</h6>
             <div style="max-height: 200px; overflow: scroll;">
               <ul class="list-group">
                 <li ng-repeat="food in vm.searchResult.systemFoods track by $index" class="list-group-item">

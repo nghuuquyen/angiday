@@ -113,6 +113,7 @@ async function getSimilarFoodByFood(foodId) {
     for(let i in foods) {
       let fullFoodData = await Food.findOne({ id: foods[i].id });
       foods[i].description = fullFoodData.description;
+      foods[i].imageUrl = fullFoodData.imageUrl;
     }
 
     return foods;
@@ -182,6 +183,7 @@ async function getUserRecommedationFoods(userId) {
     for(let i in foods) {
       let fullFoodData = await Food.findOne({ id: foods[i].id });
       foods[i].description = fullFoodData.description;
+      foods[i].imageUrl = fullFoodData.imageUrl;
     }
 
     return foods;
@@ -231,6 +233,7 @@ async function getFoodNewFeeds(userId) {
     for(let i in foods) {
       let fullFoodData = await Food.findOne({ id: foods[i].id });
       foods[i].description = fullFoodData.description;
+      foods[i].imageUrl = fullFoodData.imageUrl;
     }
 
     return foods;

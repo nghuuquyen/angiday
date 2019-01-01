@@ -6,10 +6,13 @@
     .controller('CampaignEditController', Controller);
 
   Controller.$inject = [
-    'CampaignService', '$stateParams', 'toastr', 'KeywordService', '_'
+    'CampaignService', '$stateParams', 'toastr', 'KeywordService', '_', 'Host'
   ];
-  function Controller(CampaignService, $stateParams, toastr, KeywordService, _) {
+  function Controller(CampaignService, $stateParams, toastr, KeywordService, _, Host) {
     var vm = this;
+
+    const apiGateway = Host.getApiGateway();
+
     vm.searchText = '';
     vm.searchResult = {};
 
@@ -22,6 +25,7 @@
     vm.loadTags = loadTags;
     vm.calculatingReachUser = calculatingReachUser;
     vm.removeFood = removeFood;
+    vm.getDownloadLink = getDownloadLink;
 
 
     /**
@@ -105,12 +109,48 @@
       }
     }
 
+    function getDownloadLink() {
+      if (vm.campaign.foods.length === 0 && vm.campaign.keywords.length === 0) {
+        return '';
+      }
+
+      let foodsIds;
+      let keywordIds;
+
+      if (vm.campaign.foods.length > 0) {
+        foodsIds = vm.campaign.foods.map(food => food.id).join(',');
+      }
+
+      if (vm.campaign.keywords.length > 0) {
+        keywordIds = vm.campaign.keywords.map(keyword => keyword.id).join(',');
+      }
+
+
+      let downloadURl = apiGateway + '/search/user/download';
+
+      if (vm.campaign.foods.length > 0) {
+        downloadURl += '?' + 'foods=' + foodsIds;
+      }
+
+      if (vm.campaign.keywords.length > 0) {
+        if (downloadURl.indexOf('?') === -1) {
+          downloadURl += '?' + 'keywords=' + keywordIds;
+        } else {
+          downloadURl += '&' + 'keywords=' + keywordIds;
+        }
+      }
+
+      return downloadURl;
+    }
+
+
     function calculatingReachUser() {
 
       if (vm.campaign.foods.length === 0 && vm.campaign.keywords.length === 0) {
         vm.totalReachUser = 0;
         vm.reachUsers = [];
 
+        vm.downloadLink = '';
         return;
       }
 
@@ -129,6 +169,8 @@
         .$promise.then(users => {
           vm.totalReachUser = users.length;
           vm.reachUsers = users;
+
+          vm.downloadLink = getDownloadLink();
         });
     }
 

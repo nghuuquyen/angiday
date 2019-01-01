@@ -86,6 +86,7 @@
                 <input type="text" readonly class="form-control-plaintext" value="{{vm.totalReachUser || 0}}">
               </div>
             </div>
+            <a ng-if="vm.downloadLink !== ''" href="{{vm.downloadLink}}" download="">Tải Danh Sách Người Gửi</a>
           </form>
         </div>
       </div>

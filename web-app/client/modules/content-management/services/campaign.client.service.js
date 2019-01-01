@@ -25,6 +25,10 @@
         method: 'GET',
         url: apiGateway + '/search/user-interactive'
       },
+      downloadListUser: {
+        method: 'GET',
+        url: apiGateway + '/search/user/download'
+      },
       searchUser: {
         method: 'GET',
         url: apiGateway + '/search/user',

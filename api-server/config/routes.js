@@ -38,6 +38,7 @@ module.exports.routes = {
   'POST /keyword/user-tracking': { action: 'keyword/user-tracking' },
   'GET /search/user-interactive': { action: 'search/search-user-interactive' },
   'GET /search/user': { action: 'search/get-user-related' },
+  'GET /search/user/download': { action: 'search/download-list-user-related' },
 
   /**
    * Shop Module Routes
